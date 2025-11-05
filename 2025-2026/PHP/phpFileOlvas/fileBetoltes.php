@@ -1,7 +1,7 @@
 <?php
-    $file = fopen("randomSzoveg.txt","r");
-    echo fgets($file);
-    fclose($file);
+$file = fopen("randomSzoveg.txt", "r");
+echo fgets($file);
+fclose($file);
 ?>
 
 
