@@ -1,87 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dolgozat</title>
-    <style>
-      body {
-        background-color: gray;
-        text-align: center;
-      }
-    </style>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dolgozat</title>
+        <style>
+            body {
+                background-color: gray;
+                text-align: center;
+            }
+        </style>
+    </head>
 
-  <body>
-    <label>Dupla kattintásra töröl</label><br />
-    <input type="text" id="beKer" />
-    <button onclick="hozzaAd()">Hozzá ad</button>
-    <input
-      type="radio"
-      name="rendez"
-      id="novekvo"
-      onclick="gombSzoveg()"
-    /><label>Növekvő</label>
-    <input
-      type="radio"
-      name="rendez"
-      id="csokkeno"
-      onclick="gombSzoveg()"
-    /><label>Csökkenő</label>
-    <button id="rendez" onclick="rendez()"></button>
-    <ul id="lista"></ul>
-    <script>
-      let beKer = document.getElementById("beKer");
-      let szavak = [];
-      let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-      function hozzaAd() {
-        if (!format.test(beKer.value) && !beKer.value.includes(" ")) {
-          szavak.push(beKer.value);
-          let adat = document.createElement("li");
-          adat.innerHTML = beKer.value;
-          adat.addEventListener("dblclick", function () {
-            document.getElementById("lista").removeChild(adat);
-          });
-          document.getElementById("lista").appendChild(adat);
-        } else {
-          alert(
-            "Nem 1 szót adtál meg vagy tartalmaz valami speciális karaktert"
-          );
-        }
-      }
-      function gombSzoveg() {
-        if (document.getElementById("novekvo").checked == true) {
-          document.getElementById("rendez").innerHTML = "Növekvő";
-        } else {
-          document.getElementById("rendez").innerHTML = "Csökkenő";
-        }
-      }
+    <body>
+        <label>Dupla kattintásra töröl</label><br />
+        <input type="text" id="beKer" />
+        <button onclick="hozzaAd()">Hozzá ad</button>
+        <input type="radio" name="rendez" id="novekvo" onclick="gombSzoveg()" /><label>Növekvő</label>
+        <input type="radio" name="rendez" id="csokkeno" onclick="gombSzoveg()" /><label>Csökkenő</label>
+        <button id="rendez" onclick="rendez()"></button>
+        <ul id="lista"></ul>
+        <script>
+            let beKer = document.getElementById("beKer");
+            let szavak = [];
+            let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            function hozzaAd() {
+                if (!format.test(beKer.value) && !beKer.value.includes(" ")) {
+                    szavak.push(beKer.value);
+                    let adat = document.createElement("li");
+                    adat.innerHTML = beKer.value;
+                    adat.addEventListener("dblclick", function () {
+                        document.getElementById("lista").removeChild(adat);
+                    });
+                    document.getElementById("lista").appendChild(adat);
+                } else {
+                    alert("Nem 1 szót adtál meg vagy tartalmaz valami speciális karaktert");
+                }
+            }
+            function gombSzoveg() {
+                if (document.getElementById("novekvo").checked == true) {
+                    document.getElementById("rendez").innerHTML = "Növekvő";
+                } else {
+                    document.getElementById("rendez").innerHTML = "Csökkenő";
+                }
+            }
 
-      function rendez() {
-        if (document.getElementById("novekvo").checked == true) {
-          szavak.sort((a, b) => a.length - b.length);
-          document.getElementById("lista").innerHTML = "";
-          szavak.forEach((element) => {
-            let adat = document.createElement("li");
-            adat.innerHTML = element;
-            adat.addEventListener("dblclick", function () {
-              document.getElementById("lista").removeChild(adat);
-            });
-            document.getElementById("lista").appendChild(adat);
-          });
-        } else if (document.getElementById("csokkeno").checked == true) {
-          szavak.sort((a, b) => b.length - a.length);
-          document.getElementById("lista").innerHTML = "";
-          szavak.forEach((element) => {
-            let adat = document.createElement("li");
-            adat.innerHTML = element;
-            adat.addEventListener("dblclick", function () {
-              document.getElementById("lista").removeChild(adat);
-            });
-            document.getElementById("lista").appendChild(adat);
-          });
-        }
-      }
-    </script>
-  </body>
+            function rendez() {
+                if (document.getElementById("novekvo").checked == true) {
+                    szavak.sort((a, b) => a.length - b.length);
+                    document.getElementById("lista").innerHTML = "";
+                    szavak.forEach((element) => {
+                        let adat = document.createElement("li");
+                        adat.innerHTML = element;
+                        adat.addEventListener("dblclick", function () {
+                            document.getElementById("lista").removeChild(adat);
+                        });
+                        document.getElementById("lista").appendChild(adat);
+                    });
+                } else if (document.getElementById("csokkeno").checked == true) {
+                    szavak.sort((a, b) => b.length - a.length);
+                    document.getElementById("lista").innerHTML = "";
+                    szavak.forEach((element) => {
+                        let adat = document.createElement("li");
+                        adat.innerHTML = element;
+                        adat.addEventListener("dblclick", function () {
+                            document.getElementById("lista").removeChild(adat);
+                        });
+                        document.getElementById("lista").appendChild(adat);
+                    });
+                }
+            }
+        </script>
+    </body>
 </html>
