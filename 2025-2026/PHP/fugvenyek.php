@@ -1,5 +1,8 @@
 <?php
-    include("adatok.php");
-
-    //var_dump($adatok);
+    function d($elem)
+    {
+        echo "<pre>";
+        echo var_dump($elem);
+        echo "</pre>";
+    }
 ?>
