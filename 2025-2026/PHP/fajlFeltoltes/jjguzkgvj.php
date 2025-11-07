@@ -19,8 +19,6 @@ if (isset($_FILES["fileToUpload"])) {
     $target_file = $target_dir . "Eredeti/" . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    //echo $_SERVER["DOCUMENT_ROOT"];
-    //echo PATHINFO_EXTENSION;
 
     if (isset($_POST["submit"])) {
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -54,20 +52,46 @@ if (isset($_FILES["fileToUpload"])) {
             }
         }
     }
-}
-$kepek = "";
-$dir = $config["kepek"]["kicsi"]["dir"];
-// Open a directory, and read its contents
-if (is_dir($dir)) {
-    if ($dh = opendir($dir)) {
-        while (($file = readdir($dh)) !== false) {
-            if ($file != "." && $file != "..") {
-                $kepek .= '<img src="' . $dir . $file . '">';
+    $i = 0;
+    $kepek = "";
+    $dir = $config["kepek"]["kicsi"]["dir"];
+    if (is_dir($dir)) {
+        if ($dh = opendir($dir)) {
+            while (($file = readdir($dh)) !== false) {
+                if ($file != "." && $file != "..") {
+                    $kepek .= '<img src="' . $dir . $file . '">';
+                }
+            }
+            closedir($dh);
+        }
+    }
+    $dir2 = "../IMAGES/Kicsi2/";
+    if (is_dir($dir2)) {
+        if ($dh = opendir($dir)) {
+            $sorSzam = 0;
+            while (($file = readdir($dh)) !== false) {
+                if ($file != "." && $file != "..") {
+                    copy($dir . "/" . $file, $dir2 . "/" . $file);
+                }
+            }
+            if (is_dir($dir2)) {
+                if ($dh = opendir($dir2)) {
+                    while (($file = readdir($dh)) !== false) {
+                        if ($file != "." && $file != "..") {
+                            $ujNev = "kep_" . $i . ".jpg";
+                            rename($dir2 . "/" . $file, $dir2 . "/" . $ujNev);
+                            $i++;
+                        }
+                    }
+                }
             }
         }
-        closedir($dh);
+    } else {
+        mkdir("../IMAGES/Kicsi2");
     }
 }
+
+//--------------------------------------------------------------------------------------------------------------------------------------
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -77,11 +101,13 @@ if (is_dir($dir)) {
     <title>Fájl feltöltés</title>
 </head>
 <body>
-    <form action="feltoltTovabbFejleszt.php" method="post" enctype="multipart/form-data">
+    <form action="jjguzkgvj.php" method="post" enctype="multipart/form-data">
         Select image to upload:
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload Image" name="submit">
     </form>
-    <?php echo $kepek; ?>
+    <?php if (isset($kepek)) {
+        echo $kepek;
+    } ?>
 </body>
 </html>
