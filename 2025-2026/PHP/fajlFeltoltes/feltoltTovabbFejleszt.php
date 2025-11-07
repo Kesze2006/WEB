@@ -52,8 +52,20 @@ if (isset($_FILES["fileToUpload"])) {
                 imagecopyresampled($kicsi, $forras, 0, 0, 0, 0, $ujX, $ujY, $meret[0], $meret[1]);
                 imagejpeg($kicsi, $celKep);
             }
-        } else {
         }
+    }
+}
+$dir = $config["kepek"]["eredeti"]["dir"];
+
+// Open a directory, and read its contents
+if (is_dir($dir)) {
+    if ($dh = opendir($dir)) {
+        while (($file = readdir($dh)) !== false) {
+            if ($file != "." && $file != "..") {
+                echo "filename:" . $file . "<br>";
+            }
+        }
+        closedir($dh);
     }
 }
 ?>
