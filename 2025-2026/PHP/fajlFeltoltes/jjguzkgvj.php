@@ -68,7 +68,6 @@ if (isset($_FILES["fileToUpload"])) {
     $dir2 = "../IMAGES/Kicsi2/";
     if (is_dir($dir2)) {
         if ($dh = opendir($dir)) {
-            $sorSzam = 0;
             while (($file = readdir($dh)) !== false) {
                 if ($file != "." && $file != "..") {
                     copy($dir . "/" . $file, $dir2 . "/" . $file);
@@ -88,6 +87,24 @@ if (isset($_FILES["fileToUpload"])) {
         }
     } else {
         mkdir("../IMAGES/Kicsi2");
+        if ($dh = opendir($dir)) {
+            while (($file = readdir($dh)) !== false) {
+                if ($file != "." && $file != "..") {
+                    copy($dir . "/" . $file, $dir2 . "/" . $file);
+                }
+            }
+            if (is_dir($dir2)) {
+                if ($dh = opendir($dir2)) {
+                    while (($file = readdir($dh)) !== false) {
+                        if ($file != "." && $file != "..") {
+                            $ujNev = "kep_" . $i . ".jpg";
+                            rename($dir2 . "/" . $file, $dir2 . "/" . $ujNev);
+                            $i++;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
