@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Konfigurációs ablak példa</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+            .add-btn {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                font-size: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- + gomb a képernyő sarkában -->
+        <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" data-bs-target="#configModal">
+            +
+        </button>
+
+        <!-- Modális ablak -->
+        <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <!-- nagyobb és középre igazított -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="configModalLabel">Új elem létrehozása</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="configForm">
+                            <div class="mb-3">
+                                <label for="itemName" class="form-label">Elem neve</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="itemName"
+                                    placeholder="Add meg az elem nevét..."
+                                />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="itemType" class="form-label">Típus</label>
+                                <select class="form-select" id="itemType">
+                                    <option value="alapértelmezett">Alapértelmezett</option>
+                                    <option value="prémium">Prémium</option>
+                                    <option value="egyedi">Egyedi</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="itemDesc" class="form-label">Leírás</label>
+                                <textarea
+                                    class="form-control"
+                                    id="itemDesc"
+                                    rows="3"
+                                    placeholder="Ide írd a leírást..."
+                                ></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                        <button type="button" class="btn btn-success" id="saveBtn">Mentés</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS (Popper-rel együtt) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.getElementById("saveBtn").addEventListener("click", () => {
+                const name = document.getElementById("itemName").value;
+                const type = document.getElementById("itemType").value;
+                const desc = document.getElementById("itemDesc").value;
+
+                if (!name.trim()) {
+                    alert("Kérlek, adj meg egy nevet!");
+                    return;
+                }
+
+                console.log("Új elem:", { name, type, desc });
+                alert(`Létrehozva: ${name} (${type})`);
+
+                // Bezárás
+                const modal = bootstrap.Modal.getInstance(document.getElementById("configModal"));
+                modal.hide();
+
+                // Törlés a következő használatra
+                document.getElementById("configForm").reset();
+            });
+        </script>
+    </body>
+</html>
