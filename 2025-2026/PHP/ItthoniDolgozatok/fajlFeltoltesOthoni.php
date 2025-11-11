@@ -55,6 +55,7 @@ if (isset($_FILES["fajl"])) {
         } else {
             $hiba = "Ilyen típusu fájlok nem engedélyezettek!";
         }
+        finfo_close($finfo);
     } else {
         $hiba = "A fájl mérete 0 byte vagy meghaladja a megengedett 1 megabytos maximális méretet";
     }
