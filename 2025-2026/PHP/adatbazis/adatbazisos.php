@@ -1,4 +1,5 @@
 <?php
+include_once "../fugvenyek.php";
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -14,12 +15,12 @@ $conn->query($sql);
 /*$query = "INSERT INTO `adatok` (`adat1`, `adat2`, `adat3`, `adat4`) VALUES ('12', 'qweerwq', '2025-11-28', '1212')";
  $conn->query($query);*/
 
-$query = "SELECT adat1,adat4 from adatok";
+$query = "SELECT adatok.adat1,t2.adat1*-1 as k,t2.adat4,2*adatok.adat1 as szorzas from adatok,adatok as t2";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
-    // output data of each row
-    while ($row = $result->fetch_assoc()) {
-        echo $row["adat1"] . " " . $row["adat4"] . "<br>";
+    while ($row = $result->fetch_object()) {
+        d($row);
+        //echo $row["adat1"] . " " . $row["adat4"] . " " . $row["szorzas"] . "<br>";
     }
 }
 $conn->close();
