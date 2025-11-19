@@ -1,74 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Színes LED-ek</title>
-  </head>
-  <body onload="general()">
-    <script>
-      fetch("karakterKeszlet.json")
-        .then((res) => res.json())
-        .then((betuk) => {
-          return (proba = betuk["proba"]);
-        });
-      //Karakter készlet
-      let ledFal = [];
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Színes LED-ek</title>
+    </head>
+    <body onload="general()">
+        <script>
+            fetch("karakterKeszlet.json")
+                .then((res) => res.json())
+                .then((betuk) => {
+                    return (proba = betuk["proba"]);
+                });
+            //Karakter készlet
+            let ledFal = [];
 
-      function mozog() {
-        tisztit();
-        for (let i = 0; i < proba.length; i++) {
-          for (let j = 0; j < proba[i].length; j++) {
-            ledFal[i + 1][proba[i][j] - 1].style.backgroundColor = "white";
-            if (proba[i][j] == 16) {
-              proba[i][j] = 1;
-            } else {
-              proba[i][j]++;
+            function mozog() {
+                tisztit();
+                for (let i = 0; i < proba.length; i++) {
+                    for (let j = 0; j < proba[i].length; j++) {
+                        ledFal[i + 1][proba[i][j] - 1].style.backgroundColor = "white";
+                        if (proba[i][j] == 16) {
+                            proba[i][j] = 1;
+                        } else {
+                            proba[i][j]++;
+                        }
+                    }
+                }
             }
-          }
-        }
-      }
 
-      function tisztit() {
-        for (let i = 0; i < ledFal.length; i++) {
-          for (let j = 0; j < ledFal[i].length; j++) {
-            ledFal[i][j].style.backgroundColor = "black";
-          }
-        }
-      }
+            function tisztit() {
+                for (let i = 0; i < ledFal.length; i++) {
+                    for (let j = 0; j < ledFal[i].length; j++) {
+                        ledFal[i][j].style.backgroundColor = "black";
+                    }
+                }
+            }
 
-      function general() {
-        let keret = document.createElement("div");
-        keret.style.placeItems = "center";
-        for (let i = 0; i < 16; i++) {
-          let sorokSzam = [];
-          let sor = document.createElement("div");
-          sor.style.fontSize = "0";
-          for (let j = 0; j < 16; j++) {
-            let pixel = document.createElement("div");
-            pixel.style.height = 20 + "px";
-            pixel.style.width = 20 + "px";
-            pixel.setAttribute("class", "pixel");
-            pixel.style.backgroundColor = "black";
-            pixel.style.display = "inline-block";
-            //pixel.style.borderRadius = "50%" //Ha ténylegesen ledek kellenek
-            pixel.addEventListener("click", function () {
-              pixel.style.backgroundColor = "black";
-            });
-            pixel.addEventListener("dblclick", function () {
-              pixel.style.backgroundColor = "black";
-            });
-            sor.appendChild(pixel);
-            sorokSzam.push(pixel);
-          }
-          ledFal.push(sorokSzam);
-          keret.appendChild(sor);
-        }
-        document.body.appendChild(keret);
-        setTimeout(() => {
-          setInterval(mozog, 500);
-        }, 2000);
-      }
-    </script>
-  </body>
+            function general() {
+                let keret = document.createElement("div");
+                keret.style.placeItems = "center";
+                for (let i = 0; i < 16; i++) {
+                    let sorokSzam = [];
+                    let sor = document.createElement("div");
+                    sor.style.fontSize = "0";
+                    for (let j = 0; j < 16; j++) {
+                        let pixel = document.createElement("div");
+                        pixel.style.height = 20 + "px";
+                        pixel.style.width = 20 + "px";
+                        pixel.setAttribute("class", "pixel");
+                        pixel.style.backgroundColor = "black";
+                        pixel.style.display = "inline-block";
+                        //pixel.style.borderRadius = "50%" //Ha ténylegesen ledek kellenek
+                        pixel.addEventListener("click", function () {
+                            pixel.style.backgroundColor = "black";
+                        });
+                        pixel.addEventListener("dblclick", function () {
+                            pixel.style.backgroundColor = "black";
+                        });
+                        sor.appendChild(pixel);
+                        sorokSzam.push(pixel);
+                    }
+                    ledFal.push(sorokSzam);
+                    keret.appendChild(sor);
+                }
+                document.body.appendChild(keret);
+                setTimeout(() => {
+                    setInterval(mozog, 500);
+                }, 2000);
+            }
+        </script>
+    </body>
 </html>
