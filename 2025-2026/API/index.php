@@ -18,7 +18,7 @@ if (isset($_GET["path"])) {
             $conn->close();
         }
         $json = json_encode($jsonTomb);
-        d($json);
+        echo $json;
     }
 } else {
      ?>
