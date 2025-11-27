@@ -16,6 +16,11 @@ if (isset($_GET["path"])) {
                 $jsonTomb[] = $row;
             }
             $conn->close();
+        } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $json = file_get_contents("php://input");
+            $data = json_decode($json);
+            d($data);
+            phpinfo(32);
         }
         $json = json_encode($jsonTomb);
         echo $json;
