@@ -110,8 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $maxFiuk = max($fiuk);
         $maxLanyok = max($lanyok);
         $megoldas = [];
-        $megoldas[] = array_keys($fiuk, $maxFiuk)[0];
-        $megoldas[] = array_keys($lanyok, $maxLanyok)[0];
+        $megoldas[] = array_keys($fiuk, $maxFiuk);
+        $megoldas[] = array_keys($lanyok, $maxLanyok);
         $json = json_encode($megoldas);
         echo $json;
     } elseif ($data["feladat"] == "7") {
@@ -124,8 +124,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         $legtobbTanc = array_keys($tancok, max($tancok))[0];
-
         $parok = [];
+        $parok["tanc"] = $legtobbTanc;
         foreach ($_SESSION["adatok"] as $elem) {
             if ($elem["tanc"] == $legtobbTanc) {
                 $parok[] = [
@@ -137,5 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $json = json_encode($parok);
         echo $json;
     } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
+    } elseif ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+    } elseif ($_SERVER["REQUEST_METHOD"] == "PUT") {
     }
 }

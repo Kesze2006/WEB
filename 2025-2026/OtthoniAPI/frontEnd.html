@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Megjelenítés</title>
+        <title>Apache helicopter</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -12,27 +12,67 @@
         />
         <link rel="stylesheet" href="style.css" />
     </head>
-    <body onload="feladat1()">
-        <h1>Mindent a konzolba ír ki!!</h1>
-        <button onclick="feladat2()">Masodik feladat</button>
+    <body onload="feladat1()" class="bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 bg-light p-3">
+                    <div class="p-2 fs-1">API Dolgozat</div>
 
-        <label for="tancok">Válassz egy táncot:</label>
-        <select name="tancok" id="tancok"></select>
-        <button onclick="feladat3()">Harmadik feladat</button>
+                    <div class="mb-2">
+                        <div class="mb-2">
+                            <button class="btn btn-secondary me-2" onclick="feladat2()">2. Feladat</button>
+                        </div>
+                        <div class="mb-2">
+                            <button class="btn btn-secondary me-2" onclick="feladat3()">3. Feladat</button>
+                            <label for="tancok" class="form-label me-2">Válassz egy táncot:</label>
+                            <select id="tancok" class="form-select d-inline w-auto"></select>
+                        </div>
+                        <div class="mb-2">
+                            <button class="btn btn-secondary me-2" onclick="feladat4()">4. Feladat</button>
+                            <label for="osszesTancos2" class="form-label me-2">Válassz egy táncost:</label>
+                            <select id="osszesTancos2" class="form-select d-inline w-auto"></select>
+                        </div>
+                        <div class="mb-2">
+                            <button class="btn btn-secondary me-2" onclick="feladat5()">5. Feladat</button>
 
-        <label for="osszesTancos2">Válassz egy táncost:</label>
-        <select name="osszesTancos2" id="osszesTancos2"></select>
+                            <label for="osszesTancos" class="form-label me-2">Válassz egy táncost:</label>
+                            <select id="osszesTancos" class="form-select d-inline w-auto"></select>
 
-        <button onclick="feladat4()">Negyedik feladat</button>
-
-        <label for="osszesTancos">Válassz egy táncost:</label>
-        <select name="osszesTancos" id="osszesTancos"></select>
-        <label for="tancok2">Válassz egy táncot:</label>
-        <select name="tancok2" id="tancok2"></select>
-        <button onclick="feladat5()">Ötödik feladat</button>
-
-        <button onclick="feladat6()">Hatodik feladat</button>
-        <button onclick="feladat7()">Hetedik feladat</button>
+                            <label for="tancok2" class="form-label me-2 ms-3">Válassz egy táncot:</label>
+                            <select id="tancok2" class="form-select d-inline w-auto"></select>
+                        </div>
+                        <div class="mb-2">
+                            <button class="btn btn-secondary me-2" onclick="feladat6()">6. Feladat</button>
+                        </div>
+                        <div class="mb-2">
+                            <button class="btn btn-secondary me-2" onclick="feladat7()">7. Feladat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-3 g-2">
+                    <div class="col-12 col-md-4">
+                        <div class="bg-light p-2 rounded text-center bg-light" id="feladat2">2. Feladat</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="bg-light p-2 rounded text-center bg-light" id="feladat3">3. Feladat</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="bg-light p-2 rounded text-center bg-light" id="feladat4">4. Feladat</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="bg-light p-2 rounded text-center bg-light" id="feladat5">5. Feladat</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="bg-light p-2 rounded text-center bg-light" id="feladat6">6. Feladat</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="bg-light p-2 rounded text-center bg-light" id="feladat7">7. Feladat</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

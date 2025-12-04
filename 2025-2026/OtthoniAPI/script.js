@@ -49,7 +49,8 @@ function feladat2() {
     })
         .then((x) => x.json())
         .then((valasz) => {
-            console.log("Az elsőtánc " + valasz.elsoTanc + " volt az utolsó pedig " + valasz.utolsoTanc + " volt.");
+            document.getElementById("feladat2").innerHTML =
+                "Az elsőtánc " + valasz.elsoTanc + " volt az utolsó pedig " + valasz.utolsoTanc + " volt.";
         });
 }
 function feladat3() {
@@ -62,7 +63,8 @@ function feladat3() {
     })
         .then((x) => x.json())
         .then((valasz) => {
-            console.log(valasz);
+            document.getElementById("feladat3").innerHTML =
+                valasz + " alkalommal táncoltak " + document.getElementById("tancok").value + "-t";
         });
 }
 function feladat4() {
@@ -75,7 +77,8 @@ function feladat4() {
     })
         .then((x) => x.json())
         .then((valasz) => {
-            console.log(valasz);
+            document.getElementById("feladat4").innerHTML =
+                document.getElementById("osszesTancos2").value + " az alábbi táncokat táncolta: " + valasz;
         });
 }
 function feladat5() {
@@ -89,7 +92,22 @@ function feladat5() {
     })
         .then((x) => x.json())
         .then((valasz) => {
-            console.log(valasz);
+            if (valasz) {
+                document.getElementById("feladat5").innerHTML =
+                    "A " +
+                    document.getElementById("tancok2").value +
+                    " bemutatóján " +
+                    document.getElementById("osszesTancos").value +
+                    " párja " +
+                    valasz +
+                    " volt.";
+            } else {
+                document.getElementById("feladat5").innerHTML =
+                    document.getElementById("osszesTancos").value +
+                    " nem táncolt " +
+                    document.getElementById("tancok2").value +
+                    "-t.";
+            }
         });
 }
 
@@ -102,7 +120,8 @@ function feladat6() {
     })
         .then((x) => x.json())
         .then((valasz) => {
-            console.log(valasz);
+            document.getElementById("feladat6").innerHTML =
+                "A legtöbbet táncolt fiú(k): " + valasz[0] + " A legtöbbet táncolt lány(ok) pedig: " + valasz[1];
         });
 }
 
@@ -115,7 +134,28 @@ function feladat7() {
     })
         .then((x) => x.json())
         .then((valasz) => {
-            console.log(valasz);
-            //nincs kedvem szépen ki íratni az meg hogy egyből textként úgy adja vissza nem jut instant eszembe és nics kedvem most baszakodni vele
+            let tabla = document.createElement("table");
+            tabla.classList.add("table");
+            tabla.classList.add("table-striped-columns");
+            let trCim = document.createElement("tr");
+            let thFiu = document.createElement("th");
+            let thLany = document.createElement("th");
+            tabla.appendChild(trCim);
+            thFiu.innerHTML = "Fiúk";
+            thLany.innerHTML = "Lányok";
+            trCim.appendChild(thFiu);
+            trCim.appendChild(thLany);
+            for (let i = 0; i < Object.keys(valasz).length - 1; i++) {
+                let tr = document.createElement("tr");
+                let tdFiu = document.createElement("td");
+                let tdLany = document.createElement("td");
+                tdFiu.innerHTML = valasz[i].fiu;
+                tdLany.innerHTML = valasz[i].lany;
+                tr.appendChild(tdFiu);
+                tr.appendChild(tdLany);
+                tabla.appendChild(tr);
+            }
+            document.getElementById("feladat7").innerHTML = "";
+            document.getElementById("feladat7").appendChild(tabla);
         });
 }
