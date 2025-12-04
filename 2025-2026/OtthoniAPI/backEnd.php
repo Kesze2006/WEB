@@ -124,17 +124,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         $legtobbTanc = array_keys($tancok, max($tancok))[0];
-        $parok = [];
-        $parok["tanc"] = $legtobbTanc;
+        $megoldas = [];
+        $megoldas["tanc"] = $legtobbTanc;
         foreach ($_SESSION["adatok"] as $elem) {
             if ($elem["tanc"] == $legtobbTanc) {
-                $parok[] = [
+                $megoldas["parok"][] = [
                     "lany" => $elem["lany"],
                     "fiu" => $elem["fiu"],
                 ];
             }
         }
-        $json = json_encode($parok);
+        $json = json_encode($megoldas);
         echo $json;
     } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
     } elseif ($_SERVER["REQUEST_METHOD"] == "DELETE") {
