@@ -135,6 +135,7 @@ function feladat7() {
         .then((x) => x.json())
         .then((valasz) => {
             valasz["parok"].sort((a, b) => a.lany.localeCompare(b.lany));
+            console.log(valasz);
             let tabla = document.createElement("table");
             tabla.classList.add("table");
             tabla.classList.add("table-striped-columns");
@@ -146,7 +147,7 @@ function feladat7() {
             thLany.innerHTML = "Lányok";
             trCim.appendChild(thFiu);
             trCim.appendChild(thLany);
-            for (let i = 0; i < Object.keys(valasz["parok"]).length - 1; i++) {
+            for (let i = 0; i < Object.keys(valasz["parok"]).length; i++) {
                 let tr = document.createElement("tr");
                 let tdFiu = document.createElement("td");
                 let tdLany = document.createElement("td");
