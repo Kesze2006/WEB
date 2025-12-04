@@ -47,6 +47,19 @@ if (isset($_GET["path"])) {
                     $jsonTomb["statusz"] = "succes";
                 }
             }
+        } elseif ($_SERVER["REQUEST_METHOD"] == "PUT") {
+            $json = file_get_contents("php://input");
+            $data = json_decode($json, true);
+            if (isset($data["memberid"]) && isset($data["id"])) {
+                $query = "UPDATE todo SET vege=NOW() WHERE id='" . $conn->real_escape_string($data["id"]) . "'";
+                $jsonTomb = [];
+                if ($conn->query($query) === false) {
+                    $jsonTomb["statusz"] = "error";
+                    $jsonTomb["errorMessage"] = $conn->error;
+                } else {
+                    $jsonTomb["statusz"] = "succes";
+                }
+            }
         }
         $json = json_encode($jsonTomb);
         echo $json;
