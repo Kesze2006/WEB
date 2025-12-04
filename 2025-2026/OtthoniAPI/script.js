@@ -8,7 +8,27 @@ function feladat1() {
             return fetch("backEnd.php", {
                 method: "POST",
                 body: fajl,
-            });
+            })
+                .then((res) => res.json())
+                .then((valasz) => {
+                    valasz[0].forEach((elem) => {
+                        let tancok = document.createElement("option");
+                        tancok.innerHTML = elem;
+                        document.getElementById("tancok").appendChild(tancok);
+                    });
+                    valasz[1].forEach((elem) => {
+                        let lany = document.createElement("option");
+                        lany.innerHTML = elem;
+                        document.getElementById("lanyok").appendChild(lany);
+                        document.getElementById("osszesTancos").appendChild(lany);
+                    });
+                    valasz[2].forEach((elem) => {
+                        let fiu = document.createElement("option");
+                        fiu.innerHTML = elem;
+                        document.getElementById("fiuk").appendChild(fiu);
+                        document.getElementById("osszesTancos").appendChild(fiu);
+                    });
+                });
         });
 }
 
@@ -29,11 +49,12 @@ function feladat3() {
         method: "POST",
         body: JSON.stringify({
             feladat: "3",
+            tanc: document.getElementById("tancok").value,
         }),
     })
-        .then((x) => x.text())
+        .then((x) => x.json())
         .then((valasz) => {
-            console.log("Összesen " + valasz + " samba volt.");
+            console.log(valasz);
         });
 }
 function feladat4() {
@@ -41,11 +62,13 @@ function feladat4() {
         method: "POST",
         body: JSON.stringify({
             feladat: "4",
+            lany: document.getElementById("lanyok").value,
+            fiu: document.getElementById("fiuk").value,
         }),
     })
-        .then((x) => x.text())
+        .then((x) => x.json())
         .then((valasz) => {
-            console.log("Vilma " + valasz + "táncokban szerepelt.");
+            console.log(valasz);
         });
 }
 function feladat5() {

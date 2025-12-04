@@ -27,6 +27,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $_SESSION["adatok"] = $osszesTanc;
         fclose($betoltottFajl);
+        $adatok = [];
+        $tancok = [];
+        $lanyok = [];
+        $fiuk = [];
+        foreach ($_SESSION["adatok"] as $elem) {
+            if (!in_array($elem["tanc"], $tancok)) {
+                $tancok[] = $elem["tanc"];
+            }
+        }
+        foreach ($_SESSION["adatok"] as $elem) {
+            if (!in_array($elem["lany"], $lanyok)) {
+                $lanyok[] = $elem["lany"];
+            }
+            if (!in_array($elem["fiu"], $fiuk)) {
+                $fiuk[] = $elem["fiu"];
+            }
+        }
+        $adatok[] = $tancok;
+        $adatok[] = $lanyok;
+        $adatok[] = $fiuk;
+        $json = json_encode($adatok);
+        echo $json;
     } elseif ($data["feladat"] == "2") {
         $megoldas = [
             "elsoTanc" => $_SESSION["adatok"][0]["tanc"],
@@ -34,22 +56,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
         $json = json_encode($megoldas);
         echo $json;
-    } elseif ($data["feladat"] == "3") {
-        $megoldas = 0;
+    } elseif ($data["feladat"] == "3" && isset($data["tanc"])) {
+        $db = 0;
         foreach ($_SESSION["adatok"] as $elem) {
-            if ($elem["tanc"] == "samba") {
-                $megoldas++;
+            if ($elem["tanc"] == $data["tanc"]) {
+                $db++;
             }
         }
-        echo $megoldas;
-    } elseif ($data["feladat"] == "4") {
-        $megoldas = "";
+        $json = json_encode($db);
+        echo $json;
+    } elseif ($data["feladat"] == "4" && isset($data["fiu"]) && isset($data["lany"])) {
+        $tancLany = [];
+        $tancFiu = [];
         foreach ($_SESSION["adatok"] as $elem) {
-            if ($elem["lany"] == "Vilma") {
-                $megoldas .= $elem["tanc"] . " ";
+            if ($elem["lany"] == $data["lany"] && !in_array($elem["tanc"], $tancLany)) {
+                $tancLany[] = $elem["tanc"];
+            }
+            if ($elem["fiu"] == $data["fiu"] && !in_array($elem["tanc"], $tancFiu)) {
+                $tancFiu[] = $elem["tanc"];
             }
         }
-        echo $megoldas;
+        $valasz[] = $tancLany;
+        $valasz[] = $tancFiu;
+        $json = json_encode($valasz);
+        echo $json;
     } elseif ($data["feladat"] == "5") {
         $megoldas = "Vilma nem táncolt ilyen táncot!";
         foreach ($_SESSION["adatok"] as $elem) {
