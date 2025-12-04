@@ -65,47 +65,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $json = json_encode($db);
         echo $json;
-    } elseif ($data["feladat"] == "4" && isset($data["fiu"]) && isset($data["lany"])) {
-        $tancLany = [];
-        $tancFiu = [];
+    } elseif ($data["feladat"] == "4" && isset($data["tancos"])) {
+        $tancok = [];
         foreach ($_SESSION["adatok"] as $elem) {
-            if ($elem["lany"] == $data["lany"] && !in_array($elem["tanc"], $tancLany)) {
-                $tancLany[] = $elem["tanc"];
-            }
-            if ($elem["fiu"] == $data["fiu"] && !in_array($elem["tanc"], $tancFiu)) {
-                $tancFiu[] = $elem["tanc"];
+            if (
+                ($elem["lany"] == $data["tancos"] || $elem["fiu"] == $data["tancos"]) &&
+                !in_array($elem["tanc"], $tancok)
+            ) {
+                $tancok[] = $elem["tanc"];
             }
         }
-        $valasz[] = $tancLany;
-        $valasz[] = $tancFiu;
-        $json = json_encode($valasz);
+        $json = json_encode($tancok);
         echo $json;
     } elseif ($data["feladat"] == "5") {
-        $megoldas = "Vilma nem táncolt ilyen táncot!";
+        $megoldas = "";
         foreach ($_SESSION["adatok"] as $elem) {
-            if ($elem["tanc"] == $data["tancNeve"] && $elem["lany"] == "Vilma") {
-                $megoldas = "Vilma a " . $data["tancNeve"] . " táncot " . $elem["fiu"] . " val táncolta le.";
+            if ($elem["tanc"] == $data["tanc"]) {
+                if ($elem["lany"] == $data["tancos"]) {
+                    $megoldas = $elem["fiu"];
+                }
+                if ($elem["fiu"] == $data["tancos"]) {
+                    $megoldas = $elem["lany"];
+                }
             }
         }
-        echo $megoldas;
-    } elseif ($data["feladat"] == "6") {
-        $lanyok = [];
-        $fiuk = [];
-        foreach ($_SESSION["adatok"] as $elem) {
-            if (!in_array($elem["lany"], $lanyok)) {
-                $lanyok[] = $elem["lany"];
-            }
-            if (!in_array($elem["fiu"], $fiuk)) {
-                $fiuk[] = $elem["fiu"];
-            }
-        }
-        $megoldas = [
-            "lanyok" => $lanyok,
-            "fiuk" => $fiuk,
-        ];
         $json = json_encode($megoldas);
         echo $json;
-    } elseif ($data["feladat"] == "7") {
+    } elseif ($data["feladat"] == "6") {
         $fiuk = [];
         $lanyok = [];
         foreach ($_SESSION["adatok"] as $elem) {
@@ -123,13 +109,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $maxFiuk = max($fiuk);
         $maxLanyok = max($lanyok);
-        $megoldas =
-            "A legtöbször szereplő fiú " .
-            array_keys($fiuk, $maxFiuk)[0] .
-            " volt és a legtöbször szereplő lány pedig " .
-            array_keys($lanyok, $maxLanyok)[0] .
-            " volt.";
-        echo $megoldas;
+        $megoldas = [];
+        $megoldas[] = array_keys($fiuk, $maxFiuk)[0];
+        $megoldas[] = array_keys($lanyok, $maxLanyok)[0];
+        $json = json_encode($megoldas);
+        echo $json;
+    } elseif ($data["feladat"] == "7") {
+        $tancok = [];
+        foreach ($_SESSION["adatok"] as $elem) {
+            if (isset($tancok[$elem["tanc"]])) {
+                $tancok[$elem["tanc"]] = $tancok[$elem["tanc"]] + 1;
+            } else {
+                $tancok[$elem["tanc"]] = 1;
+            }
+        }
+        $legtobbTanc = array_keys($tancok, max($tancok))[0];
+
+        $parok = [];
+        foreach ($_SESSION["adatok"] as $elem) {
+            if ($elem["tanc"] == $legtobbTanc) {
+                $parok[] = [
+                    "lany" => $elem["lany"],
+                    "fiu" => $elem["fiu"],
+                ];
+            }
+        }
+        $json = json_encode($parok);
+        echo $json;
+    } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
     }
-} elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
 }
