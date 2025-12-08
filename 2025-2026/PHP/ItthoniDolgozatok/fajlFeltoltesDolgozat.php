@@ -31,7 +31,7 @@ if (isset($_FILES["fajl"])) {
     $tiltottDolgok = ["text/html", "application/javascript", "text/x-php", "application/x-php", "text/javascript"];
 
     if ($fajl["size"] > 0 && $fajl["size"] < 1048576) {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type aka mimetype extension
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
         if (
             finfo_file($finfo, $fajl["tmp_name"]) == "image/png" ||
             finfo_file($finfo, $fajl["tmp_name"]) == "image/jpeg" ||
