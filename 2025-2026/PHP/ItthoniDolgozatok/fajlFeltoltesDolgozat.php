@@ -85,7 +85,7 @@ if (isset($_FILES["fajl"])) {
     <h1><?php if (isset($hiba)) {
         echo $hiba;
     } ?></h1>
-    <form action="fajlFeltoltesOthoni.php" method="post" enctype="multipart/form-data">
+    <form action="fajlFeltoltesDolgozat.php" method="post" enctype="multipart/form-data">
         Fájl kiválasztása: 
         <input type="file" name="fajl">
         <input type="submit" value="Feltöltés">
