@@ -1,21 +1,17 @@
 <?php
-    session_start();
-    if(!isset($_SESSION["emailTipusok"]))
-    {
-        $_SESSION["emailTipusok"] = [];
-    }
-    $tipus = explode("@",$_GET["email"]);
-    var_dump($_SESSION["emailTipusok"]);
-    if(in_array($tipus[1],$_SESSION["emailTipusok"]))
-    {
-        $_SESSION["emailTipusok"][$tipus[1]]++;
-        echo "van ilyen";
-    }
-    else
-    {
-        $_SESSION["emailTipusok"][$tipus[1]] = 1;
-    }
-    echo $_SESSION["emailTipusok"]["gmail.com"];
+session_start();
+if (!isset($_SESSION["emailTipusok"])) {
+    $_SESSION["emailTipusok"] = [];
+}
+$tipus = explode("@", $_GET["email"]);
+var_dump($_SESSION["emailTipusok"]);
+if (in_array($tipus[1], $_SESSION["emailTipusok"])) {
+    $_SESSION["emailTipusok"][$tipus[1]]++;
+    echo "van ilyen";
+} else {
+    $_SESSION["emailTipusok"][$tipus[1]] = 1;
+}
+echo $_SESSION["emailTipusok"]["gmail.com"];
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +25,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+            <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="get">
                 <label for="email">Email cím: </label>
                 <input type="email" name="email" reguired>
                 <input type="submit" value="Küldés">
