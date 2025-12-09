@@ -1,5 +1,5 @@
-<Directory "/xampp/htdocs/WEB/2025-2026/API/matekos">
-    DirectoryIndex index.php index.html
+
+   DirectoryIndex index.php index.html
     #AllowOverride All
     #Require all granted
 
@@ -8,5 +8,3 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?path=$1 [L,QSA]
-
-</Directory>
