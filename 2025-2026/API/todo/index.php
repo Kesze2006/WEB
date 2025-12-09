@@ -1,5 +1,5 @@
 <?php
-include_once "../PHP/fugvenyek.php";
+include_once "../../PHP/fugvenyek.php";
 mysqli_report(MYSQLI_REPORT_OFF);
 if (isset($_GET["path"])) {
     $apiParts = explode("/", $_GET["path"]);
