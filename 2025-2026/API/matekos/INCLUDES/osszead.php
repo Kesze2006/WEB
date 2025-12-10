@@ -1,14 +1,12 @@
 <?php
-function osszead($szamok) {}
-
-function szamKerses($szamok)
+include_once "szamKeres.php";
+function osszead($szamok)
 {
-    $vissza = [];
-    for ($i = 0; $i < sizeof($szamok); $i++) {
-        if (is_numeric($szamok[i])) {
-            $vissza[] = $szamok[i];
-        }
+    $csakSzamok = szamKeres($szamok);
+    if (sizeof($csakSzamok) <= 1) {
+        return "Nincs elég szám a művelethez!";
+    } else {
+        return array_sum($csakSzamok);
     }
-    return $vissza;
 }
 ?>
