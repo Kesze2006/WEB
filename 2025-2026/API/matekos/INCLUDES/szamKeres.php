@@ -1,4 +1,5 @@
 <?php
+include_once "../../PHP/fugvenyek.php";
 function szamKeres($szamok)
 {
     $vissza = [];
