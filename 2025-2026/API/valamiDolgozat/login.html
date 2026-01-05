@@ -13,35 +13,143 @@
         <title>Az oldal neve</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <button onclick="faktorialis()">Faktorialis</button>
-                        </li>
-                        <li class="nav-item">
-                            <button onclick="szorzas()">Szorzás</button>
-                        </li>
-                        <li class="nav-item">
-                            <button onclick="haromszog()">Háromszög</button>
-                        </li>
-                        <li class="nav-item">
-                            <button onclick="randomMax()">RandomMax</button>
-                        </li>
-                        <li class="nav-item">
-                            <button onclick="randomTolIg()">RandomTólIg</button>
-                        </li>
-                        <li class="nav-item">
-                            <button onclick="randomLepes()">RandomLépés</button>
-                        </li>
-                        <li class="nav-item">
-                            <button onclick="lorem()">Lorem</button>
-                        </li>
-                    </ul>
+        <div class="container">
+            <header class="bg-primary text-white text-center p-4">
+                <h1>Matekos API dolgozat</h1>
+                <p>HTML + Fetch + Bootstrap + PHP</p>
+            </header>
+            <nav class="navbar navbar-dark bg-dark">
+                <div class="container">
+                    <div class="text-center">
+                        <a
+                            class="navbar-brand btn btn-outline-primary p-2"
+                            onclick="(function(){document.getElementById('fakt').classList.remove('d-none')})();"
+                            >Faktoriális</a
+                        >
+                        <a
+                            class="navbar-brand btn btn-outline-primary p-2"
+                            onclick="(function(){document.getElementById('szorzas').classList.remove('d-none')})();"
+                            >Szorzat</a
+                        >
+                        <a
+                            class="navbar-brand btn btn-outline-primary p-2"
+                            onclick="(function(){document.getElementById('harom').classList.remove('d-none')})();"
+                            >Háromszög</a
+                        >
+                        <a
+                            class="navbar-brand btn btn-outline-primary p-2"
+                            onclick="(function(){document.getElementById('randMax').classList.remove('d-none')})();"
+                            >RandomMax</a
+                        >
+                        <a
+                            class="navbar-brand btn btn-outline-primary p-2"
+                            onclick="(function(){document.getElementById('randomTol').classList.remove('d-none')})();"
+                            >RandomTólIg</a
+                        >
+                        <a
+                            class="navbar-brand btn btn-outline-primary p-2"
+                            onclick="(function(){document.getElementById('randomLepes').classList.remove('d-none')})();"
+                            >RandomLépés</a
+                        >
+                        <a
+                            class="navbar-brand btn btn-outline-primary p-2"
+                            onclick="(function(){document.getElementById('label').classList.remove('d-none')})();"
+                            >Lorem</a
+                        >
+                    </div>
+                </div>
+            </nav>
+            <div class="container mt-4">
+                <div class="d-none" id="fakt">
+                    <div class="mb-3">
+                        <label for="szamFakt" class="form-label"
+                            >Válaszd ki melyik szám faktoriálisát szeretnéd tudni:</label
+                        >
+                        <input type="number" id="szamFakt" class="form-control" />
+                    </div>
+                    <button class="btn btn-primary" onclick="faktorialis()">Számolás</button>
+                    <div id="eredmenyFakt" class="alert alert-success mt-3 d-none"></div>
+                </div>
+
+                <div class="d-none" id="szorzas">
+                    <div class="mb-3">
+                        <label for="szamSzorzas1" class="form-label">Első szám:</label>
+                        <input type="number" id="szamSzorzas1" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="szamSzorzas2" class="form-label">Második szám:</label>
+                        <input type="number" id="szamSzorzas2" class="form-control" />
+                    </div>
+                    <button class="btn btn-success" onclick="szorzas()">Számolás</button>
+                    <div id="eredmenySzorzas" class="alert alert-success mt-3 d-none"></div>
+                </div>
+
+                <div class="d-none" id="harom">
+                    <div class="mb-3">
+                        <label for="szamHarom1" class="form-label">Első szám:</label>
+                        <input type="number" id="szamHarom1" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="szamHaroms2" class="form-label">Második szám:</label>
+                        <input type="number" id="szamHarom2" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="szamHaroms3" class="form-label">Harmadik szám:</label>
+                        <input type="number" id="szamHarom3" class="form-control" />
+                    </div>
+                    <button class="btn btn-success" onclick="haromszog()">Számolás</button>
+                    <div id="eredmenyHarom" class="alert alert-success mt-3 d-none"></div>
+                </div>
+
+                <div class="d-none" id="randMax">
+                    <div class="mb-3">
+                        <input type="number" id="szamRandMax" class="form-control" />
+                    </div>
+                    <button class="btn btn-primary" onclick="randomMax()">Számolás</button>
+                    <div id="eredmenyRandMax" class="alert alert-success mt-3 d-none"></div>
+                </div>
+
+                <div class="d-none" id="randomTol">
+                    <div class="mb-3">
+                        <label for="szamRandomTol1" class="form-label">Első szám:</label>
+                        <input type="number" id="szamRandomTol1" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="szamRandomTol2" class="form-label">Második szám:</label>
+                        <input type="number" id="szamRandomTol2" class="form-control" />
+                    </div>
+                    <button class="btn btn-success" onclick="randomTolIg()">Számolás</button>
+                    <div id="eredmenyRandomTol" class="alert alert-success mt-3 d-none"></div>
+                </div>
+
+                <div class="d-none" id="randomLepes">
+                    <div class="mb-3">
+                        <label for="szamRandomLepes1" class="form-label">Első szám:</label>
+                        <input type="number" id="szamRandomLepes1" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="szamRandomLepes2" class="form-label">Második szám:</label>
+                        <input type="number" id="szamRandomLepes2" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="szamRandomLepes3" class="form-label">Harmadik szám:</label>
+                        <input type="number" id="szamRandomLepes3" class="form-control" />
+                    </div>
+                    <button class="btn btn-success" onclick="randomLepes()">Számolás</button>
+                    <div id="eredmenyRandomLepes" class="alert alert-success mt-3 d-none"></div>
+                </div>
+
+                <div class="d-none" id="label">
+                    <div class="mb-3">
+                        <input type="number" id="szamLabel" class="form-control" />
+                    </div>
+                    <button class="btn btn-primary" onclick="lorem()">Számolás</button>
+                    <div id="eredmenyLabel" class="alert alert-success mt-3 d-none"></div>
                 </div>
             </div>
-        </nav>
+
+            <footer class="bg-secondary text-white text-center p-3 m-3">Készítette: Keszericze Ákos</footer>
+        </div>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

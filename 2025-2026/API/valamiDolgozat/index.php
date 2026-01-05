@@ -5,9 +5,9 @@ if (isset($_SERVER["PATH_INFO"])) {
     $apiParts = explode("/", $_SERVER["PATH_INFO"]);
     array_shift($apiParts);
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $szam = szamKeres($apiParts);
         switch ($apiParts[0]) {
             case "fakt":
-                $szam = szamKeres($apiParts);
                 if (count($szam) == 1 && count($szam) != 0 && $szam[0] <= 20) {
                     $megoldas = 1;
                     for ($i = 1; $i <= $szam[0]; $i++) {
@@ -19,7 +19,6 @@ if (isset($_SERVER["PATH_INFO"])) {
                 }
                 break;
             case "szorzat":
-                $szam = szamKeres($apiParts);
                 if (count($szam) >= 2 && count($szam) != 0) {
                     echo array_product($szam);
                 } else {
@@ -27,7 +26,6 @@ if (isset($_SERVER["PATH_INFO"])) {
                 }
                 break;
             case "haromszog":
-                $szam = szamKeres($apiParts);
                 if (count($szam) == 3 && count($szam) != 0) {
                     $s = array_sum($szam) / 2;
                     $terulet = sqrt($s * ($s - $szam[0]) * ($s - $szam[1]) * ($s - $szam[2]));
@@ -37,7 +35,6 @@ if (isset($_SERVER["PATH_INFO"])) {
                 }
                 break;
             case "random":
-                $szam = szamKeres($apiParts);
                 if (count($szam) == 1) {
                     echo rand(0, $szam[0]);
                 } elseif (count($szam) == 2) {
@@ -50,7 +47,6 @@ if (isset($_SERVER["PATH_INFO"])) {
                 }
                 break;
             case "lorem":
-                $szam = szamKeres($apiParts);
                 if (count($szam) == 1 && count($szam) != 0) {
                     $szavak = [
                         "lorem",
