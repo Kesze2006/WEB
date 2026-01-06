@@ -1,12 +1,25 @@
 <!doctype html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+    </head>
     <body>
         <script>
             fetch("http://localhost/WEB/2025-2026/API/rest_api_demo/backend/api/profile.php", {
                 headers: { Authorization: "Bearer " + localStorage.getItem("token") },
             })
-                .then((r) => r.json())
-                .then((d) => (document.body.innerHTML = `<h1>Üdv ${d.username}</h1>`));
+                .then((r) => {
+                    if (r.status == 200) {
+                        return r.json();
+                    } else {
+                        location.href = "index.html";
+                    }
+                })
+                .then((d) => {
+                    if (d) {
+                        document.body.innerHTML = `<h1>Üdv ${d.username}</h1>`;
+                    }
+                });
         </script>
     </body>
 </html>
