@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+    <body>
+        <script>
+            fetch("http://localhost/WEB/2025-2026/API/rest_api_demo/backend/api/profile.php", {
+                headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+            })
+                .then((r) => r.json())
+                .then((d) => (document.body.innerHTML = `<h1>Üdv ${d.username}</h1>`));
+        </script>
+    </body>
+</html>
