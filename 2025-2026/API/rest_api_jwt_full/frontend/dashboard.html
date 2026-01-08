@@ -1,0 +1,20 @@
+<head>
+    <meta charset="utf8" />
+</head>
+<script>
+    function logout() {
+        localStorage.token = "";
+        location = "index.html";
+    }
+</script>
+<script>
+    fetch("http://localhost/WEB/2025-2026/API/rest_api_jwt_full/backend/api/profile.php", {
+        headers: { Authorization: "Bearer " + localStorage.token },
+    })
+        .then((r) => r.json())
+        .then(
+            (d) =>
+                (document.body.innerHTML += `<h1>Welcome ${d.user} </h1>
+        <button onclick="logout()">Kilépés</button>`),
+        );
+</script>
