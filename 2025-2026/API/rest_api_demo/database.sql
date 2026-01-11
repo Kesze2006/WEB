@@ -11,3 +11,8 @@ CREATE TABLE users (
 
 INSERT INTO users (username, password)
 VALUES ('admin', SHA2('admin123', 256));
+
+/*SELECT f.nev, f.email, s.szerep AS szerep
+    FROM felhasznalo f
+    JOIN szerepek s ON f.szerep_id = s.id;
+/*
