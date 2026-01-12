@@ -11,20 +11,9 @@ if (!$adatBazis) {
     $felhasznalo = $data["felhasznalo"] ?? "";
     $email = $data["email"] ?? "";
     $jelszo = hash("sha256", $data["jelszo"] ?? "");
-    switch ($data["szerep"]) {
-        case "diak":
-            $szerep = 1;
-            break;
-        case "tanar":
-            $szerep = 2;
-            break;
-        case "admin":
-            $szerep = 3;
-            break;
-        default:
-            break;
-    }
+    $szerep = $data["szerep"] ?? "";
     $adatBazis->query("INSERT INTO felhasznalo (nev, email, jelszo_hash, szerep_id)
     VALUES ('$felhasznalo', '$email', '$jelszo', '$szerep')");
+    echo json_encode(["success" => "A regisztráció sikeres!"]);
 }
 ?>

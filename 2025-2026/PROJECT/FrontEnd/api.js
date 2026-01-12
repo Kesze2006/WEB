@@ -1,5 +1,5 @@
 function reg() {
-    fetch("../BackEnd/dbTeszt.php", {
+    fetch("../BackEnd/dbMYSQLI.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
