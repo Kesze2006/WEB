@@ -33,7 +33,7 @@ CREATE TABLE session(
     token VARCHAR(255) NOT NULL unique,
     letrehozva DATETIME DEFAULT CURRENT_TIMESTAMP,
     lejarat DATETIME NOT NULL,
-    kilepes BOOLEAN DEFAULT FALSE,
+    kilkepes BOOLEAN DEFAULT FALSE,
     CONSTRAINT felhasznalo_fk
         FOREIGN KEY (felhasznalo_id)
         REFERENCES felhasznalo(id)
