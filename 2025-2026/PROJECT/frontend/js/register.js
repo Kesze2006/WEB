@@ -1,5 +1,5 @@
 function reg() {
-    fetch("../../backend/authentication/register.php", {
+    fetch("http://localhost/WEB/2025-2026/PROJECT/backend/authentication/register.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
