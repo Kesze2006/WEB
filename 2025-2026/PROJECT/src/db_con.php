@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . "/helpers/formazotKi.php";
+require_once __DIR__ . "/helpers/errorLog.php";
+
 $config = require_once __DIR__ . "/../config/config.php";
 try {
     $adatBazis =
@@ -9,10 +11,7 @@ try {
             $config["db_jelszo"],
         ) ?? "";
 } catch (PDOException $e) {
-    /*$fajl = fopen(__DIR__ . "/../logs/error.log", "a");
-    fwrite($fajl, "\n[" . date("Y-m-d H:i:s") . "] " . $e->getMessage());
-    fclose($fajl);
-    */
+    errorLog($e);
     echo json_encode(["error" => "Nem lehet kapcsolódni az adatbázishoz!"], JSON_UNESCAPED_UNICODE);
 }
 
