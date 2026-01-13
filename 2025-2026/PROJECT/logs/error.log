@@ -1,2 +1,5 @@
 [2026-01-13 11:05:24] SQLSTATE[HY000] [2002] Nem hozható létre kapcsolat, mert a célszámítógép már visszautasította a kapcsolatot
 [2026-01-13 11:42:44] SQLSTATE[HY000] [2002] Nem hozható létre kapcsolat, mert a célszámítógép már visszautasította a kapcsolatot
+[2026-01-13 21:43:45] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[2026-01-13 23:37:11] Call to undefined function generateToken()
+[2026-01-13 23:37:53] Call to undefined function generateToken()
