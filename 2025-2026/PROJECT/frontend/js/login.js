@@ -10,6 +10,7 @@ function login() {
         .then((r) => r.json())
         .then((d) => {
             if (d.success) {
+                localStorage.setItem("token", d.token);
                 location = "kezdoLap.html";
             }
         });

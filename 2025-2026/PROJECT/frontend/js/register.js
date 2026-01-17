@@ -11,6 +11,8 @@ function reg() {
     })
         .then((r) => r.json())
         .then((d) => {
-            console.log(d);
+            if (d.success) {
+                location = "login.js";
+            }
         });
 }

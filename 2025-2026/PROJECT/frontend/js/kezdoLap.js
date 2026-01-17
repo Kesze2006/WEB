@@ -1,12 +1,11 @@
-let ido = 10;
-const kijelzo = document.getElementById("visszaszamlalo");
-
-const timer = setInterval(() => {
-    kijelzo.textContent = ido;
-    ido--;
-
-    if (ido < 0) {
-        clearInterval(timer);
-        kijelzo.textContent = "Lejárt az időd!";
-    }
-}, 1000);
+fetch("../backend/user.php", {
+    headers: {
+        Authorization: localStorage.getItem("token"),
+    },
+})
+    .then((r) => r.json())
+    .then((d) => {
+        if (d.success) {
+            console.log(d);
+        }
+    });

@@ -3,3 +3,4 @@
 [2026-01-13 21:43:45] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
 [2026-01-13 23:37:11] Call to undefined function generateToken()
 [2026-01-13 23:37:53] Call to undefined function generateToken()
+[2026-01-17 20:59:12] SQLSTATE[HY000] [2002] A kapcsolódási kísérlet nem sikerült, mert a kapcsolódó partner nem válaszolt a megadott időn belül, vagy a létrehozott kapcsolatban hiba történt, mert a kapcsolódó partner nem volt képes válaszolni

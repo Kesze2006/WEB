@@ -1,5 +1,5 @@
 <?php
 return [
-    "token_lejarat" => 10,
+    "token_lejarat" => "+10 minute",
 ];
 ?>
