@@ -1,4 +1,4 @@
-fetch("../backend/user.php", {
+fetch("../backend/user/user.php", {
     headers: {
         Authorization: localStorage.getItem("token"),
     },

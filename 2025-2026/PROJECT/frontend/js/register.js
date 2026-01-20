@@ -12,7 +12,7 @@ function reg() {
         .then((r) => r.json())
         .then((d) => {
             if (d.success) {
-                location = "login.js";
+                location = "login.html";
             }
         });
 }
