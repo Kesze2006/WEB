@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . "/init.php";
-require_once __DIR__ . "/../src/db_con.php";
-require_once __DIR__ . "/../src/token_check.php";
+require_once __DIR__ . "/../init.php";
+require_once __DIR__ . "/../../src/db_con.php";
+require_once __DIR__ . "/../../src/token_check.php";
 
 $leKer = $adatBazis->prepare("
     SELECT nev, email

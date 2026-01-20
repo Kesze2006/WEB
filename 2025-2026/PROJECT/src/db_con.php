@@ -12,6 +12,7 @@ try {
 } catch (PDOException $e) {
     errorLog($e);
     echo json_encode(["error" => "Nem lehet kapcsolódni az adatbázishoz!"], JSON_UNESCAPED_UNICODE);
+    exit();
 }
 
 ?>

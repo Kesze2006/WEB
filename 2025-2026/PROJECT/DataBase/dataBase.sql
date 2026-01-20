@@ -39,3 +39,8 @@ CREATE TABLE session(
         REFERENCES felhasznalo(id)
         ON DELETE CASCADE
 );
+/*Ezt majd a létrehozáskor kell a táblába rakni*/
+ALTER TABLE felhasznalo
+ADD email_megerositve TINYINT(1) DEFAULT 0,
+ADD email_token VARCHAR(64),
+ADD email_token_lejarat DATETIME;

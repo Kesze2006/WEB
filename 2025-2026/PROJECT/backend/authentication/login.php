@@ -15,7 +15,7 @@ if (isset($adatBazis)) {
         $check->execute([$email]);
         $felhasznalo = $check->fetch(PDO::FETCH_ASSOC);
         if ($felhasznalo && password_verify($jelszo, $felhasznalo["jelszo_hash"])) {
-            $token = tokenGen(32);
+            $token = tokenGen($secrets);
             $token_lejarat = date("Y-m-d H:i:s", strtotime($secrets["token_lejarat"]));
             $token_insert = $adatBazis->prepare(
                 "INSERT INTO session (felhasznalo_id, token, lejarat) VALUES (?, ?, ?)",

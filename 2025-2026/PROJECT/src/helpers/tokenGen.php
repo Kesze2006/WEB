@@ -1,6 +1,6 @@
 <?php
-function tokenGen($hossz = 32)
+function tokenGen($hossz)
 {
-    return bin2hex(random_bytes($hossz));
+    return bin2hex(random_bytes($hossz["token_hossz"]));
 }
 ?>
