@@ -12,7 +12,9 @@ function reg() {
         .then((r) => r.json())
         .then((d) => {
             if (d.success) {
-                location = "login.html";
+                User.email = d.email;
+                localStorage.setItem("email", d.email);
+                location = "emailJelzo.html";
             }
         });
 }

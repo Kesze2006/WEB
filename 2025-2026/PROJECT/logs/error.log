@@ -12,3 +12,4 @@
 [2026-01-22 08:21:15] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`verzio1`.`felhasznalo`, CONSTRAINT `szerep_fk` FOREIGN KEY (`szerep_id`) REFERENCES `szerepek` (`id`))
 [2026-01-22 08:42:03] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'keszericze.akos.21@ady-nagyatad.hu' for key 'email'
 [2026-01-22 08:54:38] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'keszericze.akos.21@ady-nagyatad.hu' for key 'email'
+[2026-01-22 22:41:10] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`verzio2`.`felhasznalo`, CONSTRAINT `szerep_fk` FOREIGN KEY (`szerep_id`) REFERENCES `szerepek` (`id`))

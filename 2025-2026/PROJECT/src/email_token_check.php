@@ -14,7 +14,8 @@ if (!$token) {
 ");
     $check->execute([$token]);
     if ($check->rowCount() === 1) {
-        echo json_encode(["success" => "Siker!"], JSON_UNESCAPED_UNICODE);
+        header("Location: ../frontend/emailVissza.html");
+        echo json_encode(["success" => "Siker!", "email_megerositve" => true], JSON_UNESCAPED_UNICODE);
     } else {
         echo json_encode(["error" => "Érvénytelen, lejárt vagy már használt token"], JSON_UNESCAPED_UNICODE);
     }

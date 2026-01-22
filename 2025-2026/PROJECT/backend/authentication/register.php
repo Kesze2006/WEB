@@ -20,7 +20,7 @@ if (isset($adatBazis)) {
     try {
         $feltolt->execute([$felhasznalo, $email, $jelszo, $szerep, $token, $token_lejarat]);
         emailSend($token, $email);
-        echo json_encode(["success" => "Két lépcsős cutsz"], JSON_UNESCAPED_UNICODE);
+        echo json_encode(["success" => "Felvettük az adatokat!", "email" => $email], JSON_UNESCAPED_UNICODE);
     } catch (Throwable $e) {
         errorLog($e);
         echo json_encode(["error" => "Az adatok feltöltése sikertelen volt!"], JSON_UNESCAPED_UNICODE);
