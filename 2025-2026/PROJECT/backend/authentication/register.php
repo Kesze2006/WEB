@@ -4,6 +4,7 @@ require_once __DIR__ . "/../../src/helpers/formazotKi.php";
 require_once __DIR__ . "/../../src/db_con.php";
 require_once __DIR__ . "/../../src/helpers/errorLog.php";
 require_once __DIR__ . "/../../src/helpers/tokenGen.php";
+require_once __DIR__ . "/../../src/email_sender_vendor.php";
 $secrets = require_once __DIR__ . "/../../config/secrets.php";
 
 if (isset($adatBazis)) {
@@ -18,7 +19,8 @@ if (isset($adatBazis)) {
 
     try {
         $feltolt->execute([$felhasznalo, $email, $jelszo, $szerep, $token, $token_lejarat]);
-        echo json_encode(["success" => "A regisztráció sikeres!"], JSON_UNESCAPED_UNICODE);
+        emailSend($token, $email);
+        echo json_encode(["success" => "Két lépcsős cutsz"], JSON_UNESCAPED_UNICODE);
     } catch (Throwable $e) {
         errorLog($e);
         echo json_encode(["error" => "Az adatok feltöltése sikertelen volt!"], JSON_UNESCAPED_UNICODE);

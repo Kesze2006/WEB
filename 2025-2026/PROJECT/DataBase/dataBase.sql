@@ -1,9 +1,9 @@
-DROP DATABASE verzio1;
+DROP DATABASE verzio2;
 
-CREATE DATABASE IF NOT EXISTS verzio1
+CREATE DATABASE IF NOT EXISTS verzio2
     DEFAULT CHARACTER SET= utf8 
     DEFAULT COLLATE = utf8_hungarian_ci;
-USE verzio1;
+USE verzio2;
 
 CREATE TABLE szerepek(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -22,6 +22,9 @@ CREATE TABLE felhasznalo (
     jelszo_hash VARCHAR(255) NOT NULL,
     szerep_id INT NOT NULL,
     letrehozva DATETIME DEFAULT CURRENT_TIMESTAMP,
+    email_megerositve TINYINT(1) DEFAULT 0,
+    email_token VARCHAR(255),
+    email_token_lejarat DATETIME,
     CONSTRAINT szerep_fk
         FOREIGN KEY (szerep_id)
         REFERENCES szerepek(id)
@@ -39,8 +42,4 @@ CREATE TABLE session(
         REFERENCES felhasznalo(id)
         ON DELETE CASCADE
 );
-/*Ezt majd a létrehozáskor kell a táblába rakni*/
-ALTER TABLE felhasznalo
-ADD email_megerositve TINYINT(1) DEFAULT 0,
-ADD email_token VARCHAR(255),
-ADD email_token_lejarat DATETIME;
+

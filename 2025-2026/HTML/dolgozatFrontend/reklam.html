@@ -1,215 +1,225 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Reklám</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <style>
+            .chart {
+                margin-left: 10px;
+                display: flex;
+                align-items: flex-end;
+                height: 200px;
+                width: 10%;
+                border-left: 2px solid black;
+                border-bottom: 2px solid black;
+                padding: 5px;
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reklám</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <style>
-        .chart {
-            margin-left: 10px;
-            display: flex;
-            align-items: flex-end;
-            height: 200px;
-            width: 10%;
-            border-left: 2px solid black;
-            border-bottom: 2px solid black;
-            padding: 5px;
-        }
+            .NR {
+                width: 50px;
+                background-color: steelblue;
+                text-align: center;
+                color: white;
+            }
 
-        .NR {
-            width: 50px;
-            background-color: steelblue;
-            text-align: center;
-            color: white;
-        }
+            .TV {
+                width: 50px;
+                background-color: yellowgreen;
+                text-align: center;
+                color: white;
+            }
 
-        .TV {
-            width: 50px;
-            background-color: yellowgreen;
-            text-align: center;
-            color: white;
-        }
+            .PL {
+                width: 50px;
+                background-color: darkmagenta;
+                text-align: center;
+                color: white;
+            }
+        </style>
+    </head>
 
-        .PL {
-            width: 50px;
-            background-color: darkmagenta;
-            text-align: center;
-            color: white;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="conatiner">
-        <div class="row">
-            <div id="feladat2">
-                <h5>2.feladat:</h5>
-            </div>
-            <div id="feladat3">
-                <h5>3.feladat:</h5>
-                <label>Kérem adjon meg egy napot: </label><input type="text" id="nap"><button
-                    onclick="feladat3()">Keresés</button><br>
-            </div>
-            <div id="feladat4">
-                <h5>4.feladat:</h5>
-            </div>
-            <div id="feladat5">
-                <h5>5.feladat:</h5>
-            </div>
-            <div id="feladat7">
-                <h5>7.feladat:</h5>
-            </div>
-            <div id="feladat8">
-                <h5>8.feladat:</h5>
-                <table>
-                    <tr>
-                        <th>Napok</th>
-                        <th>1..10</th>
-                        <th>11..20</th>
-                        <th>21..30</th>
-                    </tr>
-                    <tr id="elso">
-                        <td>PL</td>
-                    </tr>
-                    <tr id="masodik">
-                        <td>TV</td>
-                    </tr>
-                    <tr id="harmadik">
-                        <td>NR</td>
-                    </tr>
-                </table>
-            </div>
-            <div id="feladat9">
-                <h5>9-10.feladat:</h5>
-                <div class="chart">
-                    
-                    <div class="TV" style="height: 100px; display: inline-block;"><div class="NR" style="height: 75px; display: inline-block;"><div class="PL" style="height: 50px; display: inline-block;"></div></div></div>
-                    
+    <body>
+        <div class="conatiner">
+            <div class="row">
+                <div id="feladat2">
+                    <h5>2.feladat:</h5>
+                </div>
+                <div id="feladat3">
+                    <h5>3.feladat:</h5>
+                    <label>Kérem adjon meg egy napot: </label><input type="text" id="nap" /><button
+                        onclick="feladat3()"
+                    >
+                        Keresés</button
+                    ><br />
+                </div>
+                <div id="feladat4">
+                    <h5>4.feladat:</h5>
+                </div>
+                <div id="feladat5">
+                    <h5>5.feladat:</h5>
+                </div>
+                <div id="feladat7">
+                    <h5>7.feladat:</h5>
+                </div>
+                <div id="feladat8">
+                    <h5>8.feladat:</h5>
+                    <table>
+                        <tr>
+                            <th>Napok</th>
+                            <th>1..10</th>
+                            <th>11..20</th>
+                            <th>21..30</th>
+                        </tr>
+                        <tr id="elso">
+                            <td>PL</td>
+                        </tr>
+                        <tr id="masodik">
+                            <td>TV</td>
+                        </tr>
+                        <tr id="harmadik">
+                            <td>NR</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="feladat9">
+                    <h5>9-10.feladat:</h5>
+                    <div class="chart">
+                        <div class="TV" style="height: 100px; display: inline-block">
+                            <div class="NR" style="height: 75px; display: inline-block">
+                                <div class="PL" style="height: 50px; display: inline-block"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        let adatok = []
-        fetch("rendel.json")
-            .then((res) => res.json())
-            .then(json => {
-                adatok = json;
-                feladat2();
-                feladat4();
-                feladat5();
-                feladat7();
-                feladat8();
-            });
-        function feladat2() {
-            let szoveg = document.createElement("label")
-            szoveg.innerHTML = "A rendelések száma: " + adatok.length
-            document.getElementById("feladat2").appendChild(szoveg)
-        }
-        function feladat3() {
-            let napSzam = 0
-            adatok.forEach(elem => {
-                //console.log(elem.nap)
-                if (elem.nap == document.getElementById("nap").value) {
-                    napSzam++
-                }
-            })
-            let szoveg = document.createElement("label")
-            szoveg.innerHTML = "A rendelések száma az adott napon: " + napSzam
-            document.getElementById("feladat3").appendChild(szoveg)
-        }
-        function feladat4() {
-            let db = 0
-            adatok.forEach(elem => {
-                if (elem.varos == "NR" && elem.darab == 0) {
-                    db++
-                }
-            })
-            if (db == 0) {
-                let szoveg = document.createElement("label")
-                szoveg.innerHTML = "Minden nap volt rendelés a reklámban nem érintett városból"
-                document.getElementById("feladat4").appendChild(szoveg)
+        <script>
+            let adatok = [];
+            fetch("rendel.json")
+                .then((res) => res.json())
+                .then((json) => {
+                    adatok = json;
+                    feladat2();
+                    feladat4();
+                    feladat5();
+                    feladat7();
+                    feladat8();
+                });
+            function feladat2() {
+                let szoveg = document.createElement("label");
+                szoveg.innerHTML = "A rendelések száma: " + adatok.length;
+                document.getElementById("feladat2").appendChild(szoveg);
             }
-            else {
-                let szoveg = document.createElement("label")
-                szoveg.innerHTML = db + " nap nem volt a reklámban nem érintett városból rendelés"
-                document.getElementById("feladat4").appendChild(szoveg)
+            function feladat3() {
+                let napSzam = 0;
+                adatok.forEach((elem) => {
+                    //console.log(elem.nap)
+                    if (elem.nap == document.getElementById("nap").value) {
+                        napSzam++;
+                    }
+                });
+                let szoveg = document.createElement("label");
+                szoveg.innerHTML = "A rendelések száma az adott napon: " + napSzam;
+                document.getElementById("feladat3").appendChild(szoveg);
             }
-        }
-        function feladat5() {
-            let legnagyobb = 0
-            let nap = 0
-            adatok.forEach(elem => {
-                if (elem.darab > legnagyobb) legnagyobb = elem.darab
-            })
-            adatok.forEach(elem => {
-                if (elem.darab == legnagyobb) {
-                    nap = elem.nap
-                    return
+            function feladat4() {
+                let db = 0;
+                adatok.forEach((elem) => {
+                    if (elem.varos == "NR" && elem.darab == 0) {
+                        db++;
+                    }
+                });
+                if (db == 0) {
+                    let szoveg = document.createElement("label");
+                    szoveg.innerHTML = "Minden nap volt rendelés a reklámban nem érintett városból";
+                    document.getElementById("feladat4").appendChild(szoveg);
+                } else {
+                    let szoveg = document.createElement("label");
+                    szoveg.innerHTML = db + " nap nem volt a reklámban nem érintett városból rendelés";
+                    document.getElementById("feladat4").appendChild(szoveg);
                 }
-
-            })
-            let szoveg = document.createElement("label")
-            szoveg.innerHTML = "A legnagyobb darabszám : " + legnagyobb + ", a rendelés napja: " + nap
-            document.getElementById("feladat5").appendChild(szoveg)
-        }
-        function osszes(varos, napSorszam) {
-            let rendeltDarab = 0
-            adatok.forEach(elem => {
-                if (elem.varos == varos && elem.nap == napSorszam) {
-                    rendeltDarab += elem.darab
-                }
-            })
-            return rendeltDarab
-        }
-        function feladat7() {
-            let szoveg = document.createElement("label")
-            szoveg.innerHTML = "A rendelt termékek darabszáma a 21. napon PL: " + osszes("PL", 21) + " TV: " + osszes("TV", 21) + " NR: " + osszes("NR", 21)
-            document.getElementById("feladat7").appendChild(szoveg)
-        }
-        function feladat8() {
-            let varosok = ["PL", "TV", "NR"]
-            let elso = []
-            let masodik = []
-            let harmadik = []
-            varosok.forEach(e => {
-                db = 0
-                adatok.forEach(elem => {
-
-                    if (elem.varos == e && elem.nap >= 1 && elem.nap <= 10) {
-                        db++
+            }
+            function feladat5() {
+                let legnagyobb = 0;
+                let nap = 0;
+                adatok.forEach((elem) => {
+                    if (elem.darab > legnagyobb) legnagyobb = elem.darab;
+                });
+                adatok.forEach((elem) => {
+                    if (elem.darab == legnagyobb) {
+                        nap = elem.nap;
+                        return;
                     }
-                })
-                elso.push(db)
-            })
-            varosok.forEach(e => {
-                db = 0
-                adatok.forEach(elem => {
-
-                    if (elem.varos == e && elem.nap >= 11 && elem.nap <= 20) {
-                        db++
+                });
+                let szoveg = document.createElement("label");
+                szoveg.innerHTML = "A legnagyobb darabszám : " + legnagyobb + ", a rendelés napja: " + nap;
+                document.getElementById("feladat5").appendChild(szoveg);
+            }
+            function osszes(varos, napSorszam) {
+                let rendeltDarab = 0;
+                adatok.forEach((elem) => {
+                    if (elem.varos == varos && elem.nap == napSorszam) {
+                        rendeltDarab += elem.darab;
                     }
-                })
-                masodik.push(db)
-            })
-            varosok.forEach(e => {
-                db = 0
-                adatok.forEach(elem => {
-
-                    if (elem.varos == e && elem.nap >= 21 && elem.nap <= 30) {
-                        db++
-                    }
-                })
-                harmadik.push(db)
-            })
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-</body>
-
+                });
+                return rendeltDarab;
+            }
+            function feladat7() {
+                let szoveg = document.createElement("label");
+                szoveg.innerHTML =
+                    "A rendelt termékek darabszáma a 21. napon PL: " +
+                    osszes("PL", 21) +
+                    " TV: " +
+                    osszes("TV", 21) +
+                    " NR: " +
+                    osszes("NR", 21);
+                document.getElementById("feladat7").appendChild(szoveg);
+            }
+            function feladat8() {
+                let varosok = ["PL", "TV", "NR"];
+                let elso = [];
+                let masodik = [];
+                let harmadik = [];
+                varosok.forEach((e) => {
+                    db = 0;
+                    adatok.forEach((elem) => {
+                        if (elem.varos == e && elem.nap >= 1 && elem.nap <= 10) {
+                            db++;
+                        }
+                    });
+                    elso.push(db);
+                });
+                varosok.forEach((e) => {
+                    db = 0;
+                    adatok.forEach((elem) => {
+                        if (elem.varos == e && elem.nap >= 11 && elem.nap <= 20) {
+                            db++;
+                        }
+                    });
+                    masodik.push(db);
+                });
+                varosok.forEach((e) => {
+                    db = 0;
+                    adatok.forEach((elem) => {
+                        if (elem.varos == e && elem.nap >= 21 && elem.nap <= 30) {
+                            db++;
+                        }
+                    });
+                    harmadik.push(db);
+                });
+            }
+        </script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>
