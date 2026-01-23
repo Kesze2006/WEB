@@ -14,11 +14,14 @@ if (isset($adatBazis)) {
     $szerep = $data["szerep"] ?? "";
     $token = tokenGen($secrets);
     $token_lejarat = date("Y-m-d H:i:s", strtotime($secrets["token_email_lejarat"]));
-    $feltolt = $adatBazis->prepare("INSERT INTO felhasznalo (nev, email, jelszo_hash, szerep_id, email_token, email_token_lejarat)
+
+    $feltolt = $adatBazis->prepare("INSERT INTO felhasznalo (nev, email, jelszo_hash, szerep_id)
     VALUES (?, ?, ?, ?, ?, ?)");
 
+    $eamil_feltoltes = $adatBazis->prepare("INSERT INTO felhasznalo_tokenek (felhasznalo_id, token, tipus, lejarat, letrehozva)
+    VALUES ((SELECT id FROM felhasznalo WHERE email = ?),?,'email_megerosites',? ,DATE_ADD(NOW()");
     try {
-        $feltolt->execute([$felhasznalo, $email, $jelszo, $szerep, $token, $token_lejarat]);
+        $feltolt->execute([$felhasznalo, $email, $jelszo, $szerep]);
         emailSend($token, $email);
         echo json_encode(["success" => "Felvettük az adatokat!", "email" => $email], JSON_UNESCAPED_UNICODE);
     } catch (Throwable $e) {

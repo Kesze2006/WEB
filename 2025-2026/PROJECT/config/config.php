@@ -5,7 +5,7 @@ return [
     "db_szerver" => "localhost",
     "db_user" => "root",
     "db_jelszo" => "",
-    "db_nev" => "verzio2",
+    "db_nev" => "verzio3",
 ];
 
 ?>
