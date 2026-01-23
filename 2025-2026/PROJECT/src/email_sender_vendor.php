@@ -37,7 +37,7 @@ function emailSend($token, $email)
                     <a>Email megerősítése</a>
                     <p>A link 1 óráig érvényes.</p>
             </body>
-        </html
+        </html>
     ";
 
         $mail->send();

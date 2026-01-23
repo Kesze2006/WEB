@@ -46,9 +46,9 @@ CREATE TABLE felhasznalo_tokenek (
     felhasznalo_id INT NOT NULL,
     token VARCHAR(255) NOT NULL unique,
     tipus ENUM('email_megerosites', 'jelszo_reset') NOT NULL,
-    lejarat DATETIME NOT NULL,
-    felhasznalva TINYINT(1) DEFAULT 0,
     letrehozva DATETIME DEFAULT CURRENT_TIMESTAMP,
+    felhasznalva TINYINT(1) DEFAULT 0,
+    lejarat DATETIME NOT NULL,
 
     CONSTRAINT fk_felhasznalo
         FOREIGN KEY (felhasznalo_id)

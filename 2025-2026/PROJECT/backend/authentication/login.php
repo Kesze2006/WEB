@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../init.php";
+require_once __DIR__ . "/../../api.php";
 require_once __DIR__ . "/../../src/helpers/formazotKi.php";
 require_once __DIR__ . "/../../src/db_con.php";
 require_once __DIR__ . "/../../src/helpers/errorLog.php";
@@ -14,7 +14,11 @@ if (isset($adatBazis)) {
     try {
         $check->execute([$email]);
         $felhasznalo = $check->fetch(PDO::FETCH_ASSOC);
-        if ($felhasznalo && password_verify($jelszo, $felhasznalo["jelszo_hash"])) {
+        if (
+            $felhasznalo &&
+            password_verify($jelszo, $felhasznalo["jelszo_hash"]) &&
+            $felhasznalo["email_megerositve"] == 1
+        ) {
             $token = tokenGen($secrets);
             $token_lejarat = date("Y-m-d H:i:s", strtotime($secrets["token_lejarat"]));
             $token_insert = $adatBazis->prepare(
@@ -23,7 +27,10 @@ if (isset($adatBazis)) {
             $token_insert->execute([$felhasznalo["id"], $token, $token_lejarat]);
             echo json_encode(["success" => "Sikeres bejelentkezés!", "token" => $token], JSON_UNESCAPED_UNICODE);
         } else {
-            echo json_encode(["error" => "Hibás email vagy jelszó!"], JSON_UNESCAPED_UNICODE);
+            echo json_encode(
+                ["error" => "Hibás email vagy jelszó, a hitelesítés nem lett elvégezve!"],
+                JSON_UNESCAPED_UNICODE,
+            );
         }
     } catch (Throwable $e) {
         errorLog($e);

@@ -13,3 +13,8 @@
 [2026-01-22 08:42:03] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'keszericze.akos.21@ady-nagyatad.hu' for key 'email'
 [2026-01-22 08:54:38] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'keszericze.akos.21@ady-nagyatad.hu' for key 'email'
 [2026-01-22 22:41:10] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`verzio2`.`felhasznalo`, CONSTRAINT `szerep_fk` FOREIGN KEY (`szerep_id`) REFERENCES `szerepek` (`id`))
+[2026-01-23 09:54:04] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[2026-01-23 09:54:23] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[2026-01-23 09:57:42] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[2026-01-23 10:35:28] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'fghfghgf' for key 'email'
+[2026-01-23 11:09:42] SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`verzio3`.`felhasznalo`, CONSTRAINT `szerep_fk` FOREIGN KEY (`szerep_id`) REFERENCES `szerepek` (`id`))

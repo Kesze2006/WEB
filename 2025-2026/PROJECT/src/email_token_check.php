@@ -6,13 +6,23 @@ $token = $_GET["token"] ?? "";
 if (!$token) {
     echo json_encode(["error" => "Token hiányzik"]);
 } else {
-    $check = $adatBazis->prepare("UPDATE felhasznalo
-    SET email_megerositve = 1, email_token = NULL, email_token_lejarat = NULL
-    WHERE email_token = ?
-      AND email_token_lejarat > NOW()
-      AND email_megerositve = 0
+    $check = $adatBazis->prepare("SELECT felhasznalo_id
+    FROM felhasznalo_tokenek
+    WHERE token = ?
+      AND tipus = 'email_megerosites'
+      AND felhasznalva = 0
+      AND lejarat > NOW()
 ");
     $check->execute([$token]);
+    $user = $check->fetch(PDO::FETCH_ASSOC);
+    $update_felhasznalo = $adatBazis->prepare("UPDATE felhasznalo SET email_megerositve = 1  WHERE id = ?
+    ");
+    $update_felhasznalo->execute([$user["felhasznalo_id"]]);
+
+    $update_token = $adatBazis->prepare("UPDATE felhasznalo_tokenek SET felhasznalva = 1 WHERE felhasznalo_id = ?
+    ");
+    $update_token->execute([$user["felhasznalo_id"]]);
+
     if ($check->rowCount() === 1) {
         header("Location: ../frontend/emailVissza.html");
         echo json_encode(["success" => "Siker!", "email_megerositve" => true], JSON_UNESCAPED_UNICODE);

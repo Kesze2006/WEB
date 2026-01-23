@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../init.php";
+require_once __DIR__ . "/../../api.php";
 require_once __DIR__ . "/../../src/helpers/formazotKi.php";
 require_once __DIR__ . "/../../src/db_con.php";
 require_once __DIR__ . "/../../src/helpers/errorLog.php";
@@ -16,12 +16,21 @@ if (isset($adatBazis)) {
     $token_lejarat = date("Y-m-d H:i:s", strtotime($secrets["token_email_lejarat"]));
 
     $feltolt = $adatBazis->prepare("INSERT INTO felhasznalo (nev, email, jelszo_hash, szerep_id)
-    VALUES (?, ?, ?, ?, ?, ?)");
+    VALUES (?, ?, ?, ?)");
 
-    $eamil_feltoltes = $adatBazis->prepare("INSERT INTO felhasznalo_tokenek (felhasznalo_id, token, tipus, lejarat, letrehozva)
-    VALUES ((SELECT id FROM felhasznalo WHERE email = ?),?,'email_megerosites',? ,DATE_ADD(NOW()");
+    $email_feltoltes = $adatBazis->prepare("INSERT INTO felhasznalo_tokenek
+    (felhasznalo_id, token, tipus, lejarat, letrehozva)
+    VALUES (
+        (SELECT id FROM felhasznalo WHERE email = ?),
+        ?,
+        'email_megerosites',
+        ?,
+        NOW()
+        )
+    ");
     try {
         $feltolt->execute([$felhasznalo, $email, $jelszo, $szerep]);
+        $email_feltoltes->execute([$email, $token, $token_lejarat]);
         emailSend($token, $email);
         echo json_encode(["success" => "Felvettük az adatokat!", "email" => $email], JSON_UNESCAPED_UNICODE);
     } catch (Throwable $e) {

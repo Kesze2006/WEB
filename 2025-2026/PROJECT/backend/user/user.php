@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . "/../init.php";
+require_once __DIR__ . "/../../api.php";
 require_once __DIR__ . "/../../src/db_con.php";
 require_once __DIR__ . "/../../src/token_check.php";
 
 $leKer = $adatBazis->prepare("
-    SELECT nev, email
+    SELECT *
     FROM felhasznalo
     WHERE id = ?
 ");
