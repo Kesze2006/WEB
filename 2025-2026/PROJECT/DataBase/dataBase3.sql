@@ -53,5 +53,5 @@ CREATE TABLE felhasznalo_tokenek (
     CONSTRAINT fk_felhasznalo
         FOREIGN KEY (felhasznalo_id)
         REFERENCES felhasznalo(id)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
 );
