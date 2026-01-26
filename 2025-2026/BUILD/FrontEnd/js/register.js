@@ -1,14 +1,14 @@
 const body = document.body;
-const student = document.getElementById("student");
-const teacher = document.getElementById("teacher");
+const diak = document.getElementById("diak");
+const tanar = document.getElementById("tanar");
 const loginBox = document.getElementById("loginBox");
 const backBtn = document.getElementById("backBtn");
 const bg = document.querySelector(".background");
-
+let szerep = "";
 function selectRole(role) {
     body.classList.add(role + "-active");
-    student.classList.remove("kijeloles");
-    teacher.classList.remove("kijeloles");
+    diak.classList.remove("kijeloles");
+    tanar.classList.remove("kijeloles");
     setTimeout(() => {
         document.getElementById(role).classList.add("text-fly-up");
         bg.classList.add("sharp");
@@ -18,17 +18,22 @@ function selectRole(role) {
         loginBox.classList.add("show");
         backBtn.classList.add("show");
     }, 1600);
+    if (role == "tanar") {
+        szerep = 2;
+    } else if (role == "diak") {
+        szerep = 1;
+    }
 }
 
-student.addEventListener("click", () => selectRole("student"));
-teacher.addEventListener("click", () => selectRole("teacher"));
+diak.addEventListener("click", () => selectRole("diak"));
+tanar.addEventListener("click", () => selectRole("tanar"));
 
 backBtn.addEventListener("click", () => {
     body.className = "";
-    student.classList.remove("text-fly-up");
-    teacher.classList.remove("text-fly-up");
-    student.classList.add("kijeloles");
-    teacher.classList.add("kijeloles");
+    diak.classList.remove("text-fly-up");
+    tanar.classList.remove("text-fly-up");
+    diak.classList.add("kijeloles");
+    tanar.classList.add("kijeloles");
     loginBox.classList.remove("show");
     backBtn.classList.remove("show");
     bg.classList.remove("sharp");
@@ -44,7 +49,7 @@ function reg() {
                 felhasznalo: username.value,
                 email: email.value,
                 jelszo: password.value,
-                szerep: document.querySelector('input[name="szerep"]:checked').value,
+                szerep: szerep,
             }),
         })
             .then((r) => r.json())
@@ -52,7 +57,7 @@ function reg() {
                 if (d.success) {
                     User.email = d.email;
                     localStorage.setItem("email", d.email);
-                    location = "emailJelzo.html";
+                    location = "sikeresReg.html";
                 }
             });
     } else {

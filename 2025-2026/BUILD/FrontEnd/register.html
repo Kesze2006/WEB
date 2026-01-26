@@ -16,10 +16,10 @@
 
         <div class="container-fluid">
             <div class="row role-row">
-                <div id="teacher" class="col-12 col-lg-6 role kijeloles">
+                <div id="tanar" class="col-12 col-lg-6 role kijeloles">
                     <span>Tanár</span>
                 </div>
-                <div id="student" class="col-12 col-lg-6 role kijeloles">
+                <div id="diak" class="col-12 col-lg-6 role kijeloles">
                     <span>Diák</span>
                 </div>
             </div>
@@ -27,12 +27,13 @@
 
         <div id="loginBox" class="login-box text-light p-4">
             <h4 class="text-center mb-3">Profil létrehozás</h4>
-            <input class="form-control mb-2" placeholder="Felhasználónév" />
-            <input class="form-control mb-2" type="password" placeholder="Jelszó" />
-            <input class="form-control mb-3" type="email" placeholder="Email" />
-            <button class="btn btn-outline-light w-100">Regisztráció</button>
+            <input class="form-control mb-2" placeholder="Felhasználónév" id="username" />
+            <input class="form-control mb-2" type="password" placeholder="Jelszó" id="password" />
+            <input class="form-control mb-3" type="email" placeholder="Email" id="email" />
+            <button class="btn btn-outline-light w-100" onclick="reg()">Regisztráció</button>
         </div>
 
         <script src="js/register.js"></script>
+        <script src="js/user.js"></script>
     </body>
 </html>

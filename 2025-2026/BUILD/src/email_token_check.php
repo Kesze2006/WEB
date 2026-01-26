@@ -24,7 +24,7 @@ if (!$token) {
     $update_token->execute([$user["felhasznalo_id"]]);
 
     if ($check->rowCount() === 1) {
-        header("Location: ../frontend/emailVissza.html");
+        header("Location: ../frontend/regVisszaigazolas.html");
         echo json_encode(["success" => "Siker!", "email_megerositve" => true], JSON_UNESCAPED_UNICODE);
     } else {
         echo json_encode(["error" => "Érvénytelen, lejárt vagy már használt token"], JSON_UNESCAPED_UNICODE);

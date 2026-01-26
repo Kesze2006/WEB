@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tanterem</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="css/kezdoOldal.css" />
+    </head>
+    <body onload="leKer()">
+        <div class="background"></div>
+        <nav class="navbar navbar-expand-md fejlec navbar-dark py-4 fixed-top">
+            <div class="container-fluid">
+                <div class="d-flex w-100 align-items-center justify-content-between">
+                    <div class="d-flex justify-content-start">
+                        <button
+                            class="navbar-toggler d-md-none"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#mobileMenu"
+                            aria-controls="mobileMenu"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="d-none d-md-flex">
+                            <a href="#stats" class="nav-link quickLinks">Statisztikák</a>
+                            <a href="#footer" class="nav-link quickLinks">Elérhetőségek</a>
+                        </div>
+                    </div>
+                    <a class="navbar-brand position-absolute start-50 cim translate-middle-x" href="#"> Tanterem </a>
+
+                    <div class="d-flex align-items-center">
+                        <a href="login.html" class="btn btn-outline-light">Belépés</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapse navbar-collapse d-md-none" id="mobileMenu">
+                <div class="d-flex d-md-none flex-column p-2">
+                    <a href="#stats" class="nav-link quickLinks">Statisztikák</a>
+                    <a href="#footer" class="nav-link quickLinks">Elérhetőségek</a>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container-fluid mt-5 pt-5">
+            <section class="text-center text-white">
+                <div class="container tartalom1 py-5">
+                    <h1 class="display-4 fw-bold">Digitális Tanterem</h1>
+                    <p class="lead mt-3">Modern oktatási platform tanároknak és diákoknak.</p>
+                    <hr />
+                    <a href="#moreInfo" class="btn btn-outline-light btn-lg" data-bs-toggle="collapse"
+                        >Tudj meg többet a <strong>Tanteremről!</strong>
+                    </a>
+
+                    <div class="collapse mt-4" id="moreInfo">
+                        <div class="row">
+                            <div class="col-md-4 p-3 fs-5">
+                                <div class="equal-col sorKizart">
+                                    <div class="text-center fs-4">Kik és miért?</div>
+                                    <hr />
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa deleniti aspernatur
+                                    autem ipsum sapiente laboriosam. Quisquam commodi ratione fugit. Adipisci, ipsa
+                                    unde. Cupiditate quod placeat qui velit eius quibusdam magni?
+                                    <div class="equal-bottom"><hr /></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 p-3 fs-5">
+                                <div class="equal-col sorKizart">
+                                    <div class="text-center fs-4">Mire képes?</div>
+                                    <hr />
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit quia fugiat culpa
+                                    perspiciatis repudiandae, officia eum libero vitae quam, repellat ullam. Minima quis
+                                    corrupti commodi asperiores molestias voluptates magnam. Sunt.
+                                    <div class="equal-bottom"><hr /></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 p-3 fs-5">
+                                <div class="equal-col sorKizart">
+                                    <div class="text-center fs-4">Mi várható?</div>
+                                    <hr />
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis doloremque culpa
+                                    quasi eum ratione laborum rem dolore minus tempora quod! Sapiente a tempora
+                                    explicabo, alias voluptatibus non. Aliquam, minus numquam!
+                                    <div class="equal-bottom"><hr /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container my-5">
+                <div class="row text-center">
+                    <h2 class="mb-4">Fő funkciók</h2>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">📚 Online tananyag</h5>
+                                <p class="card-text">Digitális jegyzetek, videók és prezentációk egy helyen.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">📝 Feladatkezelés</h5>
+                                <p class="card-text">Házi feladatok feltöltése, határidők, automatikus értékelés.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">💬 Kommunikáció</h5>
+                                <p class="card-text">Chat, értesítések és csoportos üzenetek.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container my-5">
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3">
+                        <img
+                            src="../images/logo.png"
+                            height="1000"
+                            width="800"
+                            class="img-fluid rounded shadow"
+                            alt="Oktatás"
+                        />
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Miért a Tanterem?</h2>
+                        <p>
+                            A Tanterem célja, hogy egyszerűvé és hatékonnyá tegye az online oktatást. Könnyen kezelhető
+                            felület, modern dizájn és gyors működés.
+                        </p>
+                        <ul>
+                            <li>Reszponzív felület</li>
+                            <li>Biztonságos bejelentkezés</li>
+                            <li>Tanár–diák együttműködés</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section class="bg-light py-5" id="stats">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h2 id="teacherNumber"></h2>
+                        <p>A weboldalt használó tanárok száma</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h2 id="studentNumber"></h2>
+                        <p>A weboldalt használó diákok száma</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h2>24/7</h2>
+                        <p>Elérhetőség</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-dark text-light py-4" id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <h5>Tanterem</h5>
+                        <p>Digitális oktatási rendszer a modern iskolák számára.</p>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <h5>Gyors linkek</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-light text-decoration-none">Kezdőlap</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Funkciók</a></li>
+                            <li><a href="#" class="text-light text-decoration-none">Kapcsolat</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <h5>Kapcsolat</h5>
+                        <p>Email: info@tanterem.hu</p>
+                        <p>Telefon: +36 30 123 4567</p>
+                    </div>
+                </div>
+
+                <hr />
+                <p class="text-center mb-0">© 2026 Tanterem – Minden jog fenntartva</p>
+            </div>
+        </footer>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <script src="js/kezdoOldal.js"></script>
+    </body>
+</html>

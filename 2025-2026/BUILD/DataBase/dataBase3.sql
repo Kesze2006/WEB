@@ -1,4 +1,4 @@
-DROP DATABASE verzio3;
+DROP DATABASE IF EXISTS verzio3;
 
 CREATE DATABASE IF NOT EXISTS verzio3
     DEFAULT CHARACTER SET= utf8 
@@ -11,7 +11,7 @@ CREATE TABLE szerepek(
 );
 
 INSERT INTO szerepek (szerep) VALUES
-('tanulo'),
+('diak'),
 ('tanar'),
 ('admin');
 
