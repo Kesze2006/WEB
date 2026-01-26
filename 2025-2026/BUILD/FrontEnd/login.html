@@ -1,38 +1,46 @@
 <!doctype html>
 <html lang="hu">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous"
-        />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Bejelentkezés</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/login.css" />
     </head>
-    <body class="bg-dark">
-        <div class="container d-flex justify-content-center align-items-center vh-100">
-            <div class="card shadow p-4" style="max-width: 400px; width: 100%">
-                <h3 class="text-center mb-3">Bejelentkezés</h3>
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email cím</label>
-                    <input type="email" class="form-control" id="email" placeholder="pelda@email.com" required />
+    <body>
+        <div class="container vh-100 d-flex justify-content-center align-items-center">
+            <div class="row w-100 justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow keret">
+                        <div class="card-body">
+                            <h3 class="text-center mb-4">Bejelentkezés</h3>
+
+                            <div class="mb-3">
+                                <label class="form-label">Email cím</label>
+                                <input type="email" class="form-control" placeholder="pelda@gmail.com" id="email" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Jelszó</label>
+                                <input type="password" class="form-control" placeholder="••••••••" id="password" />
+                            </div>
+
+                            <button id="button" class="btn btn-outline-dark w-100">Belépés</button>
+
+                            <div class="text-center mt-3">
+                                <small>
+                                    Még nincs fiókod?
+                                    <a href="register.html">Regisztráció</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="mb-3">
-                    <label for="password" class="form-label">Jelszó</label>
-                    <input type="password" class="form-control" id="password" placeholder="Jelszó" required />
-                </div>
-
-                <button class="btn btn-primary w-100">Bejelentkezés</button>
             </div>
         </div>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"
-        ></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/login.js"></script>
     </body>
 </html>

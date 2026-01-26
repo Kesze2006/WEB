@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="hu">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Tanterem – Bejelentkezés</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/register.css" />
+    </head>
+    <body>
+        <button id="backBtn" class="btn btn-outline-light back-btn">← Vissza</button>
+
+        <div class="background"></div>
+        <div class="overlay"></div>
+
+        <div class="container-fluid">
+            <div class="row role-row">
+                <div id="teacher" class="col-12 col-lg-6 role kijeloles">
+                    <span>Tanár</span>
+                </div>
+                <div id="student" class="col-12 col-lg-6 role kijeloles">
+                    <span>Diák</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="loginBox" class="login-box text-light p-4">
+            <h4 class="text-center mb-3">Profil létrehozás</h4>
+            <input class="form-control mb-2" placeholder="Felhasználónév" />
+            <input class="form-control mb-2" type="password" placeholder="Jelszó" />
+            <input class="form-control mb-3" type="email" placeholder="Email" />
+            <button class="btn btn-outline-light w-100">Regisztráció</button>
+        </div>
+
+        <script src="js/register.js"></script>
+    </body>
+</html>

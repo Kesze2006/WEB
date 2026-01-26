@@ -1,20 +1,25 @@
 function reg() {
-    fetch("../backend/authentication/register.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            felhasznalo: username.value,
-            email: email.value,
-            jelszo: password.value,
-            szerep: document.querySelector('input[name="szerep"]:checked').value,
-        }),
-    })
-        .then((r) => r.json())
-        .then((d) => {
-            if (d.success) {
-                User.email = d.email;
-                localStorage.setItem("email", d.email);
-                location = "emailJelzo.html";
-            }
-        });
+    const minta = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email.value.match(minta)) {
+        fetch("../backend/authentication/register.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                felhasznalo: username.value,
+                email: email.value,
+                jelszo: password.value,
+                szerep: document.querySelector('input[name="szerep"]:checked').value,
+            }),
+        })
+            .then((r) => r.json())
+            .then((d) => {
+                if (d.success) {
+                    User.email = d.email;
+                    localStorage.setItem("email", d.email);
+                    location = "emailJelzo.html";
+                }
+            });
+    } else {
+        alert("Email!");
+    }
 }
