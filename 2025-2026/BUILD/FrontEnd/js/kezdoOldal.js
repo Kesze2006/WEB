@@ -1,5 +1,5 @@
 function leKer() {
-    fetch("../backend/request/db_stats_request.php", {
+    fetch("../src/db_stats_request.php", {
         method: "POST",
     })
         .then((r) => r.json())

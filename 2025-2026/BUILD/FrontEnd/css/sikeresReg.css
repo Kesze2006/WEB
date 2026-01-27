@@ -6,5 +6,5 @@ body{
     }
     .keret{
        background-color: rgba(224, 224, 224, 0.219);
-       backdrop-filter: blur(8px); /* homályosítás */
+       backdrop-filter: blur(8px);
     }
