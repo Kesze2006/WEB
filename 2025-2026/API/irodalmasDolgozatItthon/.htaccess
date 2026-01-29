@@ -1,0 +1,10 @@
+
+   DirectoryIndex api.php index.html
+    #AllowOverride All
+    #Require all granted
+
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^api/(.*)$ api.php?path=$1 [L,QSA]
