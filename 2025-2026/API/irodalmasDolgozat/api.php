@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../PHP/fugvenyek.php";
+//require_once __DIR__ . "/../../PHP/fugvenyek.php";
 
 function versLe($adatBazis, $id)
 {

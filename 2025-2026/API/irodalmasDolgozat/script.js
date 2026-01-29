@@ -1,17 +1,16 @@
-//Balázs Béla nem jó mert a zadatbázisabn nem tartozik hosszá vers.
+//Balázs Béla nem jó mert az adatbázisabn nem tartozik hosszá vers.
 
 function init() {
     koltok();
     randomVersek();
     fejlecVers();
-    setInterval(fejlecVers, 10000);
+    setInterval(fejlecVers, 30000);
 }
 
 function koltok() {
     fetch("api/kolto")
         .then((x) => x.json())
         .then((valasz) => {
-            console.log(valasz);
             valasz.forEach((e) => {
                 let div = document.createElement("div");
                 div.innerHTML = e.nev;

@@ -21,7 +21,7 @@ function emailSend($token, $email)
 
         $mail->addAddress($email);
 
-        $megerosito_link = "http://localhost/WEB/2025-2026/BUILD/src/email_token_check.php?token=$token";
+        $megerosito_link = "http://localhost/WEB/2025-2026/BUILD/src/email_megerosito.php?token=$token";
 
         $mail->isHTML(true);
         $mail->Subject = "Email megerősítés";
