@@ -28,15 +28,11 @@ if (isset($adatBazis)) {
         NOW()
         )
     ");
-    try {
-        $feltolt->execute([$felhasznalo, $email, $jelszo, $szerep]);
-        $email_feltoltes->execute([$email, $token, $token_lejarat]);
-        emailSend($token, $email, "email");
-        echo json_encode(["success" => "Felvettük az adatokat!", "email" => $email], JSON_UNESCAPED_UNICODE);
-    } catch (Throwable $e) {
-        errorLog($e);
-        echo json_encode(["error" => "Az adatok feltöltése sikertelen volt!"], JSON_UNESCAPED_UNICODE);
-    }
+
+    $feltolt->execute([$felhasznalo, $email, $jelszo, $szerep]);
+    $email_feltoltes->execute([$email, $token, $token_lejarat]);
+    emailSend($token, $email, "email_megerosites");
+    echo json_encode(["success" => "Felvettük az adatokat!", "email" => $email], JSON_UNESCAPED_UNICODE);
 }
 ?>
  

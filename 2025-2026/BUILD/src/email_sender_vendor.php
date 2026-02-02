@@ -9,7 +9,7 @@ function emailSend($token, $email, $tipus)
 
     try {
         $mail->isSMTP();
-        -($mail->Host = "smtp.gmail.com");
+        $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
         $mail->Username = "teszt1608@gmail.com";
         $mail->Password = "juht bnpz lhhv kjph";
