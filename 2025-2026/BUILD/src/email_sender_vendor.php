@@ -3,13 +3,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require __DIR__ . "/../../vendor/autoload.php";
 
-function emailSend($token, $email)
+function emailSend($token, $email, $tipus)
 {
     $mail = new PHPMailer(true);
 
     try {
         $mail->isSMTP();
-        $mail->Host = "smtp.gmail.com";
+        -($mail->Host = "smtp.gmail.com");
         $mail->SMTPAuth = true;
         $mail->Username = "teszt1608@gmail.com";
         $mail->Password = "juht bnpz lhhv kjph";
@@ -21,7 +21,7 @@ function emailSend($token, $email)
 
         $mail->addAddress($email);
 
-        $megerosito_link = "http://localhost/WEB/2025-2026/BUILD/src/email_megerosito.php?token=$token";
+        $megerosito_link = "http://localhost/WEB/2025-2026/BUILD/src/megerosito.php?token=$token&tipus=$tipus";
 
         $mail->isHTML(true);
         $mail->Subject = "Email megerősítés";
