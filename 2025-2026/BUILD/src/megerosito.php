@@ -4,6 +4,8 @@ require_once __DIR__ . "/helpers/formazotKi.php";
 
 $tipus = $_GET["tipus"] ?? "";
 $token = $_GET["token"] ?? "";
+$ujJelszo = $data["ujJelszo"] ?? "";
+
 if (!$token) {
     echo json_encode(["error" => "Token hiányzik"]);
 } else {
@@ -21,15 +23,14 @@ if (!$token) {
 
     switch ($tipus) {
         case "email_megerosites":
-            $update_felhasznalo = $adatBazis->prepare("UPDATE felhasznalo SET " . $tipus . " = 1  WHERE id = ? ");
+            $update_felhasznalo = $adatBazis->prepare("UPDATE felhasznalo SET email_megerositve = 1  WHERE id = ? ");
             $update_felhasznalo->execute([$user["felhasznalo_id"]]);
             break;
-        case "jelszo_helyreallitas":
+        case "jelszo_reset":
             break;
     }
-
     $update_token = $adatBazis->prepare("UPDATE felhasznalo_tokenek SET felhasznalva = 1 WHERE felhasznalo_id = ?
-    ");
+            ");
     $update_token->execute([$user["felhasznalo_id"]]);
 
     if ($check->rowCount() === 1) {
@@ -39,5 +40,6 @@ if (!$token) {
         echo json_encode(["error" => "Érvénytelen, lejárt vagy már használt token"], JSON_UNESCAPED_UNICODE);
     }
 }
-
+if ($ujJelszo) {
+}
 ?>

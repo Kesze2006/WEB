@@ -1,3 +1,6 @@
 [2026-02-02 21:52:50] Unsupported operand types: string * int
 [2026-02-02 21:53:04] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'keszericze.akos.21@ady-nagyatad.hu' for key 'email'
 [2026-02-02 21:53:53] Unsupported operand types: string * int
+[2026-02-04 09:25:09] SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[2026-02-04 09:26:44] SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[2026-02-04 09:30:00] SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
