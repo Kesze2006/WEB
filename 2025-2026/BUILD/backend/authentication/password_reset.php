@@ -19,7 +19,6 @@ $jelszo_feltoltes = $adatBazis->prepare("INSERT INTO felhasznalo_tokenek
                 )
             ");
 if (!$jelszo_feltoltes->execute([$email, $token, $token_lejarat])) {
-    echo "as";
     print_r($jelszo_feltoltes->errorInfo());
 }
 emailSend($token, $email, "jelszo_reset");
