@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
 
         Admin::forceCreate([
             "username" => "admin1",
-            "password" => bcrypt("hellouniverse1!"),
+            "password" => bcrypt("admin1"),
         ]);
 
         Admin::forceCreate([

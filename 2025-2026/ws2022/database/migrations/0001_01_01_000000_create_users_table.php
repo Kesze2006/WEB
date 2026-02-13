@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string("username");
             $table->string("password");
+            $table->enum("blocked", ["admin", "spam", "cheat" ])->nullable();
             $table->timestamp("registered_at")->useCurrent();
             $table->timestamp("last_login_at")->nullable();
         });

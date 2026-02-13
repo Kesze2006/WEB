@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
+use function Adminer\view;
+
 class AdminController extends Controller
 {
     /**
@@ -12,7 +14,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $admins = Admin::all();
+        return \view("admins", compact("admins"));
     }
 
     /**

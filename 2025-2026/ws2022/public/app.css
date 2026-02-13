@@ -1,0 +1,123 @@
+body
+{
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    background: #ccc;
+}
+
+.form-group
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-control
+{
+    padding: 8px;
+    border:  1px solid #ccc;
+    border-radius: 4px;
+}
+
+.from-group label
+{
+    margin-bottom: 8px;
+}
+
+.btn
+{
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary
+{
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.login-form
+{
+    max-width: 360px;
+    margin: 300px auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+h2
+{
+    margin-top: 0;
+}
+
+.alert
+{
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.alert-danger
+{
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+table
+{
+    width: 100%;
+}
+
+table, th, td
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td
+{
+    padding: 0.5rem;
+}
+
+th
+{
+    background-color: #eee;
+}
+
+.container
+{
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header
+{
+    background-color: #1a202c;
+    color: white;
+}
+
+nav
+{
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+nav a
+{
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 16px 24px;
+    background-color: #131921;
+}
+
+nav a:hover
+{
+    background-color: #36435a;
+}
