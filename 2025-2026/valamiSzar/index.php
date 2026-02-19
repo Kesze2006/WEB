@@ -10,7 +10,7 @@ $navbar = [
     6 => ["url" => "?page=terem", "text" => "Terem"],
 ];
 $pages = $_GET["pages"] ?? "";
-
+//$tartalom = "";
 switch ($pages) {
     case "csoport":
         include_once __DIR__ . "/includes/csoport.php";
@@ -30,6 +30,5 @@ switch ($pages) {
     default:
         break;
 }
-
 include_once __DIR__ . "/includes/sablon.php";
 ?>

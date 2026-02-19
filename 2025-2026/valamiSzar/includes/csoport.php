@@ -12,7 +12,7 @@ function szerkezet()
     return '
     <div class="container">
         <div class="row">' .
-        cim("asd") .
+        cim("Csoportok") .
         '</div>
         <div class="row">
             <div class="col-6">
@@ -32,11 +32,11 @@ function szerkezet()
 
 function csoportForm()
 {
-    return;
+    return "form";
 }
 
 function csoportLista()
 {
-    return;
+    return "lista";
 }
 ?>
