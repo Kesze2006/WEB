@@ -1,5 +1,6 @@
 <?php
-include_once __DIR__ . "/includes/config.php";
+include_once "includes/config.php";
+include_once "includes/database.php";
 $navbar = [
     0 => ["url" => "?page=csoport", "text" => "Csoport"],
     1 => ["url" => "?page=diakok", "text" => "Diakok"],
@@ -9,7 +10,7 @@ $navbar = [
     5 => ["url" => "?page=telepules", "text" => "Település"],
     6 => ["url" => "?page=terem", "text" => "Terem"],
 ];
-$pages = $_GET["pages"] ?? "";
+$pages = $_GET["page"] ?? "";
 $tartalom = "";
 switch ($pages) {
     case "csoport":

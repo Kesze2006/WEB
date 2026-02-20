@@ -1,9 +1,6 @@
 <?php
-    return
-    [
-        "host" => "localhost",
-        "user" => "root",
-        "password" => "",
-        "db" => "nyiltnap2"
-    ]
+$host = "localhost";
+$user = "root";
+$password = "";
+$db = "nyiltnap";
 ?>
