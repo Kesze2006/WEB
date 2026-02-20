@@ -39,4 +39,6 @@ function csoportLista()
 {
     return "lista";
 }
+
+echo $tartalom;
 ?>

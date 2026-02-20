@@ -10,7 +10,7 @@ $navbar = [
     6 => ["url" => "?page=terem", "text" => "Terem"],
 ];
 $pages = $_GET["pages"] ?? "";
-//$tartalom = "";
+$tartalom = "";
 switch ($pages) {
     case "csoport":
         include_once __DIR__ . "/includes/csoport.php";
