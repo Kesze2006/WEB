@@ -1,5 +1,5 @@
 function kuld() {
-    fetch("../backend/authentication/password_reset.php", {
+    fetch("../src/password_reset.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
