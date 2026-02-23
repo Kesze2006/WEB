@@ -28,7 +28,7 @@ if (!$token) {
     $update_token->execute([$user["felhasznalo_id"]]);
 
     if ($check->rowCount() === 1) {
-        header("Location: ../frontend/regVisszaigazolas.html");
+        //header("Location: ../frontend/regVisszaigazolas.html");
         echo json_encode(["success" => "Siker!", $tipus => true], JSON_UNESCAPED_UNICODE);
     } else {
         echo json_encode(["error" => "Érvénytelen, lejárt vagy már használt token"], JSON_UNESCAPED_UNICODE);

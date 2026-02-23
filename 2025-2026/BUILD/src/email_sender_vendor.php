@@ -20,27 +20,45 @@ function emailSend($token, $email, $tipus)
         $mail->setFrom("teszt1608@gmail.com", "ClassRoom");
 
         $mail->addAddress($email);
-
-        $megerosito_link = "http://localhost/WEB/2025-2026/BUILD/src/megerosito.php?token=$token&tipus=$tipus";
-
-        $mail->isHTML(true);
-        $mail->Subject = "Email megerősítés";
-        $mail->Body = "
-        <!DOCTYPE html>
-        <html lang='hu'>
-            <head>
-                <meta charset='UTF-8'>
-            </head>
-            <body>
-                    <h2>Üdv a ClassRoomban!</h2>
-                    <p>Kattints az alábbi linkre az email címed megerősítéséhez:$megerosito_link</p>
-                    <a>Email megerősítése</a>
-                    <p>A link 1 óráig érvényes.</p>
-            </body>
-        </html>
-    ";
-
-        $mail->send();
+        if ($tipus == "jelszo_reset") {
+            $reset_link = "http://localhost/WEB/2025-2026/BUILD/src/jelszo_beallitas.php?token=$token&tipus=$tipus";
+            $mail->isHTML(true);
+            $mail->Subject = "Email megerősítés";
+            $mail->Body = "
+                            <!DOCTYPE html>
+                            <html lang='hu'> 
+                                <head>
+                                    <meta charset='UTF-8'>
+                                </head>
+                                <body>
+                                        <h2>Üdv a ClassRoomban!</h2>
+                                        <p>Kattints az alábbi linkre a jelszó megváltoztatásához:$reset_link</p>
+                                        <a>Email megerősítése</a>
+                                        <p>A link 1 óráig érvényes.</p>
+                                </body>
+                            </html>
+                        ";
+            $mail->send();
+        } elseif ($tipus == "email_megerosites") {
+            $megerosito_link = "http://localhost/WEB/2025-2026/BUILD/src/megerosito.php?token=$token&tipus=$tipus";
+            $mail->isHTML(true);
+            $mail->Subject = "Email megerősítés";
+            $mail->Body = "
+                            <!DOCTYPE html>
+                            <html lang='hu'>
+                                <head>
+                                    <meta charset='UTF-8'>
+                                </head>
+                                <body>
+                                        <h2>Üdv a ClassRoomban!</h2>
+                                        <p>Kattints az alábbi linkre az email címed megerősítéséhez:$megerosito_link</p>
+                                        <a>Email megerősítése</a>
+                                        <p>A link 1 óráig érvényes.</p>
+                                </body>
+                            </html>
+                        ";
+            $mail->send();
+        }
     } catch (Exception $e) {
         echo "Hiba: " . $mail->ErrorInfo;
     }

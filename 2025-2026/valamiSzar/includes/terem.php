@@ -1,4 +1,7 @@
 <?php
+$oldalCim = "Termek";
+$tabla = "terem";
+$oldalPage = "terem";
 
 if (isset($_POST)) {
     $postId = $_POST["id"] ?? "";
@@ -24,10 +27,11 @@ function cim($cim)
 
 function szerkezet()
 {
+    global $oldalCim;
     return '
     <div class="container">
         <div class="row">' .
-        cim("Csoportok") .
+        cim($oldalCim) .
         '</div>
         <div class="row">
             <div class="col-6">
@@ -86,6 +90,7 @@ function csoportForm()
 
 function csoportLista()
 {
+    global $oldalPage;
     $csoportListaAdat = csoportListaAdat();
     $vissza = "";
     $id = $_GET["id"] ?? "";
@@ -93,14 +98,14 @@ function csoportLista()
         if ($id == $egyCsoport["id"]) {
             $vissza .= "<li class=\"list-group-item active \">
             $egyCsoport[nev]
-            <a class=\"text-white\" href=\"?page=csoport&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
-            <a class=\"text-white\" href=\"?page=csoport&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash \"></i></a>
+            <a class=\"text-white\" href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
+            <a class=\"text-white\" href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash \"></i></a>
             </li>";
         } else {
             $vissza .= "<li class=\"list-group-item\">
             $egyCsoport[nev]
-            <a href=\"?page=csoport&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil\"></i></a>
-            <a href=\"?page=csoport&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash\"></i></a>
+            <a href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil\"></i></a>
+            <a href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash\"></i></a>
             </li>";
         }
     }
@@ -115,9 +120,10 @@ function csoportLista()
 function csoportListaAdat()
 {
     global $adatBazis;
+    global $tabla;
     $check = $adatBazis->prepare(
         "SELECT *
-    FROM  csoport
+    FROM  $tabla
         ",
     );
     $check->execute();
@@ -128,9 +134,10 @@ function csoportListaAdat()
 function csoportAdat($id)
 {
     global $adatBazis;
+    global $tabla;
     $check = $adatBazis->prepare(
         "SELECT *
-    FROM  csoport WHERE id=?
+    FROM  $tabla WHERE id=?
         ",
     );
     $check->execute([$id]);
@@ -141,8 +148,9 @@ function csoportAdat($id)
 function csoportInsert($name)
 {
     global $adatBazis;
+    global $tabla;
     $check = $adatBazis->prepare(
-        "INSERT INTO csoport (nev) VALUES (?);
+        "INSERT INTO $tabla (nev) VALUES (?);
         ",
     );
     $check->execute([$name]);
@@ -151,8 +159,9 @@ function csoportInsert($name)
 function csoportUpdate($name, $id)
 {
     global $adatBazis;
+    global $tabla;
     $check = $adatBazis->prepare(
-        "UPDATE csoport SET nev=? WHERE id=?;
+        "UPDATE $tabla SET nev=? WHERE id=?;
         ",
     );
     $check->execute([$name, $id]);
@@ -161,8 +170,9 @@ function csoportUpdate($name, $id)
 function csoportDelete($id)
 {
     global $adatBazis;
+    global $tabla;
     $check = $adatBazis->prepare(
-        "DELETE FROM csoport WHERE id=?;
+        "DELETE FROM $tabla WHERE id=?;
         ",
     );
     $check->execute([$id]);

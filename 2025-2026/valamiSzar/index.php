@@ -17,16 +17,22 @@ switch ($pages) {
         include_once __DIR__ . "/includes/csoport.php";
         break;
     case "diakok":
+        include_once __DIR__ . "/includes/diakok.php";
         break;
     case "orak":
+        include_once __DIR__ . "/includes/orak.php";
         break;
     case "tanar":
+        include_once __DIR__ . "/includes/tanar.php";
         break;
     case "targy":
+        include_once __DIR__ . "/includes/targy.php";
         break;
     case "telepules":
+        include_once __DIR__ . "/includes/telepules.php";
         break;
     case "terem":
+        include_once __DIR__ . "/includes/terem.php";
         break;
     default:
         break;
