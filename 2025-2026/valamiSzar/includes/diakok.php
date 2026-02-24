@@ -64,28 +64,48 @@ function csoportForm()
         <div class="container">
             <div class="row">
                 <div class="col-12">Név:</div>
-            </div>
-            <div class="row">
                 <div class="col-12">
                     <input type="text" name="name" id="name" class="from-control" value="' .
         $csoportAdat["nev"] .
         '">
                 </div>
-            </div>
-            <div class="row">' .
+                <div class="col-12">E-mail:</div>
+                <div class="col-12">
+                    <input type="text" name="email" id="email" class="from-control" value="' .
+        $csoportAdat["email"] .
+        '">
+                </div>
+                <div class="col-12">Telefon:</div>
+                <div class="col-12">
+                    <input type="text" name="telefon" id="telefon" class="from-control" value="' .
+        $csoportAdat["telefon"] .
+        '">
+                </div>' .
         ($csoportAdat["id"] != ""
             ? '
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary" name="save">Mentés</button>'
+                    <button type="submit" class="btn btn-primary m-2" name="save">Mentés</button>'
             : "") .
         '
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary" name="new">Mentés újként</button>
+                    <button type="submit" class="btn btn-primary ms-2" name="new">Mentés újként</button>
                 </div>
             </div>
         </div>
     </form>';
+}
+
+function telepulesSelect($id)
+{
+    global $adatBazis;
+    $check = $adatBazis->prepare(
+        "SELECT * from telepules
+        ",
+    );
+    $check->execute();
+    $telepules = $check->fetchAll(PDO::FETCH_ASSOC);
+    return $telepules;
 }
 
 function csoportLista()
@@ -96,21 +116,31 @@ function csoportLista()
     $id = $_GET["id"] ?? "";
     foreach ($csoportListaAdat as $egyCsoport) {
         if ($id == $egyCsoport["id"]) {
-            $vissza .= "<li class=\"list-group-item active \">
-            $egyCsoport[nev]
-            <a class=\"text-white\" href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
-            <a class=\"text-white\" href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash \"></i></a>
+            $vissza .= "<li class=\"list-group-item active\">
+            <div class=\"row\">
+                <div class=\"col-6\">$egyCsoport[nev]</div>
+                <div class=\"col-4\">$egyCsoport[telepulesNev]</div>
+                <div class=\"col-2\">
+                    <a class=\"text-white\" href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
+                    <a class=\"text-white\" href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash \"></i></a>
+                </div>
+            </div>
             </li>";
         } else {
             $vissza .= "<li class=\"list-group-item\">
-            $egyCsoport[nev]
-            <a href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil\"></i></a>
-            <a href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash\"></i></a>
+            <div class=\"row\">
+                <div class=\"col-6\">$egyCsoport[nev]</div>
+                <div class=\"col-4\">$egyCsoport[telepulesNev]</div>
+                <div class=\"col-2\">
+                    <a href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
+                    <a href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash \"></i></a>
+                </div>
+            </div>
             </li>";
         }
     }
     return '
-    <ul class="list-group">
+    <ul class="list-group container">
         ' .
         $vissza .
         '
@@ -122,8 +152,8 @@ function csoportListaAdat()
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "SELECT *
-    FROM  $tabla
+        "SELECT diakok.*, telepules.nev as telepulesNev
+    FROM  $tabla, telepules WHERE diakok.telepules_id = telepules.id
         ",
     );
     $check->execute();
@@ -136,8 +166,8 @@ function csoportAdat($id)
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "SELECT *
-    FROM  $tabla WHERE id=?
+        "SELECT diakok.*, telepules.nev as telepulesNev
+    FROM  $tabla, telepules WHERE diakok.telepules_id = telepules.id and diakok.id = ?
         ",
     );
     $check->execute([$id]);
