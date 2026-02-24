@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . "/../../src/db_con.php";
-require_once __DIR__ . "/../../src/helpers/tokenGen.php";
-require_once __DIR__ . "/../../src/email_sender_vendor.php";
-$secrets = require_once __DIR__ . "/../../config/secrets.php";
+require_once __DIR__ . "/db_con.php";
+require_once __DIR__ . "/helpers/tokenGen.php";
+require_once __DIR__ . "/email_sender_vendor.php";
+$secrets = require_once __DIR__ . "/../config/secrets.php";
 
 $token = tokenGen($secrets);
 $token_lejarat = date("Y-m-d H:i:s", strtotime($secrets["token_email_lejarat"]));

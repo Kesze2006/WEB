@@ -20,9 +20,6 @@ if (!$token) {
     $check->execute([$token, $tipus]);
     $user = $check->fetch(PDO::FETCH_ASSOC);
 
-    $update_felhasznalo = $adatBazis->prepare("UPDATE felhasznalo SET email_megerositve = 1  WHERE id = ? ");
-    $update_felhasznalo->execute([$user["felhasznalo_id"]]);
-
     $update_token = $adatBazis->prepare("UPDATE felhasznalo_tokenek SET felhasznalva = 1 WHERE felhasznalo_id = ?
             ");
     $update_token->execute([$user["felhasznalo_id"]]);
