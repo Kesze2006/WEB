@@ -21,7 +21,7 @@ function emailSend($token, $email, $tipus)
 
         $mail->addAddress($email);
         if ($tipus == "jelszo_reset") {
-            $reset_link = "http://localhost/WEB/2025-2026/BUILD/src/jelszo_beallitas.php?token=$token&tipus=$tipus";
+            $reset_link = "http://localhost/WEB/2025-2026/BUILD/src/jelszo_check.php?token=$token&tipus=$tipus&email=$email";
             $mail->isHTML(true);
             $mail->Subject = "Email megerősítés";
             $mail->Body = "
