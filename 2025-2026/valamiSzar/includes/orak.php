@@ -66,30 +66,34 @@ function csoportForm()
         '">
         <div class="container">
             <div class="row">
-                <div class="col-12">Név:</div>
+                <div class="col-12">Dátum:</div>
                 <div class="col-12">
-                    <input type="text" name="name" id="name" class="from-control" value="' .
-        $csoportAdat["nev"] .
+                    <input type="date" name="datum" id="datum" class="from-control" value="' .
+        $csoportAdat["datum"] .
         '">
                 </div>
-                <div class="col-12">E-mail:</div>
+                <div class="col-12">Óra sorszáma:</div>
                 <div class="col-12">
-                    <input type="text" name="email" id="email" class="from-control" value="' .
-        $csoportAdat["email"] .
+                    <input type="number" name="orasorszam" id="orasorszam" class="from-control" value="' .
+        $csoportAdat["orasorszam"] .
         '">
                 </div>
-                <div class="col-12">Telefon:</div>
-                <div class="col-12">
-                    <input type="text" name="telefon" id="telefon" class="from-control" value="' .
-        $csoportAdat["telefon"] .
-        '">
-                </div>
-                <div class="col-12">Település:</div>
+                <div class="col-12">Tanár:</div>
                 <div class="col-12">
                     ' .
-        telepulesSelect($csoportAdat["telepules_id"]) .
+        telepulesSelect($csoportAdat["tanar_id"], "tanar") .
         '
-                </div>' .
+        </div>
+                <div class="col-12">Tárgy:</div>
+                <div class="col-12">
+                    ' .
+        telepulesSelect($csoportAdat["targy_id"], "targy") .
+        '
+        </div>
+                <div class="col-12">Csoport:</div>
+                <div class="col-12">
+                    ' .
+        telepulesSelect($csoportAdat["csoport_id"], "csoport") .
         ($csoportAdat["id"] != ""
             ? '
                 <div class="col-12">
@@ -105,11 +109,11 @@ function csoportForm()
     </form>';
 }
 
-function telepulesSelect($id)
+function telepulesSelect($id, $tabla)
 {
     global $adatBazis;
     $check = $adatBazis->prepare(
-        "SELECT * from telepules
+        "SELECT * from $tabla
         ",
     );
     $check->execute();
@@ -141,16 +145,16 @@ function csoportLista()
             <div class=\"row\">
                 <div class\"col-12 container\">
                     <div class=\"row\">
-                        <div class=\"col-3\">Dátum: $egyCsoport[datum]</div>
-                        <div class=\"col-6\">Tanár: $egyCsoport[tanarNev]</div>
+                        <div class=\"col-8\">Időpont: $egyCsoport[datum] ˇ $egyCsoport[orasorszam]. óra</div>
+                        <div class=\"col-4\">Csoport: $egyCsoport[csoportNev]</div>
+                        <div class=\"col-4\">Tárgy: $egyCsoport[targyNev]</div>
                         <div class=\"col-3\">Terem: $egyCsoport[teremNev]</div>
-                        <div class=\"col-6\">$egyCsoport[csoportNev]</div>
-                        <div class=\"col-6\">$egyCsoport[targyNev]</div>
-                        <div class=\"col-6\">$egyCsoport[ferohely]</div>
-                        <div class=\"col-6\">$egyCsoport[orasorszam]</div>
+                        <div class=\"col-5\">Tanár: $egyCsoport[tanarNev]</div>
+                        <div class=\"col-3\">Férőhely: $egyCsoport[ferohely]</div>
+                        <div class=\"col-7\"></div>
                         <div class=\"col-2\">
-                            <a href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
-                            <a href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash \"></i></a>
+                            <a class=\"text-white\" href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
+                            <a class=\"text-white\" href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash \"></i></a>
                         </div>
                     </div>
                 </div>
@@ -161,12 +165,13 @@ function csoportLista()
             <div class=\"row\">
                 <div class\"col-12 container\">
                     <div class=\"row\">
-                        <div class=\"col-12\">Időpont: $egyCsoport[datum] ˇ $egyCsoport[orasorszam]. óra</div>
+                        <div class=\"col-8\">Időpont: $egyCsoport[datum] ˇ $egyCsoport[orasorszam]. óra</div>
+                        <div class=\"col-4\">Csoport: $egyCsoport[csoportNev]</div>
                         <div class=\"col-4\">Tárgy: $egyCsoport[targyNev]</div>
                         <div class=\"col-3\">Terem: $egyCsoport[teremNev]</div>
                         <div class=\"col-5\">Tanár: $egyCsoport[tanarNev]</div>
-                        <div class=\"col-4\">Csoport: $egyCsoport[csoportNev]</div>
                         <div class=\"col-3\">Férőhely: $egyCsoport[ferohely]</div>
+                        <div class=\"col-7\"></div>
                         <div class=\"col-2\">
                             <a href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
                             <a href=\"?page=$oldalPage&action=delete&id=$egyCsoport[id]\"><i class=\"bi bi-trash \"></i></a>
@@ -200,6 +205,7 @@ function csoportListaAdat()
             JOIN terem ON orak.terem_id=terem.id
             JOIN csoport ON orak.csoport_id=csoport.id
             JOIN targy ON orak.targy_id=targy.id
+            ORDER BY datum
         ",
     );
     $check->execute();
@@ -212,8 +218,17 @@ function csoportAdat($id)
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "SELECT diakok.*, telepules.nev as telepulesNev
-    FROM  $tabla, telepules WHERE diakok.telepules_id = telepules.id and diakok.id = ?
+        "SELECT orak.*,
+            tanar.nev as tanarNev,
+            terem.nev as teremNev,
+            csoport.nev as csoportNev,
+            targy.nev as targyNev
+            FROM  $tabla
+            JOIN tanar ON orak.tanar_id=tanar.id
+            JOIN terem ON orak.terem_id=terem.id
+            JOIN csoport ON orak.csoport_id=csoport.id
+            JOIN targy ON orak.targy_id=targy.id
+            WHERE orak.id=?
         ",
     );
     $check->execute([$id]);
