@@ -24,20 +24,34 @@ function emailSend($token, $email, $tipus)
             $reset_link = "http://localhost/WEB/2025-2026/BUILD/src/jelszo_check.php?token=$token&tipus=$tipus&email=$email";
             $mail->isHTML(true);
             $mail->Subject = "Email megerősítés";
-            $mail->Body = "
+            $mail->Body =
+                '
                             <!DOCTYPE html>
-                            <html lang='hu'> 
-                                <head>
-                                    <meta charset='UTF-8'>
-                                </head>
-                                <body>
-                                        <h2>Üdv a ClassRoomban!</h2>
-                                        <p>Kattints az alábbi linkre a jelszó megváltoztatásához:$reset_link</p>
-                                        <a>Email megerősítése</a>
-                                        <p>A link 1 óráig érvényes.</p>
-                                </body>
+                            <html lang="hu">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Bejelentkezés</title>
+
+                                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+                            </head>
+                            <style>
+                            </style>
+                            <body style="font-family: \'Courier New\', Courier, monospace;">
+
+                            <div style="padding: 2%;">
+                            <h1>Üdv a ClassRoomban!</h1>
+                            <p style="color: #810000;">Ez a link csak 1 óráig érvényes!</p>
+                            <p style="border-top: 1px solid black; display: inline-block; padding-top: 5px;">Kattints az alábbi gombra új jelszó létrehozásához:</p>
+                            <br>
+                            <button style="cursor: pointer;" href="' .
+                $reset_link .
+                '">Új jelszó igénylése</button>
+                            </div>
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+                            </body>
                             </html>
-                        ";
+                        ';
             $mail->send();
         } elseif ($tipus == "email_megerosites") {
             $megerosito_link = "http://localhost/WEB/2025-2026/BUILD/src/megerosito.php?token=$token&tipus=$tipus";
