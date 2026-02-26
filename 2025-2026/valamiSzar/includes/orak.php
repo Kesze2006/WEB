@@ -4,18 +4,30 @@ $tabla = "orak";
 $oldalPage = "orak";
 
 if (isset($_POST)) {
+    $postAdat = [
+        "id" => $_POST["id"] ?? "",
+        "datum" => $_POST["datum"] ?? "",
+        "orasorszam" => $_POST["orasorszam"] ?? "",
+        "targy_id" => $_POST["targy_id"] ?? "",
+        "terem_id" => $_POST["terem_id"] ?? "",
+        "ferohely" => $_POST["ferohely"] ?? "",
+        "tanar_id" => $_POST["tanar_id"] ?? "",
+        "csoport_id" => $_POST["csoport_id"] ?? "",
+    ];
+    /*
     $postId = $_POST["id"] ?? "";
     $postNev = $_POST["name"] ?? "";
     $postEmail = $_POST["email"] ?? "";
     $postTelefon = $_POST["telefon"] ?? "";
     $postTelepulesId = $_POST["telepules_id"] ?? "";
+    */
     $postSend = $_POST["save"] ?? "default";
     $postNew = $_POST["new"] ?? "default";
 
     if ($postSend == "") {
-        csoportUpdate($postNev, $postId, $postEmail, $postTelefon, $postTelepulesId);
+        csoportUpdate($postAdat);
     } elseif ($postNew == "") {
-        csoportInsert($postNev, $postEmail, $postTelefon, $postTelepulesId);
+        csoportInsert($postAdat);
     }
 }
 
@@ -54,11 +66,26 @@ function szerkezet()
 
 function csoportForm()
 {
-    $csoportAdat = ["id" => "", "nev" => "", "email" => "", "telefon" => "", "telepules_id" => ""];
+    $csoportAdat = [
+        "id" => "",
+        "nev" => "",
+        "email" => "",
+        "datum" => "",
+        "terem_id" => "",
+        "orasorszam" => "",
+        "tanar_id" => "",
+        "targy_id" => "",
+        "csoport_id" => "",
+        "ferohely" => "",
+    ];
+    $diakAdat = [
+        "diak_nev" => "",
+        "telepules_nev" => "",
+    ];
     if (isset($_GET["action"]) && $_GET["action"] == "edit") {
         $csoportAdat = csoportAdat($_GET["id"]);
+        $diakAdat = diaktListaAdat($_GET["id"]);
     }
-
     return '
     <form method="post" action="">
         <input type="hidden" name="id" id="id" value="' .
@@ -77,7 +104,13 @@ function csoportForm()
                     <input type="number" name="orasorszam" id="orasorszam" class="from-control" value="' .
         $csoportAdat["orasorszam"] .
         '">
-                </div>
+         </div>
+                <div class="col-12">Férőhely:</div>
+                <div class="col-12">
+                    <input type="number" name="ferohely" id="ferohely" class="from-control" value="' .
+        $csoportAdat["ferohely"] .
+        '">
+        </div>
                 <div class="col-12">Tanár:</div>
                 <div class="col-12">
                     ' .
@@ -88,6 +121,12 @@ function csoportForm()
                 <div class="col-12">
                     ' .
         telepulesSelect($csoportAdat["targy_id"], "targy") .
+        '
+        </div>
+                <div class="col-12">Terem:</div>
+                <div class="col-12">
+                    ' .
+        telepulesSelect($csoportAdat["terem_id"], "terem") .
         '
         </div>
                 <div class="col-12">Csoport:</div>
@@ -118,7 +157,7 @@ function telepulesSelect($id, $tabla)
     );
     $check->execute();
     $telepulesek = $check->fetchAll(PDO::FETCH_ASSOC);
-    $vissza = '<select name="telepules_id">';
+    $vissza = '<select name="' . $tabla . '_id">';
     foreach ($telepulesek as $telepules) {
         $vissza .=
             '<option value="' .
@@ -151,6 +190,7 @@ function csoportLista()
                         <div class=\"col-3\">Terem: $egyCsoport[teremNev]</div>
                         <div class=\"col-5\">Tanár: $egyCsoport[tanarNev]</div>
                         <div class=\"col-3\">Férőhely: $egyCsoport[ferohely]</div>
+                        <div class=\"col-3\">Jelentkező: $egyCsoport[diak_darab] fő</div>
                         <div class=\"col-7\"></div>
                         <div class=\"col-2\">
                             <a class=\"text-white\" href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
@@ -171,6 +211,7 @@ function csoportLista()
                         <div class=\"col-3\">Terem: $egyCsoport[teremNev]</div>
                         <div class=\"col-5\">Tanár: $egyCsoport[tanarNev]</div>
                         <div class=\"col-3\">Férőhely: $egyCsoport[ferohely]</div>
+                        <div class=\"col-3\">Jelentkező: $egyCsoport[diak_darab] fő</div>
                         <div class=\"col-7\"></div>
                         <div class=\"col-2\">
                             <a href=\"?page=$oldalPage&action=edit&id=$egyCsoport[id]\"><i class=\"bi bi-pencil \"></i></a>
@@ -199,16 +240,36 @@ function csoportListaAdat()
             tanar.nev as tanarNev,
             terem.nev as teremNev,
             csoport.nev as csoportNev,
-            targy.nev as targyNev
+            targy.nev as targyNev,
+            COUNT(kapcsolo.diakid) AS diak_darab
             FROM  $tabla
             JOIN tanar ON orak.tanar_id=tanar.id
             JOIN terem ON orak.terem_id=terem.id
             JOIN csoport ON orak.csoport_id=csoport.id
             JOIN targy ON orak.targy_id=targy.id
+            JOIN kapcsolo ON orak.id=kapcsolo.oraid
+            GROUP BY orak.id
             ORDER BY datum
         ",
     );
     $check->execute();
+    $user = $check->fetchAll(PDO::FETCH_ASSOC);
+    return $user;
+}
+
+function diaktListaAdat($oraID)
+{
+    global $adatBazis;
+    $check = $adatBazis->prepare(
+        "SELECT diakok.nev AS diak_nev, telepules.nev AS telepules_nev
+            FROM kapcsolo
+            JOIN diakok ON kapcsolo.diakid=diakok.id
+            JOIN telepules ON diakok.telepules=telepules.id
+            WHERE kacspolo.oraid = ?
+            ORDER BY diak_nev
+        ",
+    );
+    $check->execute($oraID);
     $user = $check->fetchAll(PDO::FETCH_ASSOC);
     return $user;
 }
@@ -236,26 +297,43 @@ function csoportAdat($id)
     return $user;
 }
 
-function csoportInsert($name, $email, $telefon, $telepules_id)
+function csoportInsert($postAdat)
 {
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "INSERT INTO $tabla (nev,email,telefon,telepules_id) VALUES (?, ?, ?, ?)
+        "INSERT INTO $tabla (datum, tanar_id, terem_id, csoport_id, targy_id, ferohely, orasorszam) VALUES (?, ?, ?, ?, ?, ?, ?)
         ",
     );
-    $check->execute([$name, $email, $telefon, $telepules_id]);
+    $check->execute([
+        $postAdat["datum"],
+        $postAdat["tanar_id"],
+        $postAdat["terem_id"],
+        $postAdat["csoport_id"],
+        $postAdat["targy_id"],
+        $postAdat["ferohely"],
+        $postAdat["orasorszam"],
+    ]);
 }
 
-function csoportUpdate($name, $id, $email, $telefon, $telepules_id)
+function csoportUpdate($postAdat)
 {
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "UPDATE $tabla SET nev=?, email=?, telefon=?, telepules_id=? WHERE id=?;
+        "UPDATE $tabla SET datum=?, tanar_id=?, terem_id=?, csoport_id=?, targy_id=?, ferohely=?, orasorszam=? WHERE id=?;
         ",
     );
-    $check->execute([$name, $email, $telefon, $telepules_id, $id]);
+    $check->execute([
+        $postAdat["datum"],
+        $postAdat["tanar_id"],
+        $postAdat["terem_id"],
+        $postAdat["csoport_id"],
+        $postAdat["targy_id"],
+        $postAdat["ferohely"],
+        $postAdat["orasorszam"],
+        $postAdat["id"],
+    ]);
 }
 
 function csoportDelete($id)
