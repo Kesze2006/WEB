@@ -55,8 +55,53 @@ function szerkezet()
 function csoportForm()
 {
     $csoportAdat = ["id" => "", "nev" => "", "email" => "", "telefon" => "", "telepules_id" => ""];
+    $oralisatSzoveg = "";
     if (isset($_GET["action"]) && $_GET["action"] == "edit") {
         $csoportAdat = csoportAdat($_GET["id"]);
+        $oraLista = diaktListaAdat();
+
+        $elozoDatum = "";
+        $elozoOra = "";
+        foreach ($oraLista as $ora) {
+            if ($elozoDatum != $ora["datum"]) {
+                $oralisatSzoveg .=
+                    '
+                <div class="col-6 m-2 p-1 bg-primary container">
+                    <h3>' .
+                    $ora["datum"] .
+                    '</h3>
+                </div>';
+            }
+            $elozoDatum = $ora["datum"];
+            if ($elozoOra != $ora["orasorszam"]) {
+                $oralisatSzoveg .=
+                    '
+                <div class="col-6 m-2 p-1 bg-warning container">
+                    <h4>' .
+                    $ora["orasorszam"] .
+                    '</h4>
+                </div>';
+            }
+            $elozoOra = $ora["orasorszam"];
+            $oralisatSzoveg .=
+                '
+                <div class="col-6 m-2 p-1 bg-info container">
+                    <div class="row">
+                        <div class="col-4">Tárgy: ' .
+                $ora["tagy_nev"] .
+                '</div>
+                        <div class="col-5">Tanár: ' .
+                $ora["tanar_nev"] .
+                '</div>
+                        <div class="col-3">Hely: ' .
+                $ora["diak_darab"] .
+                "/" .
+                $ora["ferohely"] .
+                '</div>
+                    </div>
+                </div>
+            ';
+        }
     }
 
     return '
@@ -85,9 +130,9 @@ function csoportForm()
         '">
                 </div>
                 <div class="col-12">Település:</div>
-                <div class="col-12">
-                    ' .
+                <div class="col-12">' .
         telepulesSelect($csoportAdat["telepules_id"]) .
+        $oralisatSzoveg .
         '
                 </div>' .
         ($csoportAdat["id"] != ""
@@ -166,6 +211,23 @@ function csoportLista()
         $vissza .
         '
     </ul>';
+}
+
+function diaktListaAdat()
+{
+    global $adatBazis;
+    $check = $adatBazis->prepare(
+        "SELECT diakok.nev AS diak_nev, telepules.nev AS telepules_nev
+            FROM kapcsolo
+            JOIN diakok ON kapcsolo.diakid=diakok.id
+            JOIN telepules ON diakok.telepules_id=telepules.id
+            WHERE kapcsolo.oraid = ?
+            ORDER BY diak_nev
+        ",
+    );
+    $check->execute();
+    $user = $check->fetchAll(PDO::FETCH_ASSOC);
+    return $user;
 }
 
 function csoportListaAdat()

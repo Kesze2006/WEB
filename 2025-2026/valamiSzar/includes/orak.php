@@ -78,13 +78,16 @@ function csoportForm()
         "csoport_id" => "",
         "ferohely" => "",
     ];
-    $diakAdat = [
-        "diak_nev" => "",
-        "telepules_nev" => "",
-    ];
+    $diakAdat = [["diak_nev" => "", "telepules_nev" => ""]];
     if (isset($_GET["action"]) && $_GET["action"] == "edit") {
         $csoportAdat = csoportAdat($_GET["id"]);
         $diakAdat = diaktListaAdat($_GET["id"]);
+    }
+    $szoveg = "";
+    if ($diakAdat[0]["diak_nev"] != "") {
+        foreach ($diakAdat as $diak) {
+            $szoveg .= '<div class="col-6 p-2">' . $diak["diak_nev"] . '"(' . $diak["telepules_nev"] . ")</div>";
+        }
     }
     return '
     <form method="post" action="">
@@ -131,8 +134,9 @@ function csoportForm()
         </div>
                 <div class="col-12">Csoport:</div>
                 <div class="col-12">
-                    ' .
+                ' .
         telepulesSelect($csoportAdat["csoport_id"], "csoport") .
+        $szoveg .
         ($csoportAdat["id"] != ""
             ? '
                 <div class="col-12">
@@ -264,12 +268,12 @@ function diaktListaAdat($oraID)
         "SELECT diakok.nev AS diak_nev, telepules.nev AS telepules_nev
             FROM kapcsolo
             JOIN diakok ON kapcsolo.diakid=diakok.id
-            JOIN telepules ON diakok.telepules=telepules.id
-            WHERE kacspolo.oraid = ?
+            JOIN telepules ON diakok.telepules_id=telepules.id
+            WHERE kapcsolo.oraid = ?
             ORDER BY diak_nev
         ",
     );
-    $check->execute($oraID);
+    $check->execute([$oraID]);
     $user = $check->fetchAll(PDO::FETCH_ASSOC);
     return $user;
 }
