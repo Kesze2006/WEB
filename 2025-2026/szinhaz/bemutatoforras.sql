@@ -1,7 +1,10 @@
+SET FOREIGN_KEY_CHECKS=0;
+
+
 CREATE DATABASE IF NOT EXISTS `bemutato` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci;
 USE `bemutato`;
 
-DROP TABLE IF EXISTS eloadas;
+Drop table if exists `eloadas`;
 CREATE TABLE `eloadas` (
   `id` int(11) NOT NULL,
   `cim` varchar(100) COLLATE utf8mb4_hungarian_ci NOT NULL,
@@ -5923,7 +5926,7 @@ INSERT INTO `eloadas` (`id`, `cim`, `szinhazid`, `datum`, `mufaj`, `nyelv`) VALU
 (5902, 'projekt_LULU', 201, '2015-03-05', 'színmű', 'magyar'),
 (5903, 'Nyaralás', 136, '2019-09-22', 'táncelőadás', NULL);
 
-DROP TABLE IF EXISTS szinhaz;
+DROP TABLE IF EXISTS `szinhaz`;
 CREATE TABLE `szinhaz` (
   `id` int(11) NOT NULL,
   `nev` varchar(100) COLLATE utf8mb4_hungarian_ci NOT NULL,
@@ -6136,10 +6139,10 @@ INSERT INTO `szinhaz` (`id`, `nev`, `szekhely`, `belfoldi`) VALUES
 (202, 'Pécsi Harmadik Színház', 'Pécs', 1),
 (203, 'Scallabouche', 'Budapest', 1);
 
-DROP TABLE IF EXISTS tulajdonsag;
+DROP Table if exists `tulajdonsag`;
 CREATE TABLE `tulajdonsag` (
   `id` int(11) NOT NULL,
-  `eloadasid` int(11) NOT NULL,
+  `eloadasid` int(11),
   `nev` varchar(15) COLLATE utf8mb4_hungarian_ci NOT NULL,
   `ertek` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
@@ -9961,8 +9964,72 @@ ALTER TABLE `tulajdonsag`
 
 
 ALTER TABLE `eloadas`
-  ADD CONSTRAINT `eloadas_ibfk_1` FOREIGN KEY (`szinhazid`) REFERENCES `szinhaz` (`id`) ON DELETE ;
+  ADD CONSTRAINT `eloadas_ibfk_1` FOREIGN KEY (`szinhazid`) REFERENCES `szinhaz` (`id`) ON DELETE SET NULL;
 
 ALTER TABLE `tulajdonsag`
-  ADD CONSTRAINT `tulajdonsag_ibfk_1` FOREIGN KEY (`eloadasid`) REFERENCES `eloadas` (`id`) ON DELETE;
+  ADD CONSTRAINT `tulajdonsag_ibfk_1` FOREIGN KEY (`eloadasid`) REFERENCES `eloadas` (`id`) ON DELETE SET NULL;
+
+
+
+DROP TABLE IF EXISTS szekhely;
+CREATE TABLE szekhely (id INT NOT NULL AUTO_INCREMENT , nev varchar(30) NOT NULL, belfoldi tinyint(1) NOT NULL , PRIMARY KEY (id)) ENGINE = InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+INSERT INTO szekhely(nev,belfoldi) SELECT DISTINCT szekhely,belfoldi FROM szinhaz ORDER BY szekhely;
+ALTER TABLE szinhaz ADD szekhely_id INT AFTER szekhely;
+ALTER TABLE szinhaz ADD INDEX(szekhely_id);
+UPDATE szinhaz SET szekhely_id=(SELECT szekhely.id FROM szekhely WHERE szekhely.nev=szinhaz.szekhely);
+ALTER TABLE szinhaz DROP szekhely;
+
+DROP TABLE IF EXISTS mufaj;
+CREATE TABLE mufaj (id INT NOT NULL AUTO_INCREMENT , nev varchar(30) NOT NULL, PRIMARY KEY (id)) ENGINE = InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+INSERT INTO mufaj(nev) SELECT DISTINCT mufaj FROM eloadas ORDER BY mufaj;
+ALTER TABLE eloadas ADD mufaj_id INT AFTER datum;
+ALTER TABLE eloadas ADD INDEX(mufaj_id);
+UPDATE eloadas SET mufaj_id=(SELECT mufaj.id FROM mufaj WHERE mufaj.nev=eloadas.mufaj);
+ALTER TABLE eloadas DROP mufaj;
+
+DROP TABLE IF EXISTS nyelv;
+CREATE TABLE nyelv (id INT NOT NULL AUTO_INCREMENT , nev varchar(15) NOT NULL, PRIMARY KEY (id)) ENGINE = InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+INSERT INTO nyelv(nev) SELECT DISTINCT nyelv FROM eloadas ORDER BY nyelv;
+ALTER TABLE eloadas ADD nyelv_id INT AFTER nyelv;
+ALTER TABLE eloadas ADD INDEX(nyelv_id);
+UPDATE eloadas SET nyelv_id=(SELECT nyelv.id FROM nyelv WHERE nyelv.nev=eloadas.nyelv);
+ALTER TABLE eloadas DROP nyelv;
+
+DROP TABLE IF EXISTS tulajdonsagnev;
+CREATE TABLE tulajdonsagnev (id INT NOT NULL AUTO_INCREMENT , nev varchar(15) NOT NULL, PRIMARY KEY (id)) ENGINE = InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+INSERT INTO tulajdonsagnev (nev) SELECT DISTINCT nev FROM tulajdonsag ORDER BY nev;
+ALTER TABLE tulajdonsag ADD tulajdonsagnev_id INT AFTER nev;
+ALTER TABLE tulajdonsag ADD INDEX(tulajdonsagnev_id);
+UPDATE tulajdonsag SET tulajdonsagnev_id=(SELECT tulajdonsagnev_id FROM tulajdonsagnev WHERE tulajdonsagnev.nev=tulajdonsag.nev);
+ALTER TABLE tulajdonsag DROP nev;
+
+
+
+alter table szinhaz
+  drop constraint if exists szekhely_fk;
+alter table szinhaz
+    ADD CONSTRAINT szekhely_fk 
+    FOREIGN KEY (szekhely_id) 
+    REFERENCES szekhely (id) ON DELETE SET NULL;
+
+
+ALTER TABLE eloadas
+  drop constraint if exists mufaj_fk,
+  drop constraint if exists nyelv_fk;
+
+Alter TABLE eloadas
+  ADD CONSTRAINT mufaj_fk FOREIGN KEY (mufaj_id) REFERENCES mufaj (id) on delete set null,
+  ADD CONSTRAINT nyelv_fk FOREIGN KEY (nyelv_id) REFERENCES nyelv (id) on delete set null;
+
+
+ALter table tulajdonsag
+  drop constraint if exists tulajdonsagnev_fk;
+  alter table tulajdonsag
+    ADD CONSTRAINT tulajdonsag_fk 
+    FOREIGN KEY (tulajdonsagnev_id) 
+    REFERENCES tulajdonsagnev (id) ON DELETE SET NULL;
+
 COMMIT;
+
+SET FOREIGN_KEY_CHECKS=1;
+
