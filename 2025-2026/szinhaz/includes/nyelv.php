@@ -1,7 +1,7 @@
 <?php
-$oldalCim = "Település";
-$tabla = "telepules";
-$oldalPage = "telepules";
+$oldalCim = "Nyelv";
+$tabla = "nyelv";
+$oldalPage = "nyelv";
 
 if (isset($_POST)) {
     $postId = $_POST["id"] ?? "";

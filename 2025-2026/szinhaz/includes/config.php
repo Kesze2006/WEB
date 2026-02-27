@@ -2,5 +2,5 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$db = "nyiltnap";
+$db = "bemutato";
 ?>

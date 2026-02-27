@@ -1,7 +1,7 @@
 <?php
-$oldalCim = "Tanárok";
-$tabla = "tanar";
-$oldalPage = "tanar";
+$oldalCim = "Székhely";
+$tabla = "szekhely";
+$oldalPage = "szekhely";
 
 if (isset($_POST)) {
     $postId = $_POST["id"] ?? "";

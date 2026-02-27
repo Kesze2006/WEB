@@ -2,37 +2,37 @@
 include_once "includes/config.php";
 include_once "includes/database.php";
 $navbar = [
-    0 => ["url" => "?page=csoport", "text" => "Csoport"],
-    1 => ["url" => "?page=diakok", "text" => "Diakok"],
-    2 => ["url" => "?page=orak", "text" => "Órák"],
-    3 => ["url" => "?page=tanar", "text" => "Tanár"],
-    4 => ["url" => "?page=targy", "text" => "Tárgy"],
-    5 => ["url" => "?page=telepules", "text" => "Település"],
-    6 => ["url" => "?page=terem", "text" => "Terem"],
+    0 => ["url" => "?page=eloadas", "text" => "Előadás"],
+    1 => ["url" => "?page=mufaj", "text" => "Műfaj"],
+    2 => ["url" => "?page=nyelv", "text" => "Nyelv"],
+    3 => ["url" => "?page=szekhely", "text" => "Székhely"],
+    4 => ["url" => "?page=szinhaz", "text" => "Szinház"],
+    5 => ["url" => "?page=tulajdonsag", "text" => "Tulajdonság"],
+    6 => ["url" => "?page=tulajdonsagnev", "text" => "Tulajdonságnév"],
 ];
 $pages = $_GET["page"] ?? "";
 $tartalom = "";
 switch ($pages) {
-    case "csoport":
-        include_once __DIR__ . "/includes/csoport.php";
+    case "eloadas":
+        include_once __DIR__ . "/includes/eloadas.php";
         break;
-    case "diakok":
-        include_once __DIR__ . "/includes/diakok.php";
+    case "mufaj":
+        include_once __DIR__ . "/includes/mufaj.php";
         break;
-    case "orak":
-        include_once __DIR__ . "/includes/orak.php";
+    case "nyelv":
+        include_once __DIR__ . "/includes/nyelv.php";
         break;
-    case "tanar":
-        include_once __DIR__ . "/includes/tanar.php";
+    case "szekhely":
+        include_once __DIR__ . "/includes/szekhely.php";
         break;
-    case "targy":
-        include_once __DIR__ . "/includes/targy.php";
+    case "szinhaz":
+        include_once __DIR__ . "/includes/szinhaz.php";
         break;
-    case "telepules":
-        include_once __DIR__ . "/includes/telepules.php";
+    case "tulajdonsag":
+        include_once __DIR__ . "/includes/tulajdonsag.php";
         break;
-    case "terem":
-        include_once __DIR__ . "/includes/terem.php";
+    case "tulajdonsagnev":
+        include_once __DIR__ . "/includes/tulajdonsagnev.php";
         break;
     default:
         break;

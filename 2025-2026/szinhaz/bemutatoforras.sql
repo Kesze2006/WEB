@@ -10000,7 +10000,7 @@ CREATE TABLE tulajdonsagnev (id INT NOT NULL AUTO_INCREMENT , nev varchar(15) NO
 INSERT INTO tulajdonsagnev (nev) SELECT DISTINCT nev FROM tulajdonsag ORDER BY nev;
 ALTER TABLE tulajdonsag ADD tulajdonsagnev_id INT AFTER nev;
 ALTER TABLE tulajdonsag ADD INDEX(tulajdonsagnev_id);
-UPDATE tulajdonsag SET tulajdonsagnev_id=(SELECT tulajdonsagnev_id FROM tulajdonsagnev WHERE tulajdonsagnev.nev=tulajdonsag.nev);
+UPDATE tulajdonsag SET tulajdonsagnev_id=(SELECT tulajdonsagnev.id FROM tulajdonsagnev WHERE tulajdonsagnev.nev=tulajdonsag.nev);
 ALTER TABLE tulajdonsag DROP nev;
 
 

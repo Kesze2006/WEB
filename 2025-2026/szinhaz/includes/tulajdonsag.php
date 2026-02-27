@@ -1,7 +1,7 @@
 <?php
-$oldalCim = "Diákok";
-$tabla = "diakok";
-$oldalPage = "diakok";
+$oldalCim = "Tulajdonság";
+$tabla = "tulajdonsag";
+$oldalPage = "tulajdonsag";
 
 if (isset($_POST)) {
     $postId = $_POST["id"] ?? "";
@@ -235,8 +235,11 @@ function csoportListaAdat()
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "SELECT diakok.*, telepules.nev as telepulesNev
-    FROM  $tabla, telepules WHERE diakok.telepules_id = telepules.id
+        "SELECT *
+            from tulajdonsag
+            join tulajdonsagnev on tulajdonsag.tulajdonsagnev_id = tulajdonasagnev.id
+            join eloadas on tulajdonsag.eloadasid = eloadas.id
+            order by eloadas.cim
         ",
     );
     $check->execute();

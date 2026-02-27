@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <header class="col-12">
-                <h1 class="">Nyílt nap 2025 május</h1>
+                <h1>Színház 2025 május</h1>
             </header>
         </div>
         <div class="row">
