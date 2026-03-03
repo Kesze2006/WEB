@@ -54,56 +54,10 @@ function szerkezet()
 
 function csoportForm()
 {
-    $csoportAdat = ["id" => "", "nev" => "", "email" => "", "telefon" => "", "telepules_id" => ""];
-    $oralisatSzoveg = "";
+    $csoportAdat = ["id" => "", "nev" => "", "email" => "", "ertek" => "", "telepules_id" => ""];
     if (isset($_GET["action"]) && $_GET["action"] == "edit") {
         $csoportAdat = csoportAdat($_GET["id"]);
-        $oraLista = diaktListaAdat();
-
-        $elozoDatum = "";
-        $elozoOra = "";
-        foreach ($oraLista as $ora) {
-            if ($elozoDatum != $ora["datum"]) {
-                $oralisatSzoveg .=
-                    '
-                <div class="col-6 m-2 p-1 bg-primary container">
-                    <h3>' .
-                    $ora["datum"] .
-                    '</h3>
-                </div>';
-            }
-            $elozoDatum = $ora["datum"];
-            if ($elozoOra != $ora["orasorszam"]) {
-                $oralisatSzoveg .=
-                    '
-                <div class="col-6 m-2 p-1 bg-warning container">
-                    <h4>' .
-                    $ora["orasorszam"] .
-                    '</h4>
-                </div>';
-            }
-            $elozoOra = $ora["orasorszam"];
-            $oralisatSzoveg .=
-                '
-                <div class="col-6 m-2 p-1 bg-info container">
-                    <div class="row">
-                        <div class="col-4">Tárgy: ' .
-                $ora["tagy_nev"] .
-                '</div>
-                        <div class="col-5">Tanár: ' .
-                $ora["tanar_nev"] .
-                '</div>
-                        <div class="col-3">Hely: ' .
-                $ora["diak_darab"] .
-                "/" .
-                $ora["ferohely"] .
-                '</div>
-                    </div>
-                </div>
-            ';
-        }
     }
-
     return '
     <form method="post" action="">
         <input type="hidden" name="id" id="id" value="' .
@@ -111,29 +65,21 @@ function csoportForm()
         '">
         <div class="container">
             <div class="row">
-                <div class="col-12">Név:</div>
+                <div class="col-12">Előadás:</div>
                 <div class="col-12">
-                    <input type="text" name="name" id="name" class="from-control" value="' .
-        $csoportAdat["nev"] .
-        '">
+                    előadás select
                 </div>
-                <div class="col-12">E-mail:</div>
+                <div class="col-12">Tulajdonság Név:</div>
                 <div class="col-12">
-                    <input type="text" name="email" id="email" class="from-control" value="' .
-        $csoportAdat["email"] .
-        '">
-                </div>
-                <div class="col-12">Telefon:</div>
-                <div class="col-12">
-                    <input type="text" name="telefon" id="telefon" class="from-control" value="' .
-        $csoportAdat["telefon"] .
-        '">
-                </div>
-                <div class="col-12">Település:</div>
-                <div class="col-12">' .
-        telepulesSelect($csoportAdat["telepules_id"]) .
-        $oralisatSzoveg .
+                    ' .
+        telepulesSelect($csoportAdat["id"], "tulajdonsagnev") .
         '
+                </div>
+                <div class="col-12">Érték:</div>
+                <div class="col-12">
+                    <input type="number" name="ertek" id="ertek" class="from-control" value="' .
+        $csoportAdat["ertek"] .
+        '">
                 </div>' .
         ($csoportAdat["id"] != ""
             ? '
@@ -150,16 +96,16 @@ function csoportForm()
     </form>';
 }
 
-function telepulesSelect($id)
+function telepulesSelect($id, $tabla)
 {
     global $adatBazis;
     $check = $adatBazis->prepare(
-        "SELECT * from telepules
+        "SELECT * FROM $tabla
         ",
     );
     $check->execute();
     $telepulesek = $check->fetchAll(PDO::FETCH_ASSOC);
-    $vissza = '<select name="telepules_id">';
+    $vissza = '<select name="' . $tabla . '_id" class="form-select">';
     foreach ($telepulesek as $telepules) {
         $vissza .=
             '<option value="' .
@@ -252,8 +198,9 @@ function csoportAdat($id)
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "SELECT diakok.*, telepules.nev as telepulesNev
-    FROM  $tabla, telepules WHERE diakok.telepules_id = telepules.id and diakok.id = ?
+        "SELECT * 
+            FROM  $tabla
+            WHERE id=?;
         ",
     );
     $check->execute([$id]);
