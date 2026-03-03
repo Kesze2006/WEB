@@ -5,16 +5,16 @@ $oldalPage = "tulajdonsag";
 
 if (isset($_POST)) {
     $postId = $_POST["id"] ?? "";
-    $postEmail = $_POST["ertek"] ?? "";
-    $postTelefon = $_POST["eloadasid"] ?? "";
-    $postTelepulesId = $_POST["tulajdonsagnev_id"] ?? "";
+    $postErtek = $_POST["ertek"] ?? "";
+    $postEloadasId = $_POST["eloadas_id"] ?? "";
+    $postTulajdonsagnev_id = $_POST["tulajdonsagnev_id"] ?? "";
     $postSend = $_POST["save"] ?? "default";
     $postNew = $_POST["new"] ?? "default";
 
     if ($postSend == "") {
-        csoportUpdate($postId, $postEmail, $postTelefon, $postTelepulesId);
+        csoportUpdate($postId, $postErtek, $postEloadasId, $postTulajdonsagnev_id);
     } elseif ($postNew == "") {
-        csoportInsert($postEmail, $postTelefon, $postTelepulesId);
+        csoportInsert($postErtek, $postEloadasId, $postTulajdonsagnev_id);
     }
 }
 
@@ -226,18 +226,18 @@ function csoportAdat($id)
     return $user;
 }
 
-function csoportInsert($email, $telefon, $telepules_id)
+function csoportInsert($ertek, $eloadasid, $tulajdonsagnev_id)
 {
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "INSERT INTO $tabla (ertek,eloadasid,tulajdonsagnev_id) VALUES (?, ?, ?)
+        "INSERT INTO $tabla (ertek, eloadasid, tulajdonsagnev_id) VALUES (?, ?, ?)
         ",
     );
-    $check->execute([$email, $telefon, $telepules_id]);
+    $check->execute([$ertek, $eloadasid, $tulajdonsagnev_id]);
 }
 
-function csoportUpdate($id, $email, $telefon, $telepules_id)
+function csoportUpdate($id, $ertek, $eloadasid, $tulajdonsagnev_id)
 {
     global $adatBazis;
     global $tabla;
@@ -245,7 +245,7 @@ function csoportUpdate($id, $email, $telefon, $telepules_id)
         "UPDATE $tabla SET ertek=?, eloadasid=?, tulajdonsagnev_id=? WHERE id=?;
         ",
     );
-    $check->execute([$email, $telefon, $telepules_id, $id]);
+    $check->execute([$ertek, $eloadasid, $tulajdonsagnev_id, $id]);
 }
 
 function csoportDelete($id)
