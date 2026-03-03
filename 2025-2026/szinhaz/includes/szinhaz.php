@@ -5,16 +5,17 @@ $oldalPage = "tulajdonsag";
 
 if (isset($_POST)) {
     $postId = $_POST["id"] ?? "";
-    $postEmail = $_POST["ertek"] ?? "";
-    $postTelefon = $_POST["eloadasid"] ?? "";
-    $postTelepulesId = $_POST["tulajdonsagnev_id"] ?? "";
+    $postNev = $_POST["name"] ?? "";
+    $postEmail = $_POST["email"] ?? "";
+    $postTelefon = $_POST["telefon"] ?? "";
+    $postTelepulesId = $_POST["telepules_id"] ?? "";
     $postSend = $_POST["save"] ?? "default";
     $postNew = $_POST["new"] ?? "default";
 
     if ($postSend == "") {
-        csoportUpdate($postId, $postEmail, $postTelefon, $postTelepulesId);
+        csoportUpdate($postNev, $postId, $postEmail, $postTelefon, $postTelepulesId);
     } elseif ($postNew == "") {
-        csoportInsert($postEmail, $postTelefon, $postTelepulesId);
+        csoportInsert($postNev, $postEmail, $postTelefon, $postTelepulesId);
     }
 }
 
@@ -226,26 +227,26 @@ function csoportAdat($id)
     return $user;
 }
 
-function csoportInsert($email, $telefon, $telepules_id)
+function csoportInsert($name, $email, $telefon, $telepules_id)
 {
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "INSERT INTO $tabla (ertek,eloadasid,tulajdonsagnev_id) VALUES (?, ?, ?)
+        "INSERT INTO $tabla (nev,email,telefon,telepules_id) VALUES (?, ?, ?, ?)
         ",
     );
-    $check->execute([$email, $telefon, $telepules_id]);
+    $check->execute([$name, $email, $telefon, $telepules_id]);
 }
 
-function csoportUpdate($id, $email, $telefon, $telepules_id)
+function csoportUpdate($name, $id, $email, $telefon, $telepules_id)
 {
     global $adatBazis;
     global $tabla;
     $check = $adatBazis->prepare(
-        "UPDATE $tabla SET ertek=?, eloadasid=?, tulajdonsagnev_id=? WHERE id=?;
+        "UPDATE $tabla SET nev=?, email=?, telefon=?, telepules_id=? WHERE id=?;
         ",
     );
-    $check->execute([$email, $telefon, $telepules_id, $id]);
+    $check->execute([$name, $email, $telefon, $telepules_id, $id]);
 }
 
 function csoportDelete($id)
