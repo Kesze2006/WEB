@@ -1,7 +1,7 @@
 <?php
-$oldalCim = "Tulajdonság";
-$tabla = "tulajdonsag";
-$oldalPage = "tulajdonsag";
+$oldalCim = "Színház";
+$tabla = "szinhaz";
+$oldalPage = "szinhaz";
 
 if (isset($_POST)) {
     $postId = $_POST["id"] ?? "";
@@ -67,12 +67,10 @@ function csoportForm()
             <div class="row">
                 <div class="col-12">Előadás:</div>
                 <div class="col-12">
-                                    <div class="col-12">Tulajdonság Név:</div>
                 <div class="col-12">
                     ' .
         telepulesSelect($csoportAdat["eloadasid"], "eloadas", "cim") .
         '
-                </div>
                 </div>
                 </div>
                 <div class="col-12">Érték:</div>
