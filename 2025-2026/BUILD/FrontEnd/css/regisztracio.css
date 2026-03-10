@@ -10,7 +10,7 @@
             .background {
                 position: fixed;
                 inset: 0;
-                background: url(../../images/registerHatter.jpg) center / cover no-repeat;
+                background: url(../../images/regisztracio.jpg) center / cover no-repeat;
                 filter: blur(8px);
                 z-index: -2;
                 transition: filter 0.6s ease;

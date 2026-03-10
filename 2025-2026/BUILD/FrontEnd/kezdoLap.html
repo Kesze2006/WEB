@@ -10,7 +10,7 @@
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="css/kezdoOldal.css" />
+        <link rel="stylesheet" href="css/kezdoLap.css" />
     </head>
     <body onload="leKer()">
         <div class="background"></div>
@@ -37,7 +37,7 @@
                     <a class="navbar-brand position-absolute start-50 cim translate-middle-x" href="#"> Tanterem </a>
 
                     <div class="d-flex align-items-center">
-                        <a href="login.html" class="btn btn-outline-light">Belépés</a>
+                        <a href="#section1" id="lekeres" class="btn btn-outline-light">Belépés</a>
                     </div>
                 </div>
             </div>
@@ -143,23 +143,41 @@
                             alt="Oktatás"
                         />
                     </div>
-                    <div class="col-md-6">
-                        <h2>Miért a Tanterem?</h2>
-                        <p>
-                            A Tanterem célja, hogy egyszerűvé és hatékonnyá tegye az online oktatást. Könnyen kezelhető
-                            felület, modern dizájn és gyors működés.
-                        </p>
-                        <ul>
-                            <li>Reszponzív felület</li>
-                            <li>Biztonságos bejelentkezés</li>
-                            <li>Tanár–diák együttműködés</li>
-                        </ul>
+
+                    <div class="col-md-6 p-3 card shadow keret" id="section1">
+                        <div class="card-body">
+                            <h3 class="text-center mb-4">Bejelentkezés</h3>
+                            <hr />
+                            <div class="mb-3">
+                                <label class="form-label">Email cím</label>
+                                <input type="email" class="form-control" placeholder="pelda@gmail.com" id="email" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Jelszó</label>
+                                <input type="password" class="form-control" placeholder="••••••••" id="password" />
+                            </div>
+
+                            <button id="button" class="btn btn-outline-dark w-100" onclick="login()">Belépés</button>
+
+                            <div class="text-center mt-3">
+                                <small>
+                                    Még nincs fiókod?
+                                    <a href="register.html">Regisztráció</a>
+                                </small>
+                            </div>
+                            <div class="text-center mt-3">
+                                <small>
+                                    <a href="elfelejtettJelszoEmail.html">Elfelejtett jelszó</a>
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </main>
 
-        <section class="bg-light py-5" id="stats">
+        <section class="bg-light py-2" id="stats">
             <div class="container text-center">
                 <div class="row">
                     <div class="col-md-3">
@@ -178,7 +196,7 @@
             </div>
         </section>
 
-        <footer class="bg-dark text-light py-4" id="footer">
+        <footer class="bg-dark text-light py-2" id="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 mb-3">
@@ -212,6 +230,6 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
         ></script>
-        <script src="js/kezdoOldal.js"></script>
+        <script src="js/kezdoLap.js"></script>
     </body>
 </html>

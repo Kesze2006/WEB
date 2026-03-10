@@ -1,0 +1,10 @@
+    body{
+        background-image: url(../../images/jelszoVisszaEmail.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .keret{
+       background-color: rgba(175, 175, 175, 0.329);
+       backdrop-filter: blur(8px); /* homályosítás */
+    }
