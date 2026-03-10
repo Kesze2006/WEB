@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    body{
+        background-image: url(kepek/luca.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .keret{
+       background-color: rgba(175, 175, 175, 0.329);
+       backdrop-filter: blur(8px); /* homályosítás */
+    }
+</style>
+<body >
+
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="row w-100 justify-content-center">
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card shadow keret">
+                <div class="card-body">
+
+                    <h3 class="text-center mb-4">Jelszó helyreállítás kérelem</h3>
+                    <hr>
+<div>Kérlek add meg az email-címed, amire küldeni fogunk egy linket, ahol új jelszót tudsz kérvényezni</div>
+<hr>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Email cím</label>
+                            <input type="email" class="form-control" placeholder="email@example.com">
+                        </div>
+
+
+                      
+                        <button type="submit" class="btn btn-outline-dark w-100">
+                            Email küldése
+                        </button>
+                    </form>
+
+         
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

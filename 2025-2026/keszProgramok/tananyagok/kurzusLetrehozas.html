@@ -1,0 +1,62 @@
+
+<div class="d-flex justify-content-center">
+<div
+class="card HoverNot col-lg-6 col-12">
+  <div class="p-3">
+    <h1 class="text-center">Kurzus Létrehozása</h1>
+    <hr>
+    <div class="fs-4 ">
+<div class="text-center">
+        Kurzus címe <br><input type="text" class="col-10 col-lg-4 form-text">
+    </div> 
+    <br>
+    <hr>
+    <div class="row">
+<div class="col-12 col-md-4">
+      <!-- Public / Private választó -->
+        <div class="mb-4 text-start">
+          <label class="form-label d-block mb-2">Láthatóság</label>
+          <div class="btn-group" role="group" aria-label="Public Private Toggle">
+            <input type="radio" class="btn-check" name="visibility" id="publicOption" autocomplete="off" checked>
+            <label class="btn btn-outline-info" for="publicOption">Publikus</label>
+
+            <input type="radio" class="btn-check" name="visibility" id="privateOption" autocomplete="off">
+            <label class="btn btn-outline-info" for="privateOption">Privát</label>
+          </div>
+        </div>
+</div>
+    
+ <div class="col-12 col-md-4">
+            <div class="mb-4 text-start">
+              <label class="form-label d-block mb-2">Létszám</label>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="limitCheck" onchange="toggleLimitInput()">
+                <label class="form-check-label" for="limitCheck">
+                  Korlátolt
+                </label>
+              </div>
+              <input type="number" min="1" id="limitInput" class="form-control" placeholder="Add meg a határt (Fő)" style="display:none;">
+            </div>
+          </div>
+
+          <!-- 3. Leírás -->
+          <div class="col-12 col-md-4">
+            <div class="mb-4 text-start">
+              <label class="form-label d-block mb-2">Leírás</label>
+              <textarea class="form-control" rows="3" placeholder="Rövid leírás a kurzusról.."></textarea>
+            </div>
+          </div>
+        </div>
+
+    </div>
+   <hr>
+    <div>Kurzus kódja</div>
+    ALMAFASZ65 <button class="btn btn-outline-primary ">Másolás</button>
+    <hr>
+    <button class="btn btn-outline-success">Létrehozás</button>
+    <a class="btn btn-outline-danger" href="valodiFoOldal.html">Elvetés</a>
+  </div>
+    </div>
+    
+</div>
+</div>

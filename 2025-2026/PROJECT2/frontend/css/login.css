@@ -1,0 +1,9 @@
+body {
+            background-image: url("../../images/bejelentkezes.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .keret {
+            background-color: rgba(224, 224, 224, 0.219);
+            backdrop-filter: blur(8px);
+        }

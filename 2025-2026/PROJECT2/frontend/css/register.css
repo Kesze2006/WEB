@@ -1,0 +1,146 @@
+body {
+                margin: 0;
+                font-family: "Franklin Gothic Medium", Arial, sans-serif;
+                color: white;
+                overflow: hidden;
+                user-select: none;
+            }
+
+            .background {
+                position: fixed;
+                inset: 0;
+                background: url(../../images/registerHatter2.jpg) center / cover no-repeat;
+                filter: blur(8px);
+                z-index: -2;
+                transition: filter 0.6s ease;
+            }
+            .background.sharp {
+                filter: blur(0);
+            }
+
+            .overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.55);
+                z-index: -1;
+            }
+
+
+            .role-row {
+                height: 100vh;
+                overflow: hidden;
+            }
+
+
+            .role {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 6rem;
+                position: relative;
+                transition:
+                    transform 1.2s ease,
+                    opacity 0.6s ease,
+                    background 0.3s ease;
+            }
+
+            .kijeloles:hover {
+                background: rgba(255, 255, 255, 0.08);
+                cursor: pointer;
+                transition: all 1.25s ease;
+            }
+
+            .role span {
+                display: inline-block;
+                transition:
+                    transform 0.8s ease,
+                    font-size 0.8s ease;
+            }
+
+            /* Asztali Gép */
+            @media (min-width: 992px) {
+                .diak-active #diak {
+                    transform: translateX(-50%);
+                }
+                .diak-active #tanar {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+
+                .tanar-active #tanar {
+                    transform: translateX(50%);
+                }
+                .tanar-active #diak {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+
+                .text-fly-up span {
+                    transform: translateY(-130%);
+                    font-size: 7rem;
+                }
+                .back-btn {
+                    top: 5%;
+                    left: 5%;
+                }
+            }
+
+            /* Mobil */
+            @media (max-width: 991px) {
+                .diak-active #diak {
+                    transform: translateY(-120%);
+                }
+                .diak-active #tanar {
+                    transform: translateY(-100%);
+                    opacity: 0;
+                }
+
+                .tanar-active #tanar {
+                    transform: translateY(-20%);
+                }
+                .tanar-active #diak {
+                    transform: translateY(100%);
+                    opacity: 0;
+                }
+
+                .text-fly-up span {
+                    transform: translateY(-20%);
+                    font-size: 5rem;
+                }
+                .back-btn {
+                    top: 90%;
+                    left: 8%;
+                }
+            }
+
+            .login-box {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0.95);
+                width: 320px;
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease;
+                z-index: 10;
+            }
+
+            .login-box.show {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+
+            .back-btn {
+                position: fixed;
+
+                z-index: 20;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .back-btn.show {
+                opacity: 1;
+            }

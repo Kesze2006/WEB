@@ -1,0 +1,10 @@
+body {
+            background-image: url(../../images/visszaigazolas.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: rgb(39, 39, 39);
+        }
+        .keret {
+            background-color: rgba(224, 224, 224, 0.219);
+            backdrop-filter: blur(8px); 
+        }

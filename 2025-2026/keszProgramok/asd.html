@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Tanterem – Bejelentkezés</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Franklin Gothic Medium", Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* háttér */
+    .background {
+      position: fixed;
+      inset: 0;
+      background: url(kepek/registerHatter2.jpg) center / cover no-repeat;
+      filter: blur(8px);
+      z-index: -2;
+      transition: filter .6s ease;
+    }
+    .background.sharp {
+      filter: blur(0);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      z-index: -1;
+    }
+
+    /* konténer */
+    .role-row {
+      height: 100vh;
+        overflow: hidden;
+    }
+
+    /* panelek */
+    .role {
+        
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 6rem;
+      position: relative;
+      transition: transform 1.2s ease, opacity .6s ease, background .3s ease;
+      
+    }
+
+    .kijeloles:hover {
+      background: rgba(255,255,255,.08);
+       cursor: pointer;
+        transition: all 1.25s ease;
+      
+
+    }
+
+    .role span {
+      display: inline-block;
+      transition: transform .8s ease, font-size .8s ease;
+    }
+
+    /* DESKTOP */
+    @media (min-width: 992px) {
+
+      .diak-active #diak {
+        transform: translateX(-50%);
+      }
+      .diak-active #tanar {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      .tanar-active #tanar {
+        transform: translateX(50%);
+      }
+      .tanar-active #diak {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      .text-fly-up span {
+        transform: translateY(-130%);
+        font-size: 7rem;
+      }
+            .back-btn{
+              top: 5%;
+      left: 5%;
+      }
+    }
+
+    /* MOBIL */
+    @media (max-width: 991px) {
+
+      .diak-active #diak {
+        transform: translateY(-120%);
+      }
+      .diak-active #tanar {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      .tanar-active #tanar {
+        transform: translateY(-20%);
+      }
+      .tanar-active #diak {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+
+      .text-fly-up span {
+        transform: translateY(-20%);
+        font-size: 5rem;
+      }
+      .back-btn{
+              top: 90%;
+      left: 8%;
+      }
+    }
+
+    /* login doboz */
+    .login-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(.95);
+      width: 320px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease, transform .4s ease;
+      z-index: 10;
+ 
+    }
+
+    .login-box.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* vissza gomb */
+    .back-btn {
+      position: fixed;
+
+      z-index: 20;
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    .back-btn.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<button id="backBtn" class="btn btn-outline-light back-btn">← Vissza</button>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<div class="container-fluid">
+  <div class="row role-row">
+    <div id="tanar" class="col-12 col-lg-6 role kijeloles">
+      <span>Tanár</span>
+    </div>
+    <div id="diak" class="col-12 col-lg-6 role kijeloles">
+      <span>Diák</span>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="loginBox" class="login-box text-light p-4">
+  <h4 class="text-center mb-3">Profil létrehozás</h4>
+  <input class="form-control mb-2" placeholder="Felhasználónév">
+  <input class="form-control mb-2" type="password" placeholder="Jelszó">
+  <input class="form-control mb-3" type="email" placeholder="Email">
+  <button class="btn btn-outline-light w-100">Regisztráció</button>
+</div>
+
+<script>
+  const body = document.body;
+  const diak = document.getElementById("diak");
+  const tanar = document.getElementById("tanar");
+  const loginBox = document.getElementById("loginBox");
+  const backBtn = document.getElementById("backBtn");
+  const bg = document.querySelector(".background");
+
+  function selectRole(role) {
+    body.classList.add(role + "-active");
+    diak.classList.remove("kijeloles")
+    tanar.classList.remove("kijeloles")
+    setTimeout(() => {
+      document.getElementById(role).classList.add("text-fly-up");
+      bg.classList.add("sharp");
+    }, 1000);
+
+    setTimeout(() => {
+      loginBox.classList.add("show");
+      backBtn.classList.add("show");
+    }, 1600);
+  }
+
+  diak.addEventListener("click", () => selectRole("diak"));
+  tanar.addEventListener("click", () => selectRole("tanar"));
+
+  backBtn.addEventListener("click", () => {
+    body.className = "";
+    diak.classList.remove("text-fly-up");
+    tanar.classList.remove("text-fly-up");
+    diak.classList.add("kijeloles")
+    tanar.classList.add("kijeloles")
+    loginBox.classList.remove("show");
+    backBtn.classList.remove("show");
+    bg.classList.remove("sharp");
+  });
+</script>
+
+</body>
+</html>
