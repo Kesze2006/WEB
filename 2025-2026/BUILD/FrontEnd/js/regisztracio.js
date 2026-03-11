@@ -56,7 +56,6 @@ function regisztracio() {
             .then((d) => {
                 if (d.success) {
                     User.email = d.email;
-                    localStorage.setItem("email", d.email);
                     location = "regisztracioSikeres.html";
                 }
             });

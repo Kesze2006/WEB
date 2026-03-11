@@ -23,7 +23,7 @@ function emailSend($token, $email, $tipus)
         if ($tipus == "jelszo_reset") {
             $reset_link = "http://localhost/WEB/2025-2026/BUILD/src/jelszo_check.php?token=$token&tipus=$tipus&email=$email";
             $mail->isHTML(true);
-            $mail->Subject = "Email megerősítés";
+            $mail->Subject = "Jelszó megváltoztatása";
             $mail->Body =
                 '
                             <!DOCTYPE html>
@@ -42,9 +42,12 @@ function emailSend($token, $email, $tipus)
                             <p style="color: #810000;">Ez a link csak 1 óráig érvényes!</p>
                             <p style="border-top: 1px solid black; display: inline-block; padding-top: 5px;">Kattints az alábbi gombra új jelszó létrehozásához:</p>
                             <br>
-                            <button style="cursor: pointer;" href="' .
+                                        <a href="' .
                 $reset_link .
-                '">Új jelszó igénylése</button>
+                '" 
+   style="background:black;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;display:inline-block;">
+   Megnyitás
+</a>
                             </div>
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
                             </body>

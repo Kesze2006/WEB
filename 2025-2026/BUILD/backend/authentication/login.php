@@ -25,7 +25,22 @@ if (isset($adatBazis)) {
                 "INSERT INTO session (felhasznalo_id, token, lejarat) VALUES (?, ?, ?)",
             );
             $token_insert->execute([$felhasznalo["id"], $token, $token_lejarat]);
-            echo json_encode(["success" => "Sikeres bejelentkezés!", "token" => $token], JSON_UNESCAPED_UNICODE);
+
+            $szerep_le = $adatBazis->prepare("SELECT * from szerepek where id = ?");
+            $szerep_le->execute([$felhasznalo["szerep_id"]]);
+            $szerep = $szerep_le->fetch(PDO::FETCH_ASSOC);
+
+            echo json_encode(
+                [
+                    "success" => "Sikeres bejelentkezés!",
+                    "token" => $token,
+                    "nev" => $felhasznalo["nev"],
+                    "email" => $felhasznalo["email"],
+                    "id" => $felhasznalo["id"],
+                    "szerep" => $szerep["szerep"],
+                ],
+                JSON_UNESCAPED_UNICODE,
+            );
         } else {
             echo json_encode(
                 ["error" => "Hibás email vagy jelszó, a hitelesítés nem lett elvégezve!"],
