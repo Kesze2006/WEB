@@ -18,6 +18,11 @@ function selectRole(role) {
         loginBox.classList.add("show");
         backBtn.classList.add("show");
     }, 1600);
+    if (role == "tanar") {
+        szerep = 2;
+    } else if (role == "diak") {
+        szerep = 1;
+    }
 }
 
 diak.addEventListener("click", () => selectRole("diak"));
@@ -34,7 +39,7 @@ backBtn.addEventListener("click", () => {
     bg.classList.remove("sharp");
 });
 
-function reg() {
+function regisztracio() {
     const minta = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.value.match(minta)) {
         fetch("../backend/authentication/register.php", {
@@ -52,7 +57,7 @@ function reg() {
                 if (d.success) {
                     User.email = d.email;
                     localStorage.setItem("email", d.email);
-                    location = "sikeresReg.html";
+                    location = "regisztracioSikeres.html";
                 }
             });
     } else {

@@ -27,11 +27,12 @@
         <!-- LOGIN -->
         <div id="loginBox" class="login-box text-light p-4">
             <h4 class="text-center mb-3">Profil létrehozás</h4>
-            <input class="form-control mb-2" placeholder="Felhasználónév" />
-            <input class="form-control mb-2" type="password" placeholder="Jelszó" />
-            <input class="form-control mb-3" type="email" placeholder="Email" />
-            <button class="btn btn-outline-light w-100">Regisztráció</button>
+            <input class="form-control mb-2" placeholder="Felhasználónév" id="username" />
+            <input class="form-control mb-2" type="password" placeholder="Jelszó" id="password" />
+            <input class="form-control mb-3" type="email" placeholder="Email" id="email" />
+            <button class="btn btn-outline-light w-100" onclick="regisztracio()">Regisztráció</button>
         </div>
         <script src="js/regisztracio.js"></script>
+        <script src="js/user.js"></script>
     </body>
 </html>

@@ -35,8 +35,6 @@ function emailSend($token, $email, $tipus)
 
                                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
                             </head>
-                            <style>
-                            </style>
                             <body style="font-family: \'Courier New\', Courier, monospace;">
 
                             <div style="padding: 2%;">
@@ -68,7 +66,6 @@ function emailSend($token, $email, $tipus)
 
                                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
                                 </head>
-                                <style></style>
                                 <body style="font-family: &quot;Courier New&quot;, Courier, monospace">
                                     <div style="padding: 2%">
                                         <h1>Üdv a ClassRoomban!</h1>
@@ -77,9 +74,12 @@ function emailSend($token, $email, $tipus)
                                             Kattints az alábbi gombra hogy megerősítsd az email címedet!:
                                         </p>
                                         <br />
-                                        <buttonstyle="cursor: pointer;" href="' .
+                                        <a href="' .
                 $megerosito_link .
-                '">Új jelszó igénylése</button>
+                '" 
+   style="background:black;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;display:inline-block;">
+   Megnyitás
+</a>
                                     </div>
 
                                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
