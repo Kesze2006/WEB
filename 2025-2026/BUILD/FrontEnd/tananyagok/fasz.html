@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Szerkeszthető div</title>
+
+<style>
+  .editable-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    width: fit-content;
+      user-select: none;
+  }
+
+  .edit-btn {
+    cursor: pointer;
+    border: none;
+    background: #eee;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .edit-btn:hover {
+    background: #ddd;
+  }
+
+  input {
+    font-size: 16px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="editable-box">
+  <span id="word">Példaszó</span>
+  <button class="edit-btn" onclick="editWord()">✏️</button>
+</div>
+
+<script>
+function editWord() {
+  const span = document.getElementById("word");
+  const currentText = span.innerText;
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = currentText;
+
+  span.replaceWith(input);
+  input.focus();
+
+  input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      saveWord(input);
+    }
+  });
+
+  input.addEventListener("blur", function() {
+    saveWord(input);
+  });
+}
+
+function saveWord(input) {
+  const span = document.createElement("span");
+  span.id = "word";
+  span.innerText = input.value || "Üres";
+
+  input.replaceWith(span);
+}
+</script>
+
+</body>
+</html>
