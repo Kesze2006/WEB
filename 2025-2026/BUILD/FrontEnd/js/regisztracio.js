@@ -55,7 +55,6 @@ function regisztracio() {
             .then((r) => r.json())
             .then((d) => {
                 if (d.success) {
-                    User.email = d.email;
                     location = "regisztracioSikeres.html";
                 }
             });

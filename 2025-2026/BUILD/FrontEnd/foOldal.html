@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/foOldal.css" />
     </head>
 
-    <body>
+    <body onload="init()">
         <div class="background"></div>
 
         <!-- Navbar -->
@@ -25,8 +25,8 @@
                     <div class="dropdown-menu dropdown-menu-end profile-menu">
                         <div class="text-center">
                             <img src="kepek/profilKep.jpg" class="profile-avatar-large mb-2" />
-                            <h6 class="mb-0">Cigány</h6>
-                            <small class="text-muted">IHAROS@example.com</small>
+                            <h6 class="mb-0" id="nev"></h6>
+                            <small class="text-muted" id="email"></small>
                         </div>
 
                         <hr />
@@ -35,7 +35,7 @@
                             Saját fiók
                         </button>
                         <hr />
-                        <button class="dropdown-item text-danger">Kijelentkezés</button>
+                        <button class="dropdown-item text-danger" onclick="logout()">Kijelentkezés</button>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
         <!-- Sidebar -->
         <div id="sidebar">
             <hr />
-            <a href="valodiFoOldal.html"><span>🏠︎</span><span class="sidebarSzoveg">Főoldal</span></a>
+            <a href="foOldal.html"><span>🏠︎</span><span class="sidebarSzoveg">Főoldal</span></a>
 
             <div data-role="tanar">
                 <hr />
@@ -152,7 +152,6 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/user.js"></script>
         <script src="js/foOldal.js"></script>
     </body>
 </html>

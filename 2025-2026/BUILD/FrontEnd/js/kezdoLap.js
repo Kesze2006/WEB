@@ -38,10 +38,6 @@ function login() {
         .then((r) => r.json())
         .then((d) => {
             if (d.success) {
-                User.email = d.email;
-                User.id = d.id;
-                User.nev = d.nev;
-                User.szerep = d.szerep;
                 localStorage.setItem("token", d.token);
                 location = "foOldal.html";
             }

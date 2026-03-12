@@ -6,6 +6,8 @@ require_once __DIR__ . "/../../src/helpers/errorLog.php";
 require_once __DIR__ . "/../../src/helpers/tokenGen.php";
 $secrets = require_once __DIR__ . "/../../config/secrets.php";
 
+session_start();
+
 if (isset($adatBazis)) {
     $email = trim($data["email"]) ?? "";
     $jelszo = trim($data["jelszo"]) ?? "";
@@ -30,14 +32,11 @@ if (isset($adatBazis)) {
             $szerep_le->execute([$felhasznalo["szerep_id"]]);
             $szerep = $szerep_le->fetch(PDO::FETCH_ASSOC);
 
+            $_SESSION["user_id"] = $felhasznalo["id"];
+            $_SESSION["szerep"] = $szerep["szerep"];
             echo json_encode(
                 [
                     "success" => "Sikeres bejelentkezés!",
-                    "token" => $token,
-                    "nev" => $felhasznalo["nev"],
-                    "email" => $felhasznalo["email"],
-                    "id" => $felhasznalo["id"],
-                    "szerep" => $szerep["szerep"],
                 ],
                 JSON_UNESCAPED_UNICODE,
             );
