@@ -4,3 +4,5 @@
 [2026-02-04 09:25:09] SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
 [2026-02-04 09:26:44] SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
 [2026-02-04 09:30:00] SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[2026-03-12 20:59:34] SQLSTATE[HY000] [2002] Nem hozható létre kapcsolat, mert a célszámítógép már visszautasította a kapcsolatot
+[2026-03-12 20:59:43] SQLSTATE[HY000] [2002] Nem hozható létre kapcsolat, mert a célszámítógép már visszautasította a kapcsolatot

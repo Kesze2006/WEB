@@ -3,9 +3,48 @@ function init() {
         .then((r) => r.json())
         .then((d) => {
             if (d.success) {
-                const userRole = d.szerep;
+                let userRole = d.szerep;
                 nev.innerHTML = d.nev;
                 email.innerHTML = d.email;
+                applyRole(userRole);
+                const btn = document.getElementById("hamburgerBtn");
+                const sidebar = document.getElementById("sidebar");
+                const content = document.getElementById("content");
+
+                btn.addEventListener("click", () => {
+                    sidebar.classList.toggle("expanded");
+                    content.classList.toggle("shifted");
+                });
+
+                const toggle = document.getElementById("themeToggle");
+
+                // Betöltéskor ellenőrizzük az elmentett módot
+                if (localStorage.getItem("theme") === "light") {
+                    document.body.classList.add("light");
+                    toggle.checked = true;
+                }
+
+                toggle.addEventListener("change", () => {
+                    document.body.classList.toggle("light");
+
+                    if (document.body.classList.contains("light")) {
+                        localStorage.setItem("theme", "light");
+                    } else {
+                        localStorage.setItem("theme", "dark");
+                    }
+                });
+                window.addEventListener("popstate", (e) => {
+                    if (e.state?.file) {
+                        loadTananyag(e.state.file);
+                    }
+                });
+
+                /* Oldal betöltés URL-ből */
+                window.addEventListener("load", () => {
+                    const params = new URLSearchParams(window.location.search);
+                    const file = params.get("tananyag");
+                    if (file) loadTananyag(file);
+                });
             }
         });
 }
@@ -15,35 +54,7 @@ function applyRole(role) {
         el.style.display = roles.includes(role) ? "" : "none";
     });
 }
-
-applyRole(userRole);
-
-const btn = document.getElementById("hamburgerBtn");
-const sidebar = document.getElementById("sidebar");
-const content = document.getElementById("content");
-
-btn.addEventListener("click", () => {
-    sidebar.classList.toggle("expanded");
-    content.classList.toggle("shifted");
-});
-
-const toggle = document.getElementById("themeToggle");
-
-// Betöltéskor ellenőrizzük az elmentett módot
-if (localStorage.getItem("theme") === "light") {
-    document.body.classList.add("light");
-    toggle.checked = true;
-}
-
-toggle.addEventListener("change", () => {
-    document.body.classList.toggle("light");
-
-    if (document.body.classList.contains("light")) {
-        localStorage.setItem("theme", "light");
-    } else {
-        localStorage.setItem("theme", "dark");
-    }
-});
+init();
 
 function loadTananyag(file) {
     fetch(`tananyagok/${file}`)
@@ -61,18 +72,6 @@ function loadTananyag(file) {
 }
 
 /* Vissza gomb kezelése */
-window.addEventListener("popstate", (e) => {
-    if (e.state?.file) {
-        loadTananyag(e.state.file);
-    }
-});
-
-/* Oldal betöltés URL-ből */
-window.addEventListener("load", () => {
-    const params = new URLSearchParams(window.location.search);
-    const file = params.get("tananyag");
-    if (file) loadTananyag(file);
-});
 
 function toggleLimitInput() {
     const checkbox = document.getElementById("limitCheck");
