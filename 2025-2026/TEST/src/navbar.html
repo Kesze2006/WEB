@@ -1,0 +1,23 @@
+<div class="container-fluid d-flex justify-content-between align-items-center">
+    <button id="hamburgerBtn" class="hamburger" style="color: white">☰</button>
+
+    <span class="navbar-brand mb-0 h1 kozepsoCim text-center flex-grow-1"> Tanterem </span>
+
+    <div class="dropdown kisKepKeret p-1">
+        <img src="kepek/profilKep.jpg" class="avatar" data-bs-toggle="dropdown" aria-expanded="false" />
+
+        <div class="dropdown-menu dropdown-menu-end profile-menu">
+            <div class="text-center">
+                <img src="kepek/profilKep.jpg" class="profile-avatar-large mb-2" />
+                <h6 class="mb-0" id="nev"></h6>
+                <small class="text-muted" id="email"></small>
+            </div>
+
+            <hr />
+            <button class="dropdown-item">Fiók váltása</button>
+            <button class="dropdown-item" onclick="loadTananyag('sajatfiokKezeles.html')">Saját fiók</button>
+            <hr />
+            <button class="dropdown-item text-danger" onclick="logout()">Kijelentkezés</button>
+        </div>
+    </div>
+</div>
