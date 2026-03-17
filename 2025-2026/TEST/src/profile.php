@@ -45,7 +45,7 @@
 
                 <hr />
                 <div class="d-flex justify-content-center gap-2">
-                    <button class="btn btn-outline-success">Mentés</button>
+                    <button class="btn btn-outline-success">    Mentés</button>
                     <button class="btn btn-outline-danger">Mégse</button>
                 </div>
             </div>

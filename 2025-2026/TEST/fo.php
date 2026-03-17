@@ -12,9 +12,9 @@
     <body>
         <div class="background"></div>
         <!-- Navbar -->
-         
+
         <nav class="navbar px-3">
-            <?php include_once __DIR__ . "/navbar.html"; ?>
+            <?php include_once __DIR__ . "/src/navbar.php"; ?>
         </nav>
 
         <!-- Sidebar -->

@@ -15,7 +15,7 @@
 
             <hr />
             <button class="dropdown-item">Fiók váltása</button>
-            <button class="dropdown-item" onclick="loadTananyag('sajatfiokKezeles.html')">Saját fiók</button>
+            <button class="dropdown-item" onclick="<?php include_once __DIR__ . "/profile.php"; ?>">Saját fiók</button>
             <hr />
             <button class="dropdown-item text-danger" onclick="logout()">Kijelentkezés</button>
         </div>
