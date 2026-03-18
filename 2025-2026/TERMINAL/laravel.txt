@@ -1,0 +1,7 @@
+composer require laravel/sanctum                                /sanctum ahoz kell hogy apisan tokennel működjön
+php artisan install:api                                         /ez hozza létre az api.php-t ahonnan lehet Rout-olni a kéréseket
+php .\artisan migrate:refresh                                   /ezzel hozza létre újra az adatbázist FONTOS A SORREND!
+php .\artisan serv                                              /szerver futtatása localhost:8000 
+php artisan key:generate                                        /kulcs generálása a titkosításhoz (nélküle nem lehet elérni semmit)
+php .\artisan db:seed --class=RolesTableSeeder                  /a tábla értékeinek beállítása
+php .\artisan make:config cors                                  /a make bármilyen szerepű fájlt létre lehet hozni, a cors most azért kell hogy a böngésző engedélyezze a react localhost:3000 ról küldött dolgokat a laravel localhost:8000 felé és vissza
