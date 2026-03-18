@@ -20,8 +20,9 @@ class AuthController extends Controller
             "password" => "required",
             "role" => "required|string|in:diak,tanar",
         ]);
+        //return response(json_encode($request->role));
 
-        $role = Role::where("name", $request->role)->firstOrFail();
+        $role = Role::where("role", $request->role)->firstOrFail();
 
         // 2. User létrehozása
         $user = User::create([

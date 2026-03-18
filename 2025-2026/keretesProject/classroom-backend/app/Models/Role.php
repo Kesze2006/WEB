@@ -10,7 +10,7 @@ class Role extends Model
     use HasFactory;
 
     // Mely mezők tölthetők be tömegesen
-    protected $fillable = ["name"];
+    protected $fillable = ["role"];
 
     // ----- Kapcsolat a User modellel -----
     public function users()

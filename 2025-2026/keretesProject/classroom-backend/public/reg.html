@@ -28,11 +28,11 @@
             document.getElementById("registerForm").addEventListener("submit", async (e) => {
                 e.preventDefault();
 
-                const res = await fetch("/register", {
+                const res = await fetch("/api/register", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        name: name.value,
+                        name: document.getElementById("name").value,
                         email: email.value,
                         password: password.value,
                         role: role.value,
@@ -41,11 +41,8 @@
 
                 const data = await res.json();
 
-                if (data.token) {
-                    localStorage.setItem("token", data.token);
-                    alert("Sikeres regisztráció!");
-                    console.log("User:", data.user);
-                    console.log("Token:", data.token);
+                if (data.fasz) {
+                    console.log(data);
                 } else {
                     alert("Hiba történt!");
                     console.log(data);
