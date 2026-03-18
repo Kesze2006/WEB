@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,14 +18,17 @@ class AuthController extends Controller
             "name" => "required|string|max:255",
             "email" => "required|email|unique:users,email",
             "password" => "required",
+            "role" => "required|string|in:diak,tanar",
         ]);
+
+        $role = Role::where("name", $request->role)->firstOrFail();
 
         // 2. User létrehozása
         $user = User::create([
             "name" => $request->name,
             "email" => $request->email,
             "password" => Hash::make($request->password),
-            "role" => "diak", // alapértelmezett szerep
+            "role_id" => $role->id, // alapértelmezett szerep
         ]);
 
         // 3. Token generálás

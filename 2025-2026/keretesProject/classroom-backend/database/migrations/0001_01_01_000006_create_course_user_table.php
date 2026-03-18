@@ -15,13 +15,14 @@ return new class extends Migration {
             $table->foreignId("course_id")->constrained("courses")->cascadeOnDelete();
             $table->foreignId("user_id")->constrained("users")->cascadeOnDelete();
             $table->unique(["course_id", "user_id"]);
-            $table->timestamps();
+            $table->timestamp("joined")->current();
         });
     }
 
     /**
      * Reverse the migrations.
      */
+
     public function down(): void
     {
         Schema::dropIfExists("course_user");
