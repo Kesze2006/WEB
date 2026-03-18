@@ -1,1 +1,3 @@
-npm install             /telepítés?
+npm install                                 /telepítés?
+npm install bootstrap @popperjs/core        /bootstrap telepítés
+npm install react-router-dom                /több oldalhoz
