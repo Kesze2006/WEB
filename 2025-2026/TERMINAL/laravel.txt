@@ -5,3 +5,4 @@ php .\artisan serv                                              /szerver futtat�
 php artisan key:generate                                        /kulcs generálása a titkosításhoz (nélküle nem lehet elérni semmit)
 php .\artisan db:seed --class=RolesTableSeeder                  /a tábla értékeinek beállítása
 php .\artisan make:config cors                                  /a make bármilyen szerepű fájlt létre lehet hozni, a cors most azért kell hogy a böngésző engedélyezze a react localhost:3000 ról küldött dolgokat a laravel localhost:8000 felé és vissza
+composer require symfony/postmark-mailer symfony/http-client    /Postmark az email küldésekhez
