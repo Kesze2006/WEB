@@ -1,0 +1,97 @@
+.highlight {
+  animation: flash-bg 1s ease;
+}
+
+@keyframes flash-bg {
+  0% {
+    background-color: rgba(236, 236, 236, 0.137);
+  }
+  50% {
+    background-color: rgba(252, 252, 252, 0.562);
+  }
+}
+
+.keret {
+  background-color: rgba(236, 236, 236, 0.137);
+  backdrop-filter: blur(8px);
+}
+
+body {
+  margin: 0;
+  font-family: "Franklin Gothic Medium", Arial, sans-serif;
+  color: black;
+  user-select: none;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  background: url("../images/kezdoLap.jpg") center / cover no-repeat;
+  z-index: -2;
+}
+
+.fejlec {
+  background-color: rgb(70, 70, 70);
+}
+
+.sorKizart {
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Asztali */
+@media (min-width: 992px) {
+  .cim {
+    font-size: 3rem;
+  }
+
+  .quickLinks {
+    font-size: 1rem;
+    color: white;
+  }
+
+  .quickLinks:hover {
+    border-radius: 15%;
+    background-color: rgba(128, 128, 128, 0.288);
+    color: black;
+  }
+}
+
+/* Mobil */
+@media (max-width: 991px) {
+  .cim {
+    font-size: 1.5rem;
+  }
+
+  .fejlec {
+    font-size: 1rem;
+  }
+
+  .quickLinks {
+    color: white;
+  }
+}
+
+.quickLinks {
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.tartalom1 {
+  background-color: rgba(71, 71, 71, 0.274);
+}
+
+.equal-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.equal-bottom {
+  margin-top: auto;
+}
+
+.section {
+  background-color: rgba(224, 224, 224, 0.219);
+  backdrop-filter: blur(8px);
+}

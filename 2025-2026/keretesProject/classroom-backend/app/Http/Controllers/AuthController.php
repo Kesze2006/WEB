@@ -20,16 +20,15 @@ class AuthController extends Controller
             "password" => "required",
             "role" => "required|string|in:diak,tanar",
         ]);
-        //return response(json_encode($request->role));
 
-        $role = Role::where("role", $request->role)->firstOrFail();
+        $role = Role::where("role", $request->role)->first();
 
         // 2. User létrehozása
         $user = User::create([
             "name" => $request->name,
             "email" => $request->email,
             "password" => Hash::make($request->password),
-            "role_id" => $role->id, // alapértelmezett szerep
+            "role_id" => $role->id,
         ]);
 
         // 3. Token generálás
