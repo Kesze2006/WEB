@@ -31,10 +31,14 @@ class AuthController extends Controller
             "role_id" => $role->id,
         ]);
 
+        //4. email küldés
+        Auth::login($user);
+        $user->sendEmailVerificationNotification();
+
         // 3. Token generálás
         $token = $user->createToken("api-token")->plainTextToken;
 
-        // 4. JSON válasz
+        // 5. JSON válasz
         return response()->json([
             "user" => $user,
             "token" => $token,

@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Mail;
 
 Route::post("/register", [AuthController::class, "register"]);
 
-Route::get("/email", function () {
+/*Route::get("/email", function () {
     Mail::raw("Ez egy teszt email", function ($message) {
-        $message->to("keszericze.akso.21@ady-nagyatad.hu")->subject("Teszt");
+        $message->to("keszericze.akos.21@ady-nagyatad.hu")->subject("Teszt");
     });
-});
+});*/

@@ -8,3 +8,5 @@ php .\artisan make:config cors                                  /a make bármily
 composer require symfony/postmark-mailer symfony/http-client    /Postmark az email küldésekhez
 php artisan config:clear                                        /tisztítás
 php artisan cache:clear                                         /tisztítás
+composer require laravel/breeze                                 /breeze valami nem tudom
+php artisan breeze:install                                      /breeze letoltes : blade Y 1
