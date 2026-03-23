@@ -1,110 +1,106 @@
+import { useState, useEffect } from "react";
+import "../css/regiszter.css";
 
-import { MDBCalendar } from 'mdb-react-calendar';
+export default function Register() {
+    const [role, setRole] = useState(null);
+    const [step, setStep] = useState(0); // animáció lépések
+    const [name, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
 
-export default function App() {
-  const today = new Date();
+    // szerep kiválasztás (animáció időzítések)
+    const selectRole = (selectedRole) => {
+        setRole(selectedRole);
+        setStep(1);
 
-  const getStringDate = (date: Date) => date.toLocaleDateString('en-GB').replaceAll('.', '/');
+        setTimeout(() => setStep(2), 1000);
+        setTimeout(() => setStep(3), 1600);
+    };
 
-  const addDays = (date: Date, days: number) => {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
-  };
+    const handleBack = () => {
+        setRole(null);
+        setStep(0);
+    };
 
-  const myEvents = [
-    {
-      summary: 'JS Conference',
-      description: '',
-      start: {
-        date: getStringDate(today),
-      },
-      end: {
-        date: getStringDate(today),
-      },
-      color: {
-        background: 'rgb(207, 224, 252)',
-        foreground: 'rgb(10, 71, 169)',
-      },
-    },
-    {
-      summary: 'Vue Meetup',
-      description: '',
-      start: {
-        date: getStringDate(addDays(today, 1)),
-      },
-      end: {
-        date: getStringDate(addDays(today, 5)),
-      },
-      color: {
-        background: 'rgb(235, 205, 254)',
-        foreground: 'rgb(110, 2, 177)',
-      },
-    },
-    {
-      summary: 'Angular Meetup',
-      description:
-        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
-      start: {
-        date: getStringDate(addDays(today, -3)),
-        time: '10:00',
-      },
-      end: {
-        date: getStringDate(addDays(today, 3)),
-        time: '14:00',
-      },
-      color: {
-        background: 'rgb(199, 245, 217)',
-        foreground: 'rgb(11, 65, 33)',
-      },
-    },
-    {
-      summary: 'React Meetup',
-      description: '',
-      start: {
-        date: getStringDate(addDays(today, 5)),
-      },
-      end: {
-        date: getStringDate(addDays(today, 8)),
-      },
-      color: {
-        background: 'rgb(253, 216, 222)',
-        foreground: 'rgb(121, 6, 25)',
-      },
-    },
-    {
-      summary: 'Meeting',
-      description: '',
-      start: {
-        date: getStringDate(addDays(today, 1)),
-        time: '8:00',
-      },
-      end: {
-        date: getStringDate(addDays(today, 1)),
-        time: '12:00',
-      },
-      color: {
-        background: 'rgb(207, 224, 252)',
-        foreground: 'black',
-      },
-    },
-    {
-      summary: 'Call',
-      description: '',
-      start: {
-        date: getStringDate(addDays(today, 2)),
-        time: '11:00',
-      },
-      end: {
-        date: getStringDate(addDays(today, 2)),
-        time: '14:00',
-      },
-      color: {
-        background: 'black',
-        foreground: 'black',
-      },
-    },
-  ];
+    const handleRegister = () => {
+        const minta = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  return (
-    <MDBCalendar defaultEvents={myEvents} />
-  );
+        if (minta.test(email)) {
+            fetch("http://localhost:8000/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({ name, email, password, role }),
+            })
+                .then((r) => r.json())
+                .then((d) => console.log(d))
+                .catch((err) => console.error(err));
+        } else {
+            alert("Hibás email!");
+        }
+    };
+
+    return (
+        <div className={role ? `${role}-active` : ""}>
+            <button className={`btn btn-outline-light back-btn ${step >= 3 ? "show" : ""}`} onClick={handleBack}>
+                ← Vissza
+            </button>
+
+            <div className={`background ${step >= 2 ? "sharp" : ""}`}></div>
+            <div className="overlay"></div>
+
+            <div className="container-fluid">
+                <div className="row role-row">
+                    <div
+                        className={`col-12 col-lg-6 role ${
+                            !role ? "kijeloles" : ""
+                        } ${role === "diak" && step >= 2 ? "text-fly-up" : ""}`}
+                        onClick={() => selectRole("diak")}
+                    >
+                        <span>Diák</span>
+                    </div>
+
+                    <div
+                        className={`col-12 col-lg-6 role ${
+                            !role ? "kijeloles" : ""
+                        } ${role === "tanar" && step >= 2 ? "text-fly-up" : ""}`}
+                        onClick={() => selectRole("tanar")}
+                    >
+                        <span>Tanár</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* LOGIN BOX */}
+            <div className={`login-box text-light p-4 ${step >= 3 ? "show" : ""}`}>
+                <h4 className="text-center mb-3">Profil létrehozás</h4>
+
+                <input
+                    className="form-control mb-2"
+                    placeholder="Felhasználónév"
+                    value={name}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+
+                <input
+                    className="form-control mb-2"
+                    type="password"
+                    placeholder="Jelszó"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <input
+                    className="form-control mb-3"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <button className="btn btn-outline-light w-100" onClick={handleRegister}>
+                    Regisztráció
+                </button>
+            </div>
+        </div>
+    );
 }

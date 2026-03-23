@@ -22,6 +22,7 @@ class AuthController extends Controller
             "role" => "required|string|in:diak,tanar",
         ]);
 
+        //átkell írni hogy a role ne diák/tanár legyen hanem az id
         $role = Role::where("role", $request->role)->first();
 
         // 2. User létrehozása
