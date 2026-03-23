@@ -1,3 +1,4 @@
+composer create-project laravel/laravel pelda-projekt2          /létrehozás
 composer require laravel/sanctum                                /sanctum ahoz kell hogy apisan tokennel működjön
 php artisan install:api                                         /ez hozza létre az api.php-t ahonnan lehet Rout-olni a kéréseket
 php .\artisan migrate:refresh                                   /ezzel hozza létre újra az adatbázist FONTOS A SORREND!
