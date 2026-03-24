@@ -3,3 +3,4 @@ npm install                                             /telepítés?
 npm install bootstrap @popperjs/core                    /bootstrap telepítés
 npm install react-router-dom                            /több oldalhoz
 https://tailwindcss.com/docs/installation/using-vite    /tailwind
+npm install axios					/olyan mint a fetch csak könnyebb a syntaxis
