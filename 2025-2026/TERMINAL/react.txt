@@ -1,5 +1,5 @@
-npm create vite@latest classroom-frontend               /létrehozás
+npm create vite@latest classroom-frontend               /létrehozás React Javascript
 npm install                                             /telepítés?
 npm install bootstrap @popperjs/core                    /bootstrap telepítés
 npm install react-router-dom                            /több oldalhoz
-npm install -D tailwindcss                              /tailwind telepítése
+https://tailwindcss.com/docs/installation/using-vite    /tailwind
